@@ -1,5 +1,6 @@
 set nocompatible
 let mapleader = " "
+runtime macros/matchit.vim
 
 " Use vundle
 set t_Co=256
@@ -42,6 +43,10 @@ Bundle 'moll/vim-bbye'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'jiangmiao/auto-pairs'
+
+" filetype indent plugin on
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
