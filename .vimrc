@@ -1,7 +1,7 @@
 set nocompatible
 let mapleader = " "
 runtime macros/matchit.vim
-
+ 
 " Use vundle
 set t_Co=256
 filetype off                  " required!
@@ -10,7 +10,7 @@ filetype plugin indent on     " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
-
+ 
 " VIM-interface Bundles
 Bundle 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
@@ -31,6 +31,10 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 Bundle 'airblade/vim-gitgutter'
 autocmd ColorScheme * highlight clear SignColumn
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_map_keys = 0
+let g:gitgutter_escape_grep = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 0
 
 " Coding Bundles
 Bundle 'tpope/vim-rails'
@@ -70,7 +74,7 @@ map <Leader>q :ccl<CR>
 
 " VIM Settings
 Bundle 'altercation/vim-colors-solarized'
-syntax enable
+syntax on
 set background=dark
 colorscheme solarized
 set guioptions-=m  "remove menu bar
@@ -109,10 +113,13 @@ set number
 set numberwidth=4
 set hlsearch
 set nowrap
-set tabstop=2
-set shiftwidth=2 
 set showcmd
 set laststatus=2
 
-" Personal Key mapping
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" " Personal Key mapping
 nmap K i<cr><esc>k$ " makes K split lines (the opposite of J).
