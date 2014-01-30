@@ -28,13 +28,12 @@ let g:airline_powerline_fonts = 1
 Bundle 'tpope/vim-fugitive'
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-Bundle 'airblade/vim-gitgutter'
+Bundle 'mhinz/vim-signify'
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1
+let g:signify_update_on_focusgained = 1
+autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
 autocmd ColorScheme * highlight clear SignColumn
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_map_keys = 0
-let g:gitgutter_escape_grep = 1
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 0
 
 " Coding Bundles
 Bundle 'tpope/vim-rails'
@@ -47,6 +46,7 @@ Bundle 'moll/vim-bbye'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'Yggdroot/indentLine'
 
 " filetype indent plugin on
 Bundle 'kana/vim-textobj-user'
