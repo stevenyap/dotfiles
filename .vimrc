@@ -1,7 +1,7 @@
 set nocompatible
 let mapleader = " "
 runtime macros/matchit.vim
- 
+
 " Use vundle
 set t_Co=256
 filetype off                  " required!
@@ -16,24 +16,23 @@ Bundle 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
 
 Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
 
 Bundle 'bling/vim-airline'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'luna'
+" let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme = 'bubblegum'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_section_z = '%l:%c'
 
-Bundle 'tpope/vim-fugitive'
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-
-Bundle 'mhinz/vim-signify'
-let g:signify_vcs_list = [ 'git' ]
-let g:signify_update_on_bufenter = 1
-let g:signify_update_on_focusgained = 1
-autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
-autocmd ColorScheme * highlight clear SignColumn
+" Bundle 'mhinz/vim-signify'
+" let g:signify_vcs_list = [ 'git' ]
+" let g:signify_update_on_bufenter = 1
+" let g:signify_update_on_focusgained = 1
+" autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
+" autocmd ColorScheme * highlight clear SignColumn
 
 " Coding Bundles
 Bundle 'tpope/vim-rails'
@@ -45,6 +44,8 @@ Bundle 'vim-scripts/tComment'
 Bundle 'moll/vim-bbye'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-repeat'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'Yggdroot/indentLine'
 
@@ -66,17 +67,15 @@ Bundle 'thoughtbot/vim-rspec'
 " let g:rspec_command = 'call Send_keys_to_Tmux("Enter") | call Send_to_Tmux("rspec -I . -c {spec}\n")'
 let g:rspec_command = "Dispatch rspec -I . --format NyanCatFormatter --color {spec}"
 " RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>q :ccl<CR>
+autocmd FileType qf setlocal wrap linebreak 
 
-" VIM Settings
+" Colorscheme
 Bundle 'altercation/vim-colors-solarized'
 syntax on
-set background=dark
+set background=light
 colorscheme solarized
+
+" Interface settings
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
@@ -99,18 +98,19 @@ inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Es
 inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .  '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 Bundle 'ervandew/supertab'
 
-set grepprg=ack
-set switchbuf=usetab,newtab
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-inoremap jj <ESC>
+" Matcher tab settings
+set wildmenu
+set wildmode=full
 
+set grepprg=ack
+set switchbuf=useopen,usetab,split
+
+set history=100
 set splitbelow
 set splitright
 set number
 set numberwidth=4
+set cursorline
 set hlsearch
 set nowrap
 set showcmd
@@ -121,5 +121,58 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-" " Personal Key mapping
-nmap K i<cr><esc>k$ " makes K split lines (the opposite of J).
+" Lower timeout for mappings (faster response)
+set ttimeout
+set timeout timeoutlen=300 ttimeoutlen=300
+
+" *****************************************
+"     Personal Key mapping
+" *****************************************
+
+" add a line break at the cursor
+nmap K i<cr><esc>
+
+" Navigate around methods
+nmap gm ]m
+nmap gn [m
+
+" Auto-expand %% to the current file directory
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%' 
+
+" Navigation around windows
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+
+" Shift-Enter to escape in Insert Mode
+inoremap <S-CR> <Esc> 
+
+" *****************************************
+"     Leader Mappings
+" *****************************************
+
+" Rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+" Quickfix windows open and close
+map <Leader>qq :cclose<CR>
+map <Leader>qf :copen<CR>
+
+" split lines above
+map <Leader>K i<cr><esc><up>:m +1<cr> 
+
+" split lines below
+map <Leader>k i<cr><esc> 
+
+" opens NerdTree
+map <Leader>n :NERDTreeToggle<CR> 
+
+" closes current buffet
+map <Leader>x :Bdelete<cr>
+
+" reloads $MYVIMRC
+map <Leader>r :so $MYVIMRC<cr>
