@@ -1,12 +1,12 @@
 set nocompatible
 let mapleader = " "
 runtime macros/matchit.vim
-
+ 
 " Use vundle
 set t_Co=256
 filetype off                  " required!
 filetype plugin indent on     " required!
-
+ 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -14,9 +14,10 @@ Bundle 'gmarik/vundle'
 " VIM-interface Bundles
 Bundle 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
-
+ 
 Bundle 'scrooloose/nerdtree'
-
+Bundle 'tpope/vim-fugitive'
+ 
 Bundle 'bling/vim-airline'
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'bubblegum'
@@ -27,12 +28,12 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%l:%c'
 
-" Bundle 'mhinz/vim-signify'
-" let g:signify_vcs_list = [ 'git' ]
-" let g:signify_update_on_bufenter = 1
-" let g:signify_update_on_focusgained = 1
-" autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
-" autocmd ColorScheme * highlight clear SignColumn
+Bundle 'mhinz/vim-signify'
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1
+let g:signify_update_on_focusgained = 1
+autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
+autocmd ColorScheme * highlight clear SignColumn
 
 " Coding Bundles
 Bundle 'tpope/vim-rails'
@@ -75,12 +76,6 @@ syntax on
 set background=light
 colorscheme solarized
 
-" Interface settings
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
 " Auto-completion + tabbing
 filetype plugin on
 au FileType php setl ofu=phpcomplete#CompletePHP
@@ -112,9 +107,16 @@ set number
 set numberwidth=4
 set cursorline
 set hlsearch
+set incsearch
 set nowrap
 set showcmd
 set laststatus=2
+
+" Make VIM run fast even in large long lines files
+set synmaxcol=128
+
+" Make backspace works like normal
+set backspace=indent,eol,start
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -129,8 +131,8 @@ set timeout timeoutlen=300 ttimeoutlen=300
 "     Personal Key mapping
 " *****************************************
 
-" add a line break at the cursor
-nmap K i<cr><esc>
+" Insert a line break above
+nmap K 0i<cr><esc>
 
 " Navigate around methods
 nmap gm ]m
@@ -176,3 +178,9 @@ map <Leader>x :Bdelete<cr>
 
 " reloads $MYVIMRC
 map <Leader>r :so $MYVIMRC<cr>
+
+" copies selected text into Mac OS clipboard
+vmap <Leader>c :w !reattach-to-user-namespace pbcopy<cr><cr>:echo 'Copied to pbcopy'<cr>
+
+" clear highlighted search
+map <Leader>/ :nohlsearch<CR>
