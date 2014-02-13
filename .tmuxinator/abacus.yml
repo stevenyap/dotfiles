@@ -23,3 +23,4 @@ windows:
   - console: rails c
   - server: rails s
   - logs: tail -f log/development.log
+  - ssh: echo 'hello' 
