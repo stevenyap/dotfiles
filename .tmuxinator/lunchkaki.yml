@@ -1,7 +1,7 @@
 # ~/.tmuxinator/rails.yml
 
-name: stapi
-root: ~/Workspace/stapi
+name: lunchkaki
+root: ~/Workspace/lunchkaki
 
 # socket_name: foo
 
@@ -21,5 +21,5 @@ windows:
   - editor: vim
   - shell: git status 
   - console: rails c
+  - background: echo 'guard -P livereload'
   - logs: tail -f log/development.log
-  - ssh: echo 'ssh api.openseas.com.sg -l stapi' 

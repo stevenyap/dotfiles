@@ -21,6 +21,5 @@ windows:
   - editor: vim
   - shell: git status 
   - console: rails c
-  - server: rails s
   - logs: tail -f log/development.log
-  - ssh: echo 'hello' 
+  - ssh: echo 'ssh abacus.openseas.com.sg -l abacus' 

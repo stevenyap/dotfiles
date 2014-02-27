@@ -16,8 +16,10 @@ Bundle 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
  
 Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
- 
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+
 Bundle 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'bubblegum'
@@ -28,6 +30,10 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%l:%c'
 
+Bundle 'sandeepcr529/Buffet.vim'
+
+" Git stuff
+Bundle 'tpope/vim-fugitive'
 Bundle 'mhinz/vim-signify'
 let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 1
@@ -49,6 +55,7 @@ Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'Yggdroot/indentLine'
+Bundle 'tpope/vim-haml'
 
 " filetype indent plugin on
 Bundle 'kana/vim-textobj-user'
@@ -111,9 +118,10 @@ set incsearch
 set nowrap
 set showcmd
 set laststatus=2
+set autoread " auto-load file
 
 " Make VIM run fast even in large long lines files
-set synmaxcol=128
+set synmaxcol=300
 
 " Make backspace works like normal
 set backspace=indent,eol,start
@@ -135,8 +143,8 @@ set timeout timeoutlen=300 ttimeoutlen=300
 nmap K 0i<cr><esc>
 
 " Navigate around methods
-nmap gm ]m
-nmap gn [m
+" nmap gm ]m
+" nmap gn [m
 
 " Auto-expand %% to the current file directory
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%' 
@@ -160,6 +168,9 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
+" open buffet list
+map <Leader>b :Bufferlist<cr>
+
 " Quickfix windows open and close
 map <Leader>qq :cclose<CR>
 map <Leader>qf :copen<CR>
@@ -175,6 +186,9 @@ map <Leader>n :NERDTreeToggle<CR>
 
 " closes current buffet
 map <Leader>x :Bdelete<cr>
+
+" close the next window
+map <Leader>X <c-w><c-w>:q<CR>
 
 " reloads $MYVIMRC
 map <Leader>r :so $MYVIMRC<cr>
