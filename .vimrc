@@ -5,7 +5,6 @@ runtime macros/matchit.vim
 " Use vundle
 set t_Co=256
 filetype off                  " required!
-filetype plugin indent on     " required!
  
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -56,6 +55,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'jiangmiao/auto-pairs'
 Bundle 'Yggdroot/indentLine'
 Bundle 'tpope/vim-haml'
+Bundle 'kchmck/vim-coffee-script'
 
 " filetype indent plugin on
 Bundle 'kana/vim-textobj-user'
@@ -80,6 +80,7 @@ autocmd FileType qf setlocal wrap linebreak
 " Colorscheme
 Bundle 'altercation/vim-colors-solarized'
 syntax on
+filetype plugin indent on
 set background=light
 colorscheme solarized
 
