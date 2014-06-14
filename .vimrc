@@ -1,25 +1,16 @@
+" *****************************************
+"     Vundle Setup
+" *****************************************
 set nocompatible
-let mapleader = " "
-runtime macros/matchit.vim
+filetype off
  
-" Use vundle
-set t_Co=256
-filetype off                  " required!
- 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
- 
-" VIM-interface Bundles
-Bundle 'vim-scripts/vim-auto-save'
-let g:auto_save = 1
- 
-Bundle 'scrooloose/nerdtree'
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeAutoDeleteBuffer = 1
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'bling/vim-airline'
+" Look & Feel Plugins
+Plugin 'altercation/vim-colors-solarized'
+" Plugin 'bling/vim-airline'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -29,86 +20,78 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_section_z = '%l:%c'
 
-Bundle 'sandeepcr529/Buffet.vim'
+" VIM IDE Plugins
+Plugin 'vim-scripts/vim-auto-save'
+let g:auto_save = 1
+Plugin 'ervandew/supertab'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'vim-scripts/tComment'
+Plugin 'moll/vim-bbye'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-repeat'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Yggdroot/indentLine'
+Plugin 'skwp/greplace.vim'
+Plugin 'sandeepcr529/Buffet.vim'
+Plugin 'scrooloose/nerdtree'
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
 
-" Git stuff
-Bundle 'tpope/vim-fugitive'
-Bundle 'mhinz/vim-signify'
-let g:signify_vcs_list = [ 'git' ]
-let g:signify_update_on_bufenter = 1
-let g:signify_update_on_focusgained = 1
-autocmd CursorHold,InsertLeave * if exists('b:sy') | call sy#start(b:sy.path) | endif
-autocmd ColorScheme * highlight clear SignColumn
-
-" Coding Bundles
-Bundle 'tpope/vim-rails'
-Bundle 'szw/vim-tags'
+" VIM external integration plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'wakatime/vim-wakatime'
+ 
+" Coding Plugins
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-haml'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-endwise'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'szw/vim-tags'
+let g:vim_tags_auto_generate = 1
 let g:vim_tags_gems_tags_command = "ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
-Bundle 'vim-scripts/tComment'
-Bundle 'moll/vim-bbye'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-repeat'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'Yggdroot/indentLine'
-Bundle 'tpope/vim-haml'
-Bundle 'kchmck/vim-coffee-script'
-
-" filetype indent plugin on
-Bundle 'kana/vim-textobj-user'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-
-" Snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
+" Fun plugin
+Plugin 'koron/nyancat-vim'
 
 " Tmux integration for rspec testing
-Bundle 'tpope/vim-dispatch'
-Bundle 'jgdavey/tslime.vim'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-dispatch'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'thoughtbot/vim-rspec'
 " let g:rspec_command = 'call Send_keys_to_Tmux("Enter") | call Send_to_Tmux("rspec -I . -c {spec}\n")'
 let g:rspec_command = "Dispatch rspec -I . --format NyanCatFormatter --color {spec}"
 " RSpec.vim mappings
 autocmd FileType qf setlocal wrap linebreak 
 
-" Colorscheme
-Bundle 'altercation/vim-colors-solarized'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Colorscheme (based on altercation/vim-colors-solarized)
+set t_Co=256
 syntax on
-filetype plugin indent on
 set background=light
 colorscheme solarized
 
-" Auto-completion + tabbing
-filetype plugin on
-au FileType php setl ofu=phpcomplete#CompletePHP
-au FileType ruby,eruby setl ofu=rubycomplete#Complete
-au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
-au FileType c setl ofu=ccomplete#CompleteCpp
-au FileType css setl ofu=csscomplete#CompleteCSS
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" open omni completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .  '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-" open user completion menu closing previous if open and opening new menu without changing the text
-inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .  '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-Bundle 'ervandew/supertab'
+" *****************************************
+"     Vim Settings
+" *****************************************
 
-" Matcher tab settings
+runtime macros/matchit.vim
+
 set wildmenu
 set wildmode=full
 
 set grepprg=ack
 set switchbuf=useopen,usetab,split
 
-set history=100
+set history=500
 set splitbelow
 set splitright
 set number
@@ -122,7 +105,7 @@ set laststatus=2
 set autoread " auto-load file
 
 " Make VIM run fast even in large long lines files
-set synmaxcol=300
+set synmaxcol=150
 
 " Make backspace works like normal
 set backspace=indent,eol,start
@@ -136,6 +119,10 @@ set expandtab
 set ttimeout
 set timeout timeoutlen=300 ttimeoutlen=300
 
+" Set markdown syntax highlight
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost *.md set wrap linebreak
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
@@ -144,8 +131,8 @@ set timeout timeoutlen=300 ttimeoutlen=300
 nmap K 0i<cr><esc>
 
 " Navigate around methods
-" nmap gm ]m
-" nmap gn [m
+nmap gm ]m
+nmap gn [m
 
 " Auto-expand %% to the current file directory
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%' 
@@ -162,6 +149,8 @@ inoremap <S-CR> <Esc>
 " *****************************************
 "     Leader Mappings
 " *****************************************
+
+let mapleader = " "
 
 " Rspec
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -199,3 +188,10 @@ vmap <Leader>c :w !reattach-to-user-namespace pbcopy<cr><cr>:echo 'Copied to pbc
 
 " clear highlighted search
 map <Leader>/ :nohlsearch<CR>
+
+" convert ruby hash from :abc => '123' to abc: '123'
+map <Leader>h :%s/:\([^=,'"]*\) =>/\1:/g"']<CR>
+
+" Code format entire file
+map <Leader>= ggVG=
+
