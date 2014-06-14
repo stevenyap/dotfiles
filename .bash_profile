@@ -17,3 +17,5 @@ export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 
 export EDITOR='vim'
+
+alias iphone='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
