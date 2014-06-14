@@ -1,7 +1,7 @@
 # ~/.tmuxinator/rails.yml
 
-name: $PROJECT
-root: ~/Workspace/$PROJECT
+name: neember
+root: ~/Workspace/neember
 
 # socket_name: foo
 
@@ -18,13 +18,9 @@ root: ~/Workspace/$PROJECT
 # tmux_command: byobu
 
 windows:
-  - editor:
-      layout: 9685,211x50,0,0[211x39,0,0,0,211x10,0,40,5] 
-      panes:
-        - vim
-        - #empty - for rspec
+  - editor: vim
   - shell: git status 
   - console: rails c
-  - server: rails s
   - logs: tail -f log/development.log
-  - ssh: echo 'ssh localhost -l user' 
+  - guard: echo 'guard -P livereload'
+  - heroku: heroku status

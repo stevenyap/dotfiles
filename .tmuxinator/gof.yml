@@ -1,0 +1,7 @@
+name: gof
+root: ~/Workspace/gof
+
+windows:
+  - editor: vim
+  - shell: echo 'Welcome to Katas!'
+  - console: irb
