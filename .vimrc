@@ -123,6 +123,9 @@ set timeout timeoutlen=300 ttimeoutlen=300
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+set formatoptions-=or
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
