@@ -8,6 +8,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'vim-scripts/AutoComplPop'
+
 " Look & Feel Plugins
 Plugin 'altercation/vim-colors-solarized'
 " Plugin 'bling/vim-airline'
@@ -23,7 +25,7 @@ let g:airline_section_z = '%l:%c'
 " VIM IDE Plugins
 Plugin 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'vim-scripts/tComment'
 Plugin 'moll/vim-bbye'
