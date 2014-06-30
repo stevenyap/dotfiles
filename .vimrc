@@ -8,24 +8,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'vim-scripts/AutoComplPop'
-
-" Look & Feel Plugins
+" Color scheme
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'bling/vim-airline'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'bubblegum'
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_powerline_fonts = 1
-let g:airline_section_x = ''
-let g:airline_section_y = ''
-let g:airline_section_z = '%l:%c'
 
 " VIM IDE Plugins
 Plugin 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
 " Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/AutoComplPop' "Testing auto completion pop instead of super tab for now
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'vim-scripts/tComment'
 Plugin 'moll/vim-bbye'
