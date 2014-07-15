@@ -61,7 +61,7 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'thoughtbot/vim-rspec'
 " let g:rspec_command = 'call Send_keys_to_Tmux("Enter") | call Send_to_Tmux("rspec -I . -c {spec}\n")'
-let g:rspec_command = "Dispatch rspec -I . --format NyanCatFormatter --color {spec}"
+let g:rspec_command = "Dispatch rspec -I . --color {spec}"
 " RSpec.vim mappings
 autocmd FileType qf setlocal wrap linebreak 
 
@@ -99,6 +99,7 @@ set nowrap
 set showcmd
 set laststatus=2
 set autoread " auto-load file
+set pastetoggle=<F2>
 
 " Make VIM run fast even in large long lines files
 set synmaxcol=150
