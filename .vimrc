@@ -48,6 +48,10 @@ Plugin 'szw/vim-tags'
 let g:vim_tags_auto_generate = 1
 let g:vim_tags_gems_tags_command = "ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
 
+" Ruby Static Analyser
+Plugin 'ngmy/vim-rubocop'
+Plugin 'rainerborene/vim-reek'
+
 " Fun plugin
 Plugin 'koron/nyancat-vim'
 
