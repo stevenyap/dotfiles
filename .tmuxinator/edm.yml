@@ -1,0 +1,6 @@
+name: edm
+root: ~/Workspace/edm
+
+windows:
+  - editor: vim
+  - shell: echo 'Welcome to EDM Workspace'
