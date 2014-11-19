@@ -3,7 +3,6 @@
 " *****************************************
 set nocompatible
 filetype off
- 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -61,7 +60,7 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'thoughtbot/vim-rspec'
 " let g:rspec_command = 'call Send_keys_to_Tmux("Enter") | call Send_to_Tmux("rspec -I . -c {spec}\n")'
-let g:rspec_command = "Dispatch rspec -I . --color {spec}"
+let g:rspec_command = "Dispatch rspec -I . --color -f p {spec}"
 " RSpec.vim mappings
 autocmd FileType qf setlocal wrap linebreak 
 
