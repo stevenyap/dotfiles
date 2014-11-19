@@ -1,8 +1,0 @@
-name: t2l
-root: ~/Workspace/tenant2landlord/
-
-windows:
-  - editor: vim
-  - shell: git status 
-  - console: rails c
-  - logs: tail -f log/development.log

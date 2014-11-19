@@ -1,0 +1,11 @@
+name: moneyball
+root: ~/Workspace/moneyball
+
+windows:
+  - editor: vim
+  - shell: git status 
+  - console: rails c
+  - regression: echo 'rake regression:single or rake regression:signal_range'
+  - test log: tail -f log/test.log
+  - development log: tail -f log/development.log
+  - Heroku log: heroku logs --tail
