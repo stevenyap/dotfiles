@@ -20,3 +20,4 @@ export EDITOR='vim'
 alias iphone='open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app'
 
 source ~/bin/git-completion.bash
+source ~/bin/tmuxinator.bash
