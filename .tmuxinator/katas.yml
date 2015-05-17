@@ -1,7 +1,0 @@
-name: katas
-root: ~/Workspace/katas
-
-windows:
-  - editor: vim
-  - shell: echo 'Welcome to Katas!'
-  - console: irb

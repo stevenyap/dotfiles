@@ -1,8 +1,0 @@
-name: tecklong
-root: ~/Workspace/tecklong
-
-windows:
-  - editor: vim
-  - shell: git status 
-  - mysql: /Applications/MAMP/Library/bin/mysql --host=localhost -uroot tecklong
-  - log: echo 'Log something!'

@@ -1,9 +1,0 @@
-name: cumis
-root: ~/Workspace/cumis
-
-windows:
-  - editor: vim
-  - shell: git status 
-  - console: rails c
-  - test log: tail -f log/test.log
-  - development log: tail -f log/development.log
