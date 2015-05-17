@@ -36,6 +36,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'wakatime/vim-wakatime'
  
 " Coding Plugins
+Plugin 'slim-template/vim-slim.git'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-haml'
