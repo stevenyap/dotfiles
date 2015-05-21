@@ -13,8 +13,7 @@ Plugin 'altercation/vim-colors-solarized'
 " VIM IDE Plugins
 Plugin 'vim-scripts/vim-auto-save'
 let g:auto_save = 1
-" Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/AutoComplPop' "Testing auto completion pop instead of super tab for now
+Plugin 'ervandew/supertab'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'vim-scripts/tComment'
 Plugin 'moll/vim-bbye'
@@ -44,9 +43,11 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-endwise'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'szw/vim-tags'
-let g:vim_tags_auto_generate = 1
-let g:vim_tags_gems_tags_command = "ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-bundler'
+" Turned off due to weird status popup errors when typing 'o' in normal mode
+" from a comment
+" Plugin 'szw/vim-tags'
 
 " Ruby Static Analyser
 Plugin 'ngmy/vim-rubocop'
@@ -173,6 +174,9 @@ map <Leader>k i<cr><esc>
 
 " opens NerdTree
 map <Leader>n :NERDTreeToggle<CR> 
+
+" opens Tagbar
+map <Leader>m :TagbarToggle<CR>
 
 " closes current buffet
 map <Leader>x :Bdelete<cr>
