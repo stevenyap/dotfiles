@@ -45,9 +45,7 @@ Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-bundler'
-" Turned off due to weird status popup errors when typing 'o' in normal mode
-" from a comment
-" Plugin 'szw/vim-tags'
+Plugin 'szw/vim-tags'
 
 " Ruby Static Analyser
 Plugin 'ngmy/vim-rubocop'
