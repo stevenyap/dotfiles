@@ -197,3 +197,5 @@ map <Leader>h :%s/:\([^=,'"]*\) =>/\1:/g"']<CR>
 " Code format entire file
 map <Leader>= ggVG=
 
+" Compile coffeescript codes and show in a temporary buffer
+map <Leader>p :CoffeeCompile<CR>
