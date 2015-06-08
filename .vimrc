@@ -29,6 +29,7 @@ Plugin 'scrooloose/nerdtree'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
+Plugin 'djoshea/vim-autoread'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
@@ -97,7 +98,6 @@ set incsearch
 set nowrap
 set showcmd
 set laststatus=2
-set autoread " auto-load file
 set pastetoggle=<F2>
 
 " Make VIM run fast even in large long lines files
