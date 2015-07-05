@@ -33,7 +33,6 @@ Plugin 'djoshea/vim-autoread'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
-Plugin 'wakatime/vim-wakatime'
  
 " Coding Plugins
 Plugin 'slim-template/vim-slim.git'
