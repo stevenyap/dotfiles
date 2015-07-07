@@ -1,0 +1,7 @@
+# Ignore VIM tmp files
+*.swp
+*.swo
+
+# Ignore Mac OSX generated file
+.DS_Store
+.localized
