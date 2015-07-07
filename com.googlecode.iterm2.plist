@@ -634,9 +634,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1316 110 538 307 0 0 1920 1057 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>316 426 924 485 0 0 1920 1057 </string>
+	<string>316 443 924 485 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1920 1080 0 0 1920 1057 </string>
+	<string>254 124 890 651 0 0 1920 1080 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2195,7 +2195,7 @@
 	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
