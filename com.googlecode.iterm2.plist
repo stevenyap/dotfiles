@@ -634,9 +634,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1316 110 538 307 0 0 1920 1057 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>164 309 924 485 0 0 1440 900 </string>
+	<string>164 292 924 485 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>162 91 890 651 0 0 1440 900 </string>
+	<string>4 225 890 651 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2097,10 +2097,12 @@
 			<string>/Users/stevenyap</string>
 		</dict>
 	</array>
+	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>457794633.39648598</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>458014793.23321801</real>
+	<real>458101194.31121898</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -2163,7 +2165,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-07-08T02:19:51Z</date>
+	<date>2015-07-09T02:19:51Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
