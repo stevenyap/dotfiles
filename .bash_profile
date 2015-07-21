@@ -3,12 +3,10 @@ export PS1="\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[00m\]\$(parse_git
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
-alias ll='ls -al'
-alias ls='ls -GFh'
-
 export LC_ALL='en_US.UTF-8'  
 export LANG='en_US.UTF-8'
 export EDITOR='vim'
 
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
+source ~/.dotfiles/bin/helpers.bash
