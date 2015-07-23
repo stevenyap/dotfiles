@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export LC_ALL='en_US.UTF-8'  
