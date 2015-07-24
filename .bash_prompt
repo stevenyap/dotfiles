@@ -55,6 +55,7 @@ PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${black}\]:";
 PS1+="\[${green}\]\w "; # working directory
 PS1+="\[${blue}\][\$(parse_git_branch)]"; # Git repository details
+PS1+=" 🌴 🌴 🌴 🌴 ";
 PS1+="\n";
 PS1+="\[${black}\]\!# \[${reset}\]"; # `$` (and reset color)
 export PS1;
