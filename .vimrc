@@ -30,6 +30,7 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 Plugin 'djoshea/vim-autoread'
+Plugin 'tommcdo/vim-exchange'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
