@@ -31,6 +31,7 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
+Plugin 'rking/ag.vim'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
@@ -84,7 +85,6 @@ runtime macros/matchit.vim
 set wildmenu
 set wildmode=full
 
-set grepprg=ack
 set switchbuf=useopen,usetab,split
 
 set history=500
