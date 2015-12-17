@@ -1892,7 +1892,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>457794633.39648598</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>465464037.95937097</real>
+	<real>465560664.21699703</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -1955,7 +1955,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-02T07:33:55Z</date>
+	<date>2015-10-03T10:24:20Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1996,7 +1996,11 @@
 	<integer>0</integer>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findIgnoreCase_iTerm</key>
+	<true/>
+	<key>findRegex_iTerm</key>
+	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.1</string>
+	<string>2.1.3</string>
 </dict>
 </plist>
