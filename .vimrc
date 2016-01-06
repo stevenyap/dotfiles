@@ -55,6 +55,11 @@ Plugin 'rainerborene/vim-reek'
 
 " Fun plugin
 Plugin 'koron/nyancat-vim'
+Plugin 'stevearc/vim-arduino'
+let g:arduino_cmd = '/Users/stevenyap/Applications/Arduino.app/Contents/MacOS/Arduino'
+let g:arduino_serial_port = '/dev/cu.usbmodem1411'
+let g:arduino_serial_cmd = 'picocom {port} -b {baud} -l'
+let g:arduino_programmer = ''
 
 " Tmux integration for rspec testing
 Plugin 'tpope/vim-dispatch'
