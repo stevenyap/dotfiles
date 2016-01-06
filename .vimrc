@@ -50,8 +50,10 @@ Plugin 'tpope/vim-bundler'
 " Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
 
 " Ruby Static Analyser
+Plugin '/Users/stevenyap/Workspace/vim-future-cop/.git'
 Plugin 'ngmy/vim-rubocop'
 Plugin 'rainerborene/vim-reek'
+let g:reek_on_loading = 0
 
 " Fun plugin
 Plugin 'koron/nyancat-vim'
