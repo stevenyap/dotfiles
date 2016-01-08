@@ -162,8 +162,8 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-" Compile current Ruby file in another Tmux pane
-map <Leader>c :Dispatch ruby %<CR>
+" Deploy Arduino runner.rb in current directory
+map <Leader>d :Dispatch ruby %%/runner.rb<CR>
 
 " open buffet list
 map <Leader>b :Bufferlist<cr>
