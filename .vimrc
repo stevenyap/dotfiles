@@ -29,6 +29,7 @@ Plugin 'scrooloose/nerdtree'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
+let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data']
 Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'rking/ag.vim'
@@ -126,6 +127,9 @@ autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 set formatoptions-=or
+
+" Wild ignore all node modules
+set wildignore+=node_modules
 
 " *****************************************
 "     Personal Key mapping
