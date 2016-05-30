@@ -49,6 +49,8 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-bundler'
 " Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
 
 " Ruby Static Analyser
 Plugin 'ngmy/vim-rubocop'
