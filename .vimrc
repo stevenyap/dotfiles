@@ -133,6 +133,10 @@ set formatoptions-=or
 " Wild ignore all node modules
 set wildignore+=node_modules
 
+" Faster redraws in terminal Vim ?
+set lazyredraw
+set ttyfast
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
