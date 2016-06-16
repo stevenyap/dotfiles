@@ -29,7 +29,7 @@ Plugin 'scrooloose/nerdtree'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data']
+let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
 Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'rking/ag.vim'
