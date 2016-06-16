@@ -3,6 +3,7 @@
 	name = Steven Yap
 [core]
 	excludesfile = /Users/stevenyap/.gitignore_global
+  ignorecase = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
