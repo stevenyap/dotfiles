@@ -12,6 +12,7 @@ Plugin 'altercation/vim-colors-solarized'
 
 " VIM IDE Plugins
 Plugin 'vim-scripts/vim-auto-save'
+Plugin '907th/vim-auto-save'
 let g:auto_save = 1
 Plugin 'ervandew/supertab'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
