@@ -11,7 +11,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 
 " VIM IDE Plugins
-Plugin 'vim-scripts/vim-auto-save'
 Plugin '907th/vim-auto-save'
 let g:auto_save = 1
 Plugin 'ervandew/supertab'
@@ -52,6 +51,21 @@ Plugin 'tpope/vim-bundler'
 " Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d' " Faster syntax checking
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+" npm install -g eslint eslint-config-standard eslint-plugin-import eslint-plugin-promise eslint-plugin-react eslint-plugin-standard
 
 " Ruby Static Analyser
 Plugin 'ngmy/vim-rubocop'
