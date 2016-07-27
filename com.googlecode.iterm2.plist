@@ -21,7 +21,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
 	<key>CommandSelection</key>
@@ -436,6 +436,8 @@
 	</dict>
 	<key>NSWindow Frame Preferences</key>
 	<string>519 601 606 456 0 0 1920 1080 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>652 516 620 392 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1920 1080 0 0 1920 1057 </string>
 	<key>New Bookmarks</key>
@@ -1898,6 +1900,8 @@
 			<string>/Users/stevenyap</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
@@ -1984,11 +1988,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=55</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=55</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-06-09T07:40:57Z</date>
+	<date>2016-06-16T08:12:50Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2034,6 +2038,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.0</string>
+	<string>3.0.2</string>
 </dict>
 </plist>
