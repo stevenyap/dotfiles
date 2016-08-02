@@ -33,6 +33,7 @@ let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_S
 Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'rking/ag.vim'
+Plugin 'vim-airline/vim-airline'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
