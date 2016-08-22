@@ -17,7 +17,9 @@ Plugin 'ervandew/supertab'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'vim-scripts/tComment'
 Plugin 'moll/vim-bbye'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-repeat'
@@ -51,6 +53,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-bundler'
 " Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
 Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 let g:indentLine_noConcealCursor="" " Needed because of Yggdroot/indentLine
@@ -64,6 +67,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d' " Faster syntax checking
+let g:syntastic_json_checkers=['jsonlint']
 let g:syntastic_error_symbol = '❌'
 let g:syntastic_style_error_symbol = '⁉️'
 let g:syntastic_warning_symbol = '⚠️'
@@ -145,6 +149,9 @@ set timeout timeoutlen=300 ttimeoutlen=300
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
+" Set JSON filtype
+autocmd BufRead,BufNewFile *.json set filetype=json
+
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 set formatoptions-=or
 
@@ -184,11 +191,12 @@ inoremap <S-CR> <Esc>
 
 let mapleader = " "
 
-" Rspec
+" Rspec & Mocha
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>w :Dispatch webpack % --config=webpack.test.config.js > /dev/null && mocha tmp/bundle.js --reporter min<CR>
 
 " Deploy Arduino runner.rb in current directory
 map <Leader>d :Dispatch ruby %%/runner.rb<CR>
