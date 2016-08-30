@@ -131,7 +131,7 @@ set laststatus=2
 set pastetoggle=<F2>
 
 " Make VIM run fast even in large long lines files
-set synmaxcol=150
+set synmaxcol=300
 
 " Make backspace works like normal
 set backspace=indent,eol,start
