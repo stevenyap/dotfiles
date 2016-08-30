@@ -191,12 +191,15 @@ inoremap <S-CR> <Esc>
 
 let mapleader = " "
 
-" Rspec & Mocha
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>w :Dispatch webpack % --config=webpack.test.config.js > /dev/null && mocha tmp/bundle.js --reporter min<CR>
+" Rspec & Jest
+autocmd Filetype ruby map <Leader>t :call RunCurrentSpecFile()<CR>
+autocmd Filetype ruby map <Leader>s :call RunNearestSpec()<CR>
+autocmd Filetype ruby map <Leader>l :call RunLastSpec()<CR>
+autocmd Filetype ruby map <Leader>a :call RunAllSpecs()<CR>
+autocmd Filetype javascript map <Leader>t :let g:jest_last_spec=expand('%') \| execute 'Dispatch jest ' . jest_last_spec<CR>
+autocmd Filetype javascript map <Leader>s :let g:jest_last_spec=expand('%') \| execute 'Dispatch jest ' . jest_last_spec<CR>
+autocmd Filetype javascript map <Leader>l :execute 'Dispatch jest ' . jest_last_spec<CR>
+autocmd Filetype javascript map <Leader>a :Dispatch jest<CR>
 
 " Deploy Arduino runner.rb in current directory
 map <Leader>d :Dispatch ruby %%/runner.rb<CR>
