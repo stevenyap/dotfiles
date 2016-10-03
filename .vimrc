@@ -39,7 +39,7 @@ Plugin 'vim-airline/vim-airline'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
- 
+
 " Coding Plugins
 Plugin 'slim-template/vim-slim.git'
 Plugin 'tpope/vim-rails'
@@ -94,7 +94,7 @@ Plugin 'thoughtbot/vim-rspec'
 let g:rspec_command = "Dispatch rspec -I . --color -f p {spec}"
 " let g:rspec_command = 'call Send_keys_to_Tmux("Enter") | call Send_to_Tmux("rspec -I . -c {spec}\n")'
 " RSpec.vim mappings
-autocmd FileType qf setlocal wrap linebreak 
+autocmd FileType qf setlocal wrap linebreak
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -174,7 +174,7 @@ nmap gm ]m
 nmap gn [m
 
 " Auto-expand %% to the current file directory
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%' 
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Navigation around windows
 nnoremap <C-L> <C-W><C-L>
@@ -183,7 +183,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 
 " Shift-Enter to escape in Insert Mode
-inoremap <S-CR> <Esc> 
+inoremap <S-CR> <Esc>
 
 " *****************************************
 "     Leader Mappings
@@ -212,13 +212,13 @@ map <Leader>qq :cclose<CR>
 map <Leader>qf :copen<CR>
 
 " split lines above
-map <Leader>K i<cr><esc><up>:m +1<cr> 
+map <Leader>K i<cr><esc><up>:m +1<cr>
 
 " split lines below
-map <Leader>k i<cr><esc> 
+map <Leader>k i<cr><esc>
 
 " opens NerdTree
-map <Leader>n :NERDTreeToggle<CR> 
+map <Leader>n :NERDTreeToggle<CR>
 
 " opens Tagbar
 map <Leader>m :TagbarToggle<CR>
