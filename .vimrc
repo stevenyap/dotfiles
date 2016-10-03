@@ -232,8 +232,8 @@ map <Leader>X <c-w><c-w>:q<CR>
 " reloads $MYVIMRC
 map <Leader>r :so $MYVIMRC<cr>
 
-" copies selected text into Mac OS clipboard
-vmap <Leader>c :w !reattach-to-user-namespace pbcopy<cr><cr>:echo 'Copied to pbcopy'<cr>
+" Yanks text into system clipboard
+set clipboard=unnamed
 
 " clear highlighted search
 map <Leader>/ :nohlsearch<CR>
