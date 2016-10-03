@@ -115,7 +115,7 @@ runtime macros/matchit.vim
 set wildmenu
 set wildmode=full
 
-set switchbuf=useopen,usetab,split
+set switchbuf=useopen,usetab
 
 set history=500
 set splitbelow
