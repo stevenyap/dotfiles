@@ -1,0 +1,7 @@
+name: laptop
+root: ~/laptop
+
+windows:
+  - editor: vim
+  - bash: git status
+  - runner: echo hello

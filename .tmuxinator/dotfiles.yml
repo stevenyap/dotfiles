@@ -1,0 +1,6 @@
+name: dotfiles
+root: ~/.dotfiles
+
+windows:
+  - editor: vim
+  - bash: git status

@@ -1,0 +1,7 @@
+name: base
+root: ~/Workspace/base
+
+windows:
+  - editor: vim
+  - bash: git status
+  - runner: history -s echo do something
