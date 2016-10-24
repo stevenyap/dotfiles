@@ -11,6 +11,11 @@ fi
 
 charge_status=$(echo "(($current_charge/$total_charge)*100)+1" | bc -l | cut -d '.' -f 1)
 if [[ $charge_status -lt 20 ]]; then
-	echo -n '#[fg=red]'
+  echo -n '#[fg=red]'
 fi
-echo -n "$charge_status%"
+
+if [[ $charge_status == '' ]]; then
+  echo -n 'A/C#[fg=yellow]'
+else
+  echo -n "$charge_status%"
+fi
