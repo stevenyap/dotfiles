@@ -196,10 +196,10 @@ autocmd Filetype ruby map <Leader>t :call RunCurrentSpecFile()<CR>
 autocmd Filetype ruby map <Leader>s :call RunNearestSpec()<CR>
 autocmd Filetype ruby map <Leader>l :call RunLastSpec()<CR>
 autocmd Filetype ruby map <Leader>a :call RunAllSpecs()<CR>
-autocmd Filetype javascript map <Leader>t :let g:jest_last_spec=expand('%') \| execute 'Dispatch jest ' . jest_last_spec<CR>
-autocmd Filetype javascript map <Leader>s :let g:jest_last_spec=expand('%') \| execute 'Dispatch jest ' . jest_last_spec<CR>
-autocmd Filetype javascript map <Leader>l :execute 'Dispatch jest ' . jest_last_spec<CR>
-autocmd Filetype javascript map <Leader>a :Dispatch jest<CR>
+autocmd Filetype javascript map <Leader>t :let g:last_spec_file=expand('%') \| execute 'Dispatch mocha ' . last_spec_file<CR>
+autocmd Filetype javascript map <Leader>s :let g:last_spec_file=expand('%') \| execute 'Dispatch mocha ' . last_spec_file<CR>
+autocmd Filetype javascript map <Leader>l :execute 'Dispatch mocha ' . last_spec_file<CR>
+autocmd Filetype javascript map <Leader>a :Dispatch mocha **/test/*.js<CR>
 
 " Deploy Arduino runner.rb in current directory
 map <Leader>d :Dispatch ruby %%/runner.rb<CR>
