@@ -3,7 +3,7 @@ root: ~/Workspace/rails
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - test: tail -f log/test.log
   - console: history -s rails console
   - server: history -s rails server

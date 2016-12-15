@@ -3,7 +3,7 @@ root: ~/Workspace/serverless
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - test: history -s serverless invoke --log --region ap-southeast-1 --stage dev --path event.json --function myFunction
   - logs: history -s serverless logs --tail --function myFunction
   - deploy: history -s serverless deploy

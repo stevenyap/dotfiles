@@ -3,4 +3,4 @@ root: ~/.dotfiles
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status

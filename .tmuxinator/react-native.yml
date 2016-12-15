@@ -3,7 +3,7 @@ root: ~/Workspace/react-native
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - ios: history -s "react-native run-ios && react-native log-ios"
   - android: history -s "react-native run-android && react-native log-android"
   - server: history -s npm start

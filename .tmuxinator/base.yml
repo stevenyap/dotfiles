@@ -3,5 +3,5 @@ root: ~/Workspace/base
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - runner: history -s echo do something

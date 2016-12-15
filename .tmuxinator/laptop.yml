@@ -3,5 +3,5 @@ root: ~/laptop
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - runner: history -s ./laptop.sh

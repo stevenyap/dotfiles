@@ -3,6 +3,6 @@ root: ~/Workspace/reactjs
 
 windows:
   - editor: vim
-  - bash: git status
+  - bash: git fetch --all && git status
   - server: history -s npm start
   - deploy: history -s npm run deploy
