@@ -15,6 +15,6 @@
 [alias]
   ls = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   merge-into = !sh -c '_CURRENT_BRANCH=$(git symbolic-ref --short HEAD) && git checkout $1 && git merge $_CURRENT_BRANCH && git checkout $_CURRENT_BRANCH' -
-
+  close-into = !sh -c '_CURRENT_BRANCH=$(git symbolic-ref --short HEAD) && git checkout $1 && git merge $_CURRENT_BRANCH && git branch -d $_CURRENT_BRANCH' -
 [commit]
 	template = /Users/stevenyap/.stCommitMsg
