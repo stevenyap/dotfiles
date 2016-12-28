@@ -54,6 +54,7 @@ Plugin 'tpope/vim-bundler'
 " Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
+Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 let g:indentLine_noConcealCursor="" " Needed because of Yggdroot/indentLine
