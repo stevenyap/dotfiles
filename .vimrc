@@ -88,6 +88,7 @@ let g:arduino_serial_cmd = 'picocom {port} -b {baud} -l'
 let g:arduino_programmer = ''
 
 " Tmux integration for rspec testing
+Plugin 'benmills/vimux'
 Plugin 'tpope/vim-dispatch'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -201,6 +202,7 @@ autocmd Filetype javascript map <Leader>t :let g:last_spec_file=expand('%') \| e
 autocmd Filetype javascript map <Leader>s :let g:last_spec_file=expand('%') \| execute 'Dispatch mocha ' . last_spec_file<CR>
 autocmd Filetype javascript map <Leader>l :execute 'Dispatch mocha ' . last_spec_file<CR>
 autocmd Filetype javascript map <Leader>a :Dispatch mocha **/test/*.js<CR>
+autocmd Filetype javascript map <Leader>j :VimuxRunCommand 'jest --onlyChanged'<CR>
 
 " Deploy Arduino runner.rb in current directory
 map <Leader>d :Dispatch ruby %%/runner.rb<CR>
