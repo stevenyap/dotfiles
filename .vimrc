@@ -36,6 +36,7 @@ Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'rking/ag.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'wakatime/vim-wakatime'
 
 " VIM external integration plugins
 Plugin 'tpope/vim-fugitive'
