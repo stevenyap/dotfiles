@@ -50,9 +50,14 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-endwise'
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
+" Plugin to list from ctags
+" For JS files, use https://github.com/ramitos/jsctags to generate tags file
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-bundler'
-" Plugin 'szw/vim-tags' This plugin is causing the dependencies are satisfied
+" Plugin 'szw/vim-tags' " This plugin is causing the dependencies are satisfied
+Plugin 'ternjs/tern_for_vim' " Run `npm install` in ~/.vim/bundles/tern_for_vim
+Plugin 'flowtype/vim-flow'
+let g:flow#enable = 0
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plugin 'mattn/emmet-vim'
@@ -204,6 +209,10 @@ autocmd Filetype javascript map <Leader>s :let g:last_spec_file=expand('%') \| e
 autocmd Filetype javascript map <Leader>l :execute 'Dispatch mocha ' . last_spec_file<CR>
 autocmd Filetype javascript map <Leader>a :Dispatch mocha **/test/*.js<CR>
 autocmd Filetype javascript map <Leader>j :VimuxRunCommand 'jest --onlyChanged'<CR>
+
+" JS with Flow shortcuts
+" Require plugin flowtype/vim-flow
+autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
 
 " Deploy Arduino runner.rb in current directory
 map <Leader>d :Dispatch ruby %%/runner.rb<CR>
