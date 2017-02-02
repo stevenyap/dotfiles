@@ -178,13 +178,11 @@ nmap K 0i<cr><esc>
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " Navigation around windows
+nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <tab><tab> <c-w><c-w>
-" Currently not working: https://github.com/neovim/neovim/issues/2048
-" Hack is achieved via tmux conf
-nnoremap <c-h> <c-w>h
 
 " Shift-Enter to escape in Insert Mode
 inoremap <S-CR> <Esc>
