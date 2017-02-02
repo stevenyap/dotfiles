@@ -263,6 +263,13 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x68-0x40000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x17 0x68</string>
+		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -273,9 +280,9 @@
 		<key>0xd-0x20000</key>
 		<dict>
 			<key>Action</key>
-			<integer>10</integer>
+			<integer>11</integer>
 			<key>Text</key>
-			<string></string>
+			<string>0x1b</string>
 		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
@@ -443,7 +450,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>652 516 620 392 0 0 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>336 391 796 473 0 0 1920 1080 </string>
+	<string>403 356 796 473 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>-1280 56 1280 1024 -1280 56 1280 1001 </string>
 	<key>New Bookmarks</key>

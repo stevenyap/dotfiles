@@ -78,6 +78,8 @@ Plug 'Yggdroot/indentLine'
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
+" Only enable syntastic for better performance
+let g:airline_extensions=['syntastic']
 
 " *** HTML/CSS/JSON Plugs
 " HTML tag expander
@@ -137,7 +139,6 @@ set hlsearch
 set incsearch
 set nowrap
 set showcmd
-set laststatus=2
 
 " Make backspace works like normal
 set backspace=indent,eol,start
@@ -161,6 +162,26 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 " JS with Flow shortcuts
 " Require plugin flowtype/vim-flow
 autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
+
+" *****************************************
+"     Personal Key mapping
+" *****************************************
+
+" Insert a line break above
+nmap K 0i<cr><esc>
+
+" Auto-expand %% to the current file directory
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" Navigation around windows
+nnoremap <c-l> <c-w>l
+nnoremap <c-h> <c-w>h " Currently not working: https://github.com/neovim/neovim/issues/2048
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <tab><tab> <c-w><c-w>
+
+" Shift-Enter to escape in Insert Mode
+inoremap <S-CR> <Esc>
 
 " *****************************************
 "     Leader Mappings

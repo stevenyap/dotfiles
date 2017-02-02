@@ -36,6 +36,8 @@ Plugin 'djoshea/vim-autoread'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'rking/ag.vim'
 Plugin 'vim-airline/vim-airline'
+" Only enable syntastic for better performance
+let g:airline_extensions=['syntastic']
 Plugin 'wakatime/vim-wakatime'
 
 " VIM external integration plugins
