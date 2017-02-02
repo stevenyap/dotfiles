@@ -81,6 +81,10 @@ Plug 'vim-airline/vim-airline'
 " Only enable syntastic for better performance
 let g:airline_extensions=['syntastic']
 
+" Dark-powered Neovim autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup=1
+
 " *** HTML/CSS/JSON Plugs
 " HTML tag expander
 Plug 'mattn/emmet-vim'
@@ -184,6 +188,10 @@ nnoremap <c-h> <c-w>h
 
 " Shift-Enter to escape in Insert Mode
 inoremap <S-CR> <Esc>
+
+" Map navigation in insert mode for deoplete auto-completion
+imap <c-k> <Up>
+imap <c-j> <Down>
 
 " *****************************************
 "     Leader Mappings
