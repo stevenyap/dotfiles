@@ -263,13 +263,6 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0x68-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>11</integer>
-			<key>Text</key>
-			<string>0x17 0x68</string>
-		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
