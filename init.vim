@@ -155,6 +155,9 @@ set expandtab
 " Lower timeout for mappings (faster response)
 set ttimeout
 set timeout timeoutlen=300 ttimeoutlen=300
+" Faster escape in insert mode
+autocmd InsertEnter * set timeoutlen=0 ttimeoutlen=0
+autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 
 " Set markdown syntax highlight
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
