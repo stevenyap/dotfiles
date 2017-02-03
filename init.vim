@@ -200,6 +200,18 @@ imap <c-j> <Down>
 
 let mapleader = " "
 
+" Run tests for javascript
+" The script assumes you are running in a tmux session
+" and there is a window named 6 to run the jest tests
+" This is meant for my personal dual screen development setup
+let clearRunningJestTest = 'tmux send-key -t 6 q && tmux send-key -t 6 BSpace '
+let sendKeysToTmux= '!' . clearRunningJestTest . '&& tmux send-key -t 6 '
+let endTmuxCommand = ' Enter'
+let runAllTests = 'npm run watch:test'
+let runCurrentFile = 'jest --watch %'
+map <Leader>a :execute sendKeysToTmux . '"' . runAllTests . '"' . endTmuxCommand<CR><bar>:echo 'Running all changed Jest tests'<CR>
+map <Leader>t :execute sendKeysToTmux . '"' . runCurrentFile . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
+
 " Open buffet list
 map <Leader>b :Bufferlist<cr>
 
