@@ -11,6 +11,9 @@ export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
+# For fastlane
+export PATH="$HOME/.fastlane/bin:$PATH"
+
 source ~/.dotfiles/.bash_prompt
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
