@@ -14,6 +14,9 @@ export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 # For fastlane
 export PATH="$HOME/.fastlane/bin:$PATH"
 
+# Use local npm binaries over global npm binaries
+export PATH=./node_modules/.bin:${PATH}
+
 source ~/.dotfiles/.bash_prompt
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
