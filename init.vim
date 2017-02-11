@@ -29,22 +29,12 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
 
 " Syntax highlighting
-Plug 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_eslint_exec = 'eslint_d' " Faster syntax checking
-let g:syntastic_json_checkers=['jsonlint']
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-" Requirement: npm install -g eslint eslint-config-standard eslint-plugin-import eslint-plugin-promise eslint-plugin-react eslint-plugin-standard
+Plug 'neomake/neomake'
+let g:neomake_javascript_enabled_makers = ['flow', 'eslint_d']
+let g:neomake_jsx_enabled_makers = ['flow', 'eslint_d']
+let g:neomake_error_sign = { 'text': 'X', 'texthl': 'ErrorMsg' }
+let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
+autocmd! BufWritePost,BufEnter * Neomake
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -80,8 +70,8 @@ Plug 'Yggdroot/indentLine'
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
-" Only enable syntastic for better performance
-let g:airline_extensions=['syntastic']
+" Disable all extensions for vim-airline for better performance
+let g:airline_extensions=['neomake']
 
 " Dark-powered Neovim autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
