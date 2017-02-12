@@ -48,8 +48,11 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 Plug 'rking/ag.vim'
 
 " *** Coding Plugs
-" TODO: Checkout the snippet plugin
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Snippet Engine
+Plug 'SirVer/ultisnips'
+set runtimepath+=~/.dotfiles " loads custom snippets at ~/.dotfiles/UltiSnips
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
 
 " Easy commenting in code (gcc)
 Plug 'tpope/vim-commentary'
