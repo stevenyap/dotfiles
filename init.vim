@@ -169,6 +169,38 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 " Require plugin flowtype/vim-flow
 autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
 
+" Custom function to open alternate (specs) file for JS
+" Type :A to jump between JS and specs
+" Type :AV to open alternate file in an vertical split
+" TODO: Make it configurable (eg. let g:javascript_alternate = ['**/*.js', 'specs/**/*.spec.js'])
+function GetAlternateFile()
+  let currentPath = expand('%')
+  let path = split(currentPath, '/')
+
+  if path[0] == "specs"
+    let fileName = expand('%:t:r:r')
+    let fileExtension = expand('%:e')
+    let filePathWithoutSpecs = join(path[1:-2], '/')
+    return filePathWithoutSpecs . '/' . fileName . '.' . fileExtension
+  else
+    let fileExtension = expand('%:e:e')
+    let currentPathWithoutExtension = expand('%:r:r')
+    return "specs/" . currentPathWithoutExtension . ".spec." . fileExtension
+  endif
+endfunction
+
+function OpenAlternateFile()
+  execute "edit " . GetAlternateFile()
+endfunction
+
+function OpenAlternateFileInVerticalSplit()
+  execute "vsp " . GetAlternateFile()
+endfunction
+
+command A call OpenAlternateFile()
+command AV call OpenAlternateFileInVerticalSplit()
+" End: Custom function to open alternate (specs) file for JS
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
