@@ -154,6 +154,10 @@ set expandtab
 " Lower timeout for mappings (faster response)
 set ttimeout
 set timeout timeoutlen=300 ttimeoutlen=300
+
+" Live preview of subsitution
+set inccommand=split
+
 " Faster escape in insert mode
 autocmd InsertEnter * set timeoutlen=0 ttimeoutlen=0
 autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
