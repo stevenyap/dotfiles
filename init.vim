@@ -47,10 +47,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Ag silver searcher plugin
 Plug 'rking/ag.vim'
 
-" Move lines up and down
-Plug 'matze/vim-move'
-let g:move_key_modifier = 'C' " <C-k|j> Move current line/selections up|down
-
 " *** Coding Plugs
 " Snippet Engine
 Plug 'SirVer/ultisnips'
@@ -231,6 +227,16 @@ imap <c-j> <Down>
 
 " Remap for emmet-vim due to timeout issue in insert mode
 imap <c-y> <esc><c-y>,i
+
+" Move lines in normal, visual and insert modes
+" ∆ is <A-j>
+" ˚ is <A-k>
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " *****************************************
 "     Leader Mappings
