@@ -47,6 +47,21 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Ag silver searcher plugin
 Plug 'rking/ag.vim'
 
+" Project-level fine-tuning of Vim
+" index.ios.js: React Native projects
+" package.json: Default Javascript projects
+Plug 'tpope/vim-projectionist'
+let g:projectionist_heuristics = {
+      \   "index.ios.js": {
+      \     "app/*.js": {"alternate": "specs/{}.spec.js"},
+      \     "specs/*.spec.js": {"alternate": "app/{}.js"},
+      \   },
+      \   "package.json": {
+      \     "*.js": {"alternate": "specs/{}.spec.js"},
+      \     "specs/*.spec.js": {"alternate": "{}.js"},
+      \   }
+      \ }
+
 " *** Coding Plugs
 " Snippet Engine
 Plug 'SirVer/ultisnips'
@@ -168,38 +183,6 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 " JS with Flow shortcuts
 " Require plugin flowtype/vim-flow
 autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
-
-" Custom function to open alternate (specs) file for JS
-" Type :A to jump between JS and specs
-" Type :AV to open alternate file in an vertical split
-" TODO: Make it configurable (eg. let g:javascript_alternate = ['**/*.js', 'specs/**/*.spec.js'])
-function GetAlternateFile()
-  let currentPath = expand('%')
-  let path = split(currentPath, '/')
-
-  if path[0] == "specs"
-    let fileName = expand('%:t:r:r')
-    let fileExtension = expand('%:e')
-    let filePathWithoutSpecs = join(path[1:-2], '/')
-    return filePathWithoutSpecs . '/' . fileName . '.' . fileExtension
-  else
-    let fileExtension = expand('%:e:e')
-    let currentPathWithoutExtension = expand('%:r:r')
-    return "specs/" . currentPathWithoutExtension . ".spec." . fileExtension
-  endif
-endfunction
-
-function OpenAlternateFile()
-  execute "edit " . GetAlternateFile()
-endfunction
-
-function OpenAlternateFileInVerticalSplit()
-  execute "vsp " . GetAlternateFile()
-endfunction
-
-command A call OpenAlternateFile()
-command AV call OpenAlternateFileInVerticalSplit()
-" End: Custom function to open alternate (specs) file for JS
 
 " *****************************************
 "     Personal Key mapping
