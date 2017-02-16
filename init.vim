@@ -229,6 +229,9 @@ inoremap <S-CR> <Esc>
 imap <c-k> <Up>
 imap <c-j> <Down>
 
+" Remap for emmet-vim due to timeout issue in insert mode
+imap <c-y> <esc><c-y>,i
+
 " *****************************************
 "     Leader Mappings
 " *****************************************
