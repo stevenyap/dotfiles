@@ -30,11 +30,25 @@ let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_S
 
 " Syntax highlighting
 Plug 'neomake/neomake'
-let g:neomake_javascript_enabled_makers = ['flow', 'eslint_d']
-let g:neomake_jsx_enabled_makers = ['flow', 'eslint_d']
+let g:neomake_flow_maker = {
+        \ 'exe': 'flow',
+        \ 'args': ['--from=vim', '--show-all-errors'],
+        \ 'errorformat': '%EFile "%f"\, line %l\, characters %c-%m,%C%m,%Z%m',
+        \ 'postprocess': function('neomake#makers#ft#javascript#FlowProcess')
+        \ }
+let g:neomake_eslint_d_maker = {
+        \ 'exe': 'eslint_d',
+        \ 'args': ['%', '-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
 let g:neomake_error_sign = { 'text': 'X', 'texthl': 'ErrorMsg' }
-let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'WarningMsg' }
-autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'Search' }
+let g:neomake_verbose = 3
+let customFTSettings = ['js']
+" Run neomake for all file types except those in customFTSettings
+autocmd BufWritePre * if index(customFTSettings, &ft) < 0 | Neomake
+autocmd! BufWritePost,BufEnter *.js Neomake! eslint_d
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -122,6 +136,10 @@ let g:jsx_ext_required = 0
 " *** Ruby Plugs
 " Plugin for rails development
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
+
+" *** Vim Plugs
+" Plugin for vim development
+Plug 'junegunn/vader.vim'
 
 " *** Other Plugs
 " Track IDE time in wakatime.com
