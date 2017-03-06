@@ -236,8 +236,10 @@ let sendKeysToTmux= '!' . clearRunningJestTest . '&& tmux send-key -t 6 '
 let endTmuxCommand = ' Enter'
 let runAllTests = 'npm run watch:test'
 let runCurrentFile = 'jest --watch %'
+let runCurrentFileWithoutWatch = 'jest %'
 map <Leader>a :execute sendKeysToTmux . '"' . runAllTests . '"' . endTmuxCommand<CR><bar>:echo 'Running all changed Jest tests'<CR>
 map <Leader>t :execute sendKeysToTmux . '"' . runCurrentFile . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
+map <Leader>s :execute sendKeysToTmux . '"' . runCurrentFileWithoutWatch . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
 
 " Open buffet list
 map <Leader>b :Bufferlist<cr>
