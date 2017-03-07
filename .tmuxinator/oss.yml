@@ -1,0 +1,6 @@
+name: PROJECTNAME
+root: ~/Workspace/oss/PROJECTNAME
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
