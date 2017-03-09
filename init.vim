@@ -4,7 +4,7 @@ call plug#begin('~/.nvim/plugged')
 
 " *** Vim Plugs
 " Use solarized color scheme
-Plug 'altercation/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized'
 
 " Saves file automatically
 Plug '907th/vim-auto-save'
@@ -138,7 +138,7 @@ call plug#end()
 
 " Color scheme
 set background=light
-colorscheme solarized
+colorscheme NeoSolarized
 
 set wildmenu
 set wildmode=full
