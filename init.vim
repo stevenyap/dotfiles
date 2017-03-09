@@ -81,6 +81,7 @@ Plug 'tpope/vim-repeat'
 " Automatically close your brackets/etc
 Plug 'jiangmiao/auto-pairs'
 " Add back closing tag for jiangmiao/auto-pairs
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 " Displays a | for indentation
