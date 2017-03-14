@@ -178,6 +178,9 @@ set incsearch
 set nowrap
 set showcmd
 
+" Yanks text into system clipboard
+set clipboard=unnamed
+
 " Make backspace works like normal
 set backspace=indent,eol,start
 
@@ -287,9 +290,6 @@ map <Leader>m :TagbarToggle<CR>
 " Close the next window
 map <Leader>X <c-w><c-w>:q<CR>
 
-" Yanks text into system clipboard
-set clipboard=unnamed
-
 " Clear highlighted search
 map <Leader>/ :nohlsearch<CR>
 
@@ -301,3 +301,6 @@ map <Leader>= ggVG=
 
 " Toggle paste and nopaste mode
 set pastetoggle=<leader>p
+
+" Displays the registers
+map <Leader>r :reg<CR>
