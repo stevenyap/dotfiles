@@ -1,4 +1,8 @@
 " TODO: Set NeoVim installation in laptop repo once confirmed move to NeoVim
+
+" Clear all autocmd
+autocmd!
+
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.nvim/plugged')
 
@@ -44,11 +48,12 @@ let g:neomake_eslint_d_maker = {
         \ }
 let g:neomake_error_sign = { 'text': 'X', 'texthl': 'ErrorMsg' }
 let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'Search' }
-let g:neomake_verbose = 3
+let g:neomake_verbose = 1
 let customFTSettings = ['js']
 " Run neomake for all file types except those in customFTSettings
 autocmd BufWritePre * if index(customFTSettings, &ft) < 0 | Neomake
-autocmd! BufWritePost,BufEnter *.js Neomake! eslint_d
+" Turn off flow for now until we can fix it
+autocmd BufWritePost,BufEnter *.js Neomake eslint_d
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
