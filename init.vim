@@ -53,7 +53,7 @@ let customFTSettings = ['js']
 " Run neomake for all file types except those in customFTSettings
 autocmd BufWritePre * if index(customFTSettings, &ft) < 0 | Neomake
 " Turn off flow for now until we can fix it
-autocmd BufWritePost,BufEnter *.js Neomake eslint_d
+autocmd BufWritePost,BufEnter *.js Neomake! eslint_d flow
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -267,6 +267,9 @@ let runCurrentFileWithoutWatch = 'jest %'
 map <Leader>a :execute sendKeysToTmux . '"' . runAllTests . '"' . endTmuxCommand<CR><bar>:echo 'Running all changed Jest tests'<CR>
 map <Leader>t :execute sendKeysToTmux . '"' . runCurrentFile . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
 map <Leader>s :execute sendKeysToTmux . '"' . runCurrentFileWithoutWatch . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
+
+" Show the flow type of the variable under the cursor
+map <Leader>T :FlowType<cr>
 
 " Open buffet list
 map <Leader>b :Bufferlist<cr>
