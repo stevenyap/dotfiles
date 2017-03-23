@@ -42,7 +42,7 @@ let g:neomake_flow_maker = {
         \ }
 let g:neomake_eslint_d_maker = {
         \ 'exe': 'eslint_d',
-        \ 'args': ['%', '-f', 'compact'],
+        \ 'args': ['%', '--cache', '-f', 'compact'],
         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \ '%W%f: line %l\, col %c\, Warning - %m'
         \ }

@@ -9,3 +9,6 @@
 
 # Ignore ctags
 tags
+
+# Others
+.eslintcache
