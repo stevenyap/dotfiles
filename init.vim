@@ -33,27 +33,15 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
 
 " Syntax highlighting
-Plug 'neomake/neomake'
-let g:neomake_flow_maker = {
-        \ 'exe': 'flow',
-        \ 'args': ['--from=vim', '--show-all-errors'],
-        \ 'errorformat': '%EFile "%f"\, line %l\, characters %c-%m,%C%m,%Z%m',
-        \ 'postprocess': function('neomake#makers#ft#javascript#FlowProcess')
-        \ }
-let g:neomake_eslint_d_maker = {
-        \ 'exe': 'eslint_d',
-        \ 'args': ['%', '--cache', '-f', 'compact'],
-        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \ '%W%f: line %l\, col %c\, Warning - %m'
-        \ }
-let g:neomake_error_sign = { 'text': 'X', 'texthl': 'ErrorMsg' }
-let g:neomake_warning_sign = { 'text': 'W', 'texthl': 'Search' }
-let g:neomake_verbose = 1
-let customFTSettings = ['js']
-" Run neomake for all file types except those in customFTSettings
-autocmd BufWritePre * if index(customFTSettings, &ft) < 0 | Neomake
-" Turn off flow for now until we can fix it
-autocmd BufWritePost,BufEnter *.js Neomake! eslint_d flow
+Plug 'w0rp/ale'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_history_log_output = 1 " :ALEInfo to view and debug
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
+let g:ale_javascript_eslint_executable='eslint_d'
+nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
+nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -109,7 +97,7 @@ Plug 'Yggdroot/indentLine'
 " Nice status bar
 Plug 'vim-airline/vim-airline'
 " Disable all extensions for vim-airline for better performance
-let g:airline_extensions=['neomake']
+let g:airline_extensions=[]
 
 " Dark-powered Neovim autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -163,6 +151,10 @@ call plug#end()
 " Color scheme
 set background=light
 colorscheme NeoSolarized
+
+" Set highlighting for ALE
+highlight ALEErrorSign ctermbg=DarkRed ctermfg=White
+highlight ALEWarningSign ctermbg=Brown ctermfg=White
 
 set wildmenu
 set wildmode=full
