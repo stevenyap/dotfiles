@@ -171,12 +171,17 @@ set history=500
 set splitbelow
 set splitright
 set number
-set numberwidth=4
 set cursorline
 set hlsearch
 set incsearch
 set nowrap
 set showcmd
+
+" Set folding
+" Trigger folding with <Leader>z
+" Open/Close all foldings via zR/zM
+set foldnestmax=1
+highlight Folded ctermbg=254 ctermfg=244
 
 " Yanks text into system clipboard
 set clipboard=unnamed
@@ -214,6 +219,9 @@ autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
 " *****************************************
 "     Personal Key mapping
 " *****************************************
+
+" Toggle folding
+nmap <Space> za
 
 " Insert a line break above
 nmap K 0i<cr><esc>
@@ -307,3 +315,6 @@ set pastetoggle=<leader>p
 
 " Displays the registers
 map <Leader>r :reg<CR>
+
+" Trigger folding
+map <Leader>z :setlocal foldmethod=syntax<CR>
