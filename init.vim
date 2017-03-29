@@ -303,7 +303,7 @@ map <Leader>h :%s/:\([^=,'"]*\) =>/\1:/g"']<CR>
 map <Leader>= ggVG=
 
 " Toggle paste and nopaste mode
-set pastetoggle=<leader>p
+nnoremap <Leader>p :set invpaste paste?<CR>
 
 " Displays the registers
 map <Leader>r :reg<CR>
