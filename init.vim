@@ -35,7 +35,7 @@ let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_S
 " Syntax highlighting
 Plug 'w0rp/ale'
 let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_quickfix = 0
 let g:ale_history_log_output = 1 " :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
