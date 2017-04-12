@@ -17,6 +17,9 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 # Use local npm binaries over global npm binaries
 export PATH=./node_modules/.bin:${PATH}
 
+# Put Yarn in PATH
+export PATH="$PATH:`yarn global bin`"
+
 source ~/.dotfiles/.bash_prompt
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
