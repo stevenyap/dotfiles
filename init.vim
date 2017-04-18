@@ -64,8 +64,8 @@ let g:projectionist_heuristics = {
       \     "specs/*.spec.js": {"alternate": "app/{}.js"},
       \   },
       \   "package.json": {
-      \     "*.js": {"alternate": "specs/{}.spec.js"},
-      \     "specs/*.spec.js": {"alternate": "{}.js"},
+      \     "app/*.js": {"alternate": "specs/{}.spec.js"},
+      \     "specs/*.spec.js": {"alternate": "app/{}.js"},
       \   }
       \ }
 
@@ -310,3 +310,6 @@ map <Leader>r :reg<CR>
 
 " Trigger folding
 map <Leader>z :setlocal foldmethod=syntax<CR>
+
+" Yank the whole page
+map <Leader>y mcggVGy`c
