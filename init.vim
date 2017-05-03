@@ -36,10 +36,15 @@ let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_S
 Plug 'w0rp/ale'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
-let g:ale_history_log_output = 1 " :ALEInfo to view and debug
+let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
-let g:ale_javascript_eslint_executable='eslint_d'
+" Don't lint when text changed but lint when auto-save
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+" eslint_d can only be used as global
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = 'eslint_d'
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
 nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
 
