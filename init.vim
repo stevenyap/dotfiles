@@ -43,6 +43,14 @@ let g:ale_javascript_eslint_executable='eslint_d'
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
 nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
 
+" Syntax formatting (for JS prettier only so far)
+Plug 'sbdchd/neoformat'
+let g:neoformat_javascript_prettier = {
+      \ 'exe': 'prettier',
+      \ 'args': ['--stdin', '--no-semi', '--single-quote', '--jsx-bracket-same-line'],
+      \ 'stdin': 1,
+      \ }
+
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -211,6 +219,9 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 " JS with Flow shortcuts
 " Require plugin flowtype/vim-flow
 autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
+
+" Turn on autoformattin from NeoFormat plugin
+autocmd BufWritePre *.js Neoformat
 
 " *****************************************
 "     Personal Key mapping
