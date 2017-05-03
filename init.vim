@@ -59,11 +59,15 @@ Plug 'numkil/ag.nvim'
 " package.json: Default Javascript projects
 Plug 'tpope/vim-projectionist'
 let g:projectionist_heuristics = {
+      \   "src/*.js": {
+      \     "src/*.js": {"alternate": "specs/{}.spec.js"},
+      \     "specs/*.spec.js": {"alternate": "src/{}.js"},
+      \   },
       \   "index.ios.js": {
       \     "app/*.js": {"alternate": "specs/{}.spec.js"},
       \     "specs/*.spec.js": {"alternate": "app/{}.js"},
       \   },
-      \   "package.json": {
+      \   "app/*.js": {
       \     "app/*.js": {"alternate": "specs/{}.spec.js"},
       \     "specs/*.spec.js": {"alternate": "app/{}.js"},
       \   }
