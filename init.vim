@@ -223,8 +223,11 @@ autocmd BufRead,BufNewFile *.json set filetype=json
 " Require plugin flowtype/vim-flow
 autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
 
-" Turn on autoformattin from NeoFormat plugin
+" Turn on autoformatting from NeoFormat plugin
 autocmd BufWritePre *.js Neoformat
+
+" Fix Yggdroot/indentLine after eslinting
+autocmd BufWritePre * IndentLinesReset
 
 " *****************************************
 "     Personal Key mapping

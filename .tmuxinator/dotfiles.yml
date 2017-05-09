@@ -2,5 +2,5 @@ name: dotfiles
 root: ~/.dotfiles
 
 windows:
-  - editor: vim
+  - editor: nvim init.vim
   - bash: git fetch --all && git status
