@@ -105,6 +105,7 @@ Plug 'jiangmiao/auto-pairs'
 " Add back closing tag for jiangmiao/auto-pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsMapCR = 0 " Hack to work with prettier for opening a line in {|}
 
 " Displays a | for indentation
 Plug 'Yggdroot/indentLine'
