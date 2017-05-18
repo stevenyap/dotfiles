@@ -1,4 +1,5 @@
 " TODO: Set NeoVim installation in laptop repo once confirmed move to NeoVim
+" TODO: Move .tmuxinator into dropbox for consistent replication of projects setup
 
 " Clear all autocmd
 autocmd!
