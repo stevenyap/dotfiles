@@ -11,10 +11,6 @@ call plug#begin('~/.nvim/plugged')
 " Use solarized color scheme
 Plug 'iCyMind/NeoSolarized'
 
-" Saves file automatically
-Plug '907th/vim-auto-save'
-let g:auto_save = 1
-
 " Read the file automatically when returning back to Vim
 Plug 'djoshea/vim-autoread'
 
@@ -40,9 +36,8 @@ let g:ale_set_quickfix = 0
 let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
-" Don't lint when text changed but lint when auto-save
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_save = 0
 " eslint_d can only be used as global
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
@@ -106,7 +101,6 @@ Plug 'jiangmiao/auto-pairs'
 " Add back closing tag for jiangmiao/auto-pairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<C-b>'
-let g:AutoPairsMapCR = 0 " Hack to work with prettier for opening a line in {|}
 
 " Displays a | for indentation
 Plug 'Yggdroot/indentLine'
@@ -185,6 +179,7 @@ set hlsearch
 set incsearch
 set nowrap
 set showcmd
+set autowriteall
 
 " Set folding
 " Trigger folding with <Leader>z
