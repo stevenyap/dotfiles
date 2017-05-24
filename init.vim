@@ -120,8 +120,8 @@ Plug 'mattn/emmet-vim'
 
 " Syntax highlighting and indentation for JSON
 Plug 'elzr/vim-json'
-" Need the below config because of Yggdroot/indentLine
-let g:indentLine_noConcealCursor=""
+let g:vim_json_syntax_conceal = 0
+let g:vim_json_warnings = 0
 
 " *** Javascript Plugs
 " Plugin for Javascript flow typing
@@ -212,9 +212,6 @@ autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 " Set markdown syntax highlight
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
-
-" Set JSON filtype
-autocmd BufRead,BufNewFile *.json set filetype=json
 
 " JS with Flow shortcuts
 " Require plugin flowtype/vim-flow
