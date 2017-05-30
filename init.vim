@@ -38,9 +38,6 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_save = 0
-" eslint_d can only be used as global
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable = 'eslint_d'
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
 nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
 
