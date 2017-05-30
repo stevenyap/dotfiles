@@ -121,7 +121,6 @@ Plug 'mattn/emmet-vim'
 " Syntax highlighting and indentation for JSON
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
-let g:vim_json_warnings = 0
 
 " *** Javascript Plugs
 " Plugin for Javascript flow typing
@@ -328,3 +327,6 @@ map <Leader>z :setlocal foldmethod=syntax<CR>
 
 " Yank the whole page
 map <Leader>y mcggVGy`c
+
+" Saves all buffets
+map <Leader>w :wa<CR>:echo 'Saved all buffets'<CR>
