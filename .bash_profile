@@ -18,8 +18,9 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 export PATH=./node_modules/.bin:${PATH}
 
 # Put Yarn in PATH
-export PATH="$PATH:`yarn global bin`"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
+# Source other bash config/scripts
 source ~/.dotfiles/.bash_prompt
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
