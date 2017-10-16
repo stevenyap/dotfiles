@@ -141,6 +141,11 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 " Plugin for vim development
 Plug 'junegunn/vader.vim'
 
+" *** Elm Plugs
+" Plugin for Elm development
+Plug 'elmcast/elm-vim', { 'for': 'elm' }
+Plug 'pbogut/deoplete-elm', { 'for': 'elm' } " Until elm-vim merged the PR: https://github.com/ElmCast/elm-vim/issues/52
+
 " *** Other Plugs
 " Track IDE time in wakatime.com
 Plug 'wakatime/vim-wakatime'
@@ -325,5 +330,7 @@ map <Leader>z :setlocal foldmethod=syntax<CR>
 " Yank the whole page
 map <Leader>y mcggVGy`c
 
-" Saves all buffets
-map <Leader>w :wa<CR>:echo 'Saved all buffets'<CR>
+" vim-elm key-bindings
+map <Leader>w :ElmBrowseDocs<CR>
+map <Leader>d :ElmShowDocs<CR>
+map <Leader>e :ElmErrorDetail<CR>
