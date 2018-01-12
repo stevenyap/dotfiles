@@ -163,12 +163,6 @@ set nowrap
 set showcmd
 set autowriteall
 
-" Set folding
-" Trigger folding with <Leader>z
-" Open/Close all foldings via zR/zM
-set foldnestmax=1
-highlight Folded ctermbg=254 ctermfg=244
-
 " Yanks text into system clipboard
 set clipboard=unnamed
 
@@ -197,20 +191,11 @@ autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
 " JS with Flow shortcuts
 " Turn on autoformatting from NeoFormat plugin
-" autocmd BufWritePre *.js Neoformat
-
-" Fix Yggdroot/indentLine after eslinting
-" autocmd BufWritePre * IndentLinesReset
+autocmd BufWritePre *.js Neoformat
 
 " *****************************************
 "     Personal Key mapping
 " *****************************************
-
-" Toggle folding
-nmap <Space> za
-
-" Insert a line break above
-nmap K 0i<cr><esc>
 
 " Auto-expand %% to the current file directory
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -221,9 +206,6 @@ nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <tab><tab> <c-w><c-w>
-
-" Shift-Enter to escape in Insert Mode
-inoremap <S-CR> <Esc>
 
 " Move lines in normal, visual and insert modes
 " ∆ is <A-j>
@@ -259,32 +241,20 @@ map <Leader>s :execute sendKeysToTmux . '"' . runCurrentFileWithoutWatch . '"' .
 map <Leader>qq :cclose<CR>
 map <Leader>qf :copen<CR>
 
-" Split lines above
-map <Leader>K i<cr><esc><up>:m +1<cr>
-
 " Split lines below
 map <Leader>k i<cr><esc>
 
 " Opens NerdTree
 map <Leader>n :NERDTreeToggle<CR>
 
-" Close the next window
-map <Leader>X <c-w><c-w>:q<CR>
-
 " Clear highlighted search
 map <Leader>/ :nohlsearch<CR>
-
-" Auto-format the entire current file
-map <Leader>= ggVG=
 
 " Toggle paste and nopaste mode
 nnoremap <Leader>p :set invpaste paste?<CR>
 
 " Displays the registers
 map <Leader>r :reg<CR>
-
-" Trigger folding
-map <Leader>z :setlocal foldmethod=syntax<CR>
 
 " Yank the whole page
 map <Leader>y mcggVGy`c
