@@ -42,7 +42,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Fuzzy file matching
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
 
 " Ag silver searcher plugin
 Plug 'numkil/ag.nvim'
