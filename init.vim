@@ -1,6 +1,3 @@
-" TODO: Set NeoVim installation in laptop repo once confirmed move to NeoVim
-" TODO: Move .tmuxinator into dropbox for consistent replication of projects setup
-
 " Clear all autocmd
 autocmd!
 
@@ -13,14 +10,6 @@ Plug 'iCyMind/NeoSolarized'
 
 " Read the file automatically when returning back to Vim
 Plug 'djoshea/vim-autoread'
-
-" Displays a list of buffets
-" <Leader>b to trigger
-Plug 'sandeepcr529/Buffet.vim'
-
-" Displays a menu of tagged functions via ctags
-" <Leader>m to trigger
-Plug 'majutsushi/tagbar'
 
 " Displays directory file system on the side
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -35,7 +24,7 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
+let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_save = 0
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
@@ -74,16 +63,14 @@ let g:projectionist_heuristics = {
       \   "app/*.js": {
       \     "app/*.js": {"alternate": "specs/{}.spec.js"},
       \     "specs/*.spec.js": {"alternate": "app/{}.js"},
+      \   },
+      \   "src/*.elm": {
+      \     "src/*.elm": {"alternate": "tests/Tests/{}.elm"},
+      \     "tests/Tests/*.elm": {"alternate": "src/{}.elm"},
       \   }
       \ }
 
 " *** Coding Plugs
-" Snippet Engine
-Plug 'SirVer/ultisnips'
-set runtimepath+=~/.dotfiles " loads custom snippets at ~/.dotfiles/UltiSnips
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-
 " Easy commenting in code (gcc)
 Plug 'tpope/vim-commentary'
 
@@ -101,6 +88,7 @@ let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 " Displays a | for indentation
 Plug 'Yggdroot/indentLine'
+let g:indentLine_char = '┆'
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
@@ -110,21 +98,16 @@ let g:airline_extensions=[]
 " Dark-powered Neovim autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup=1
+" Map navigation in insert mode for deoplete auto-completion
+imap <c-k> <Up>
+imap <c-j> <Down>
 
 " *** HTML/CSS/JSON Plugs
-" HTML tag expander
-Plug 'mattn/emmet-vim'
-
 " Syntax highlighting and indentation for JSON
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 
 " *** Javascript Plugs
-" Plugin for Javascript flow typing
-" Can jump to definition directly without ctags
-Plug 'flowtype/vim-flow', { 'for': 'javascript' }
-let g:flow#enable = 0
-
 " Syntax highlighting and indentation for Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 let g:javascript_plugin_flow = 1
@@ -137,9 +120,6 @@ let g:jsx_ext_required = 0
 " Plugin for rails development
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
-" *** Vim Plugs
-" Plugin for vim development
-Plug 'junegunn/vader.vim'
 
 " *** Elm Plugs
 " Plugin for Elm development
@@ -216,14 +196,11 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
 " JS with Flow shortcuts
-" Require plugin flowtype/vim-flow
-autocmd Filetype javascript nnoremap <C-]> :vsp<CR>:FlowJumpToDef<CR>zz
-
 " Turn on autoformatting from NeoFormat plugin
-autocmd BufWritePre *.js Neoformat
+" autocmd BufWritePre *.js Neoformat
 
 " Fix Yggdroot/indentLine after eslinting
-autocmd BufWritePre * IndentLinesReset
+" autocmd BufWritePre * IndentLinesReset
 
 " *****************************************
 "     Personal Key mapping
@@ -247,13 +224,6 @@ nnoremap <tab><tab> <c-w><c-w>
 
 " Shift-Enter to escape in Insert Mode
 inoremap <S-CR> <Esc>
-
-" Map navigation in insert mode for deoplete auto-completion
-imap <c-k> <Up>
-imap <c-j> <Down>
-
-" Remap for emmet-vim due to timeout issue in insert mode
-imap <c-y> <esc><c-y>,i
 
 " Move lines in normal, visual and insert modes
 " ∆ is <A-j>
@@ -285,12 +255,6 @@ map <Leader>a :execute sendKeysToTmux . '"' . runAllTests . '"' . endTmuxCommand
 map <Leader>t :execute sendKeysToTmux . '"' . runCurrentFile . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
 map <Leader>s :execute sendKeysToTmux . '"' . runCurrentFileWithoutWatch . '"' . endTmuxCommand<CR><bar>:echo 'Running current spec file'<CR>
 
-" Show the flow type of the variable under the cursor
-map <Leader>T :FlowType<cr>
-
-" Open buffet list
-map <Leader>b :Bufferlist<cr>
-
 " Quickfix windows open and close
 map <Leader>qq :cclose<CR>
 map <Leader>qf :copen<CR>
@@ -304,17 +268,11 @@ map <Leader>k i<cr><esc>
 " Opens NerdTree
 map <Leader>n :NERDTreeToggle<CR>
 
-" Opens Tagbar
-map <Leader>m :TagbarToggle<CR>
-
 " Close the next window
 map <Leader>X <c-w><c-w>:q<CR>
 
 " Clear highlighted search
 map <Leader>/ :nohlsearch<CR>
-
-" Convert ruby hash from :abc => '123' to abc: '123'
-map <Leader>h :%s/:\([^=,'"]*\) =>/\1:/g"']<CR>
 
 " Auto-format the entire current file
 map <Leader>= ggVG=
@@ -334,4 +292,4 @@ map <Leader>y mcggVGy`c
 " vim-elm key-bindings
 map <Leader>w :ElmBrowseDocs<CR>
 map <Leader>d :ElmShowDocs<CR>
-map <Leader>e :ElmErrorDetail<CR>
+map <Leader>e :ALEDetail<CR>
