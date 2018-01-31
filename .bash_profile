@@ -25,3 +25,6 @@ source ~/.dotfiles/.bash_prompt
 source ~/.dotfiles/bin/git-completion.bash
 source ~/.dotfiles/bin/tmuxinator.bash
 source ~/.dotfiles/bin/helpers.bash
+
+# Manual link to stree
+alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
