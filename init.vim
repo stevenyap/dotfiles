@@ -101,6 +101,7 @@ let g:deoplete#enable_at_startup=1
 " Map navigation in insert mode for deoplete auto-completion
 imap <c-k> <Up>
 imap <c-j> <Down>
+autocmd CompleteDone * silent! pclose!
 
 " *** HTML/CSS/JSON Plugs
 " Syntax highlighting and indentation for JSON
