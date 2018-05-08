@@ -1,6 +1,9 @@
 " Clear all autocmd
 autocmd!
 
+" Turn off python2
+let g:loaded_python_provider = 1
+
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.nvim/plugged')
 
