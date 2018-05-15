@@ -193,7 +193,6 @@ autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
-" JS with Flow shortcuts
 " Turn on autoformatting from NeoFormat plugin
 autocmd BufWritePre *.js Neoformat
 
