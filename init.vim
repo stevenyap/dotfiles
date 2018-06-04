@@ -96,7 +96,8 @@ let g:indentLine_char = '┆'
 " Nice status bar
 Plug 'vim-airline/vim-airline'
 " Disable all extensions for vim-airline for better performance
-let g:airline_extensions=[]
+let g:airline_extensions=['ale']
+let g:airline#extensions#ale#enabled = 1
 
 " Dark-powered Neovim autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
