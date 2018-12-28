@@ -201,6 +201,10 @@ autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 " Turn on autoformatting from NeoFormat plugin
 autocmd BufWritePre *.js Neoformat
 
+" Saves undo into a file and use it across all vim sessions
+set undodir=~/.nvim/undo
+set undofile
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
