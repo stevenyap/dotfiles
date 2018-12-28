@@ -168,6 +168,10 @@ set nowrap
 set showcmd
 set autowriteall
 
+" Set the folding behaviors
+set foldmethod=syntax
+set nofoldenable
+
 " Yanks text into system clipboard
 set clipboard=unnamed
 
