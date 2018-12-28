@@ -28,3 +28,6 @@ source ~/.dotfiles/bin/helpers.bash
 
 # Manual link to stree
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+
+# Alias to ag
+alias ag='ag --path-to-ignore ~/.dotfiles/.agignore'

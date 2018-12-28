@@ -1,6 +1,8 @@
-*.min.js
 _book
 ios
 android
-git
+.git
 node_modules
+*.min.js
+*.min.css.map
+*.min.css
