@@ -205,6 +205,10 @@ autocmd BufWritePre *.js Neoformat
 set undodir=~/.nvim/undo
 set undofile
 
+" Set formatting for python
+autocmd BufNewFile,BufRead *.py set tabstop=4
+autocmd BufNewFile,BufRead *.py set shiftwidth=4
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
