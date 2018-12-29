@@ -49,6 +49,7 @@ let g:ctrlp_user_command = 'ag --path-to-ignore ~/.dotfiles/.agignore --literal 
 
 " Ag silver searcher plugin
 Plug 'numkil/ag.nvim'
+let g:ag_prg = 'ag --path-to-ignore ~/.dotfiles/.agignore --vimgrep --silent'
 
 " Project-level fine-tuning of Vim
 " index.ios.js: React Native projects
