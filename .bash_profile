@@ -27,10 +27,10 @@ source ~/.dotfiles/bin/tmuxinator.bash
 source ~/.dotfiles/bin/helpers.bash
 
 # Manual link to stree
-alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+alias stree="/Applications/SourceTree.app/Contents/Resources/stree"
 
 # Alias to ag
-alias ag='ag --path-to-ignore ~/.dotfiles/.agignore'
+alias ag="ag --path-to-ignore $HOME/.dotfiles/.agignore"
 
 # Set tmuxinator project config folder
 export TMUXINATOR_CONFIG="$HOME/.dotfiles/.tmuxinator"
