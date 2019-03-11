@@ -1,7 +1,0 @@
-name: laptop
-root: ~/laptop
-
-windows:
-  - editor: vim
-  - bash: git fetch --all && git status
-  - runner: history -s ./laptop.sh

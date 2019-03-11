@@ -1,0 +1,7 @@
+name: rails
+root: ~/Workspace/mirum/bicentennial-site
+
+windows:
+  - editor: vim
+  - bash: git fetch --all && git status
+  - server: history -s "docker-compose start && (cd themes/bicentennial && gulp watch-bs)"

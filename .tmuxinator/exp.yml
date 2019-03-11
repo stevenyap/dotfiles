@@ -1,9 +1,0 @@
-name: exp
-root: ~/Workspace/exp
-
-windows:
-  - editor: vim
-  - bash: git fetch --all && git status
-  - ios: history -s exp ios
-  - android: history -s exp android
-  - server: exp start && exp logs
