@@ -31,3 +31,6 @@ alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 
 # Alias to ag
 alias ag='ag --path-to-ignore ~/.dotfiles/.agignore'
+
+# Set tmuxinator project config folder
+export TMUXINATOR_CONFIG="$HOME/.dotfiles/.tmuxinator"
