@@ -1,5 +1,6 @@
 name: vsb-web
 root: ~/Workspace/vsb/web
+pre_window: nvm use
 
 windows:
   - editor: nvim
