@@ -1,0 +1,8 @@
+name: happymatches-api
+root: ~/Workspace/happymatches/api
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - ngrok: history -s "/Applications/ngrok http 5000"
+  - server: history -s "yarn start"

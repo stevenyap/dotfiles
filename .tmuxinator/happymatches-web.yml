@@ -1,0 +1,7 @@
+name: happymatches-web
+root: ~/Workspace/happymatches/web
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - server: history -s "yarn start"
