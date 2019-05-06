@@ -27,7 +27,7 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_save = 0
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
