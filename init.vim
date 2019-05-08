@@ -30,6 +30,7 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_on_save = 0
+let g:ale_elm_make_executable = 'elm-app' " Use local elm in create-elm-app
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
 nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
 
