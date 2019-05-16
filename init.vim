@@ -25,11 +25,13 @@ let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_S
 Plug 'w0rp/ale'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
-let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_lint_on_text_changed = 'always'
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_save = 0
+let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
+let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_elm_make_executable = 'elm-app' " Use local elm in create-elm-app
 nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
 nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
@@ -103,11 +105,11 @@ let g:airline#extensions#ale#enabled = 1
 
 " Dark-powered Neovim autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup=1
-" Map navigation in insert mode for deoplete auto-completion
-imap <c-k> <Up>
-imap <c-j> <Down>
-autocmd CompleteDone * silent! pclose!
+let g:deoplete#enable_at_startup = 1
+" Map navigation & Enter in insert mode for deoplete auto-completion
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " *** HTML/CSS/JSON Plugs
 " Syntax highlighting and indentation for JSON
