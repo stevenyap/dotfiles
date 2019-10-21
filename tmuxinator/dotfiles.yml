@@ -1,0 +1,6 @@
+name: dotfiles
+root: ~/Workspace/dotfiles
+
+windows:
+  - editor: nvim init.vim
+  - shell: git fetch --all && git status

@@ -48,11 +48,11 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Fuzzy file matching
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = 'ag --path-to-ignore ~/.dotfiles/.agignore --literal --files-with-matches --nocolor --hidden -g "" %s'
+let g:ctrlp_user_command = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --literal --files-with-matches --nocolor --hidden -g "" %s'
 
 " Ag silver searcher plugin
 Plug 'numkil/ag.nvim'
-let g:ag_prg = 'ag --path-to-ignore ~/.dotfiles/.agignore --vimgrep --silent'
+let g:ag_prg = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --vimgrep --silent'
 
 " Project-level fine-tuning of Vim
 " index.ios.js: React Native projects
