@@ -33,6 +33,7 @@ bindkey '' vi-backward-word # move left by a word
 bindkey '' vi-forward-word # move right by a word
 bindkey '' vi-beginning-of-line
 bindkey '' vi-end-of-line
+bindkey '' backward-delete-word
 bindkey '' up-history
 # CTRL-J is a return line in terminal
 # We map Ctrl-J in iterm2 to Ctrl-T and capture it here
