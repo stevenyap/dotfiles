@@ -4,5 +4,5 @@ root: ~/Workspace/happymatches/web
 windows:
   - editor: nvim
   - bash: git fetch --all && git status
-  - test: history -s "npm test"
-  - server: history -s "npm start"
+  - test: print -S "npm test"
+  - server: print -S "npm start"
