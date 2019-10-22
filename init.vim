@@ -132,8 +132,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 " *** Elm Plugs
 " Plugin for Elm development
-Plug 'elmcast/elm-vim', { 'for': 'elm' }
-Plug 'pbogut/deoplete-elm' " Until elm-vim merged the PR: https://github.com/ElmCast/elm-vim/issues/52
+Plug 'Zaptic/elm-vim', { 'for': 'elm' }
 let g:elm_setup_keybindings = 0
 
 " *** Other Plugs
