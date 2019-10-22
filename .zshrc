@@ -33,6 +33,10 @@ bindkey '' vi-backward-word # move left by a word
 bindkey '' vi-forward-word # move right by a word
 bindkey '' vi-beginning-of-line
 bindkey '' vi-end-of-line
+bindkey '' up-history
+# CTRL-J is a return line in terminal
+# We map Ctrl-J in iterm2 to Ctrl-T and capture it here
+bindkey '' down-history 
 
 # Load zsh autocomplete
 autoload -U compinit && compinit
@@ -59,8 +63,8 @@ export TMUXINATOR_CONFIG="$HOME/Workspace/dotfiles/tmuxinator"
 alias mux="tmuxinator"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 # Add gem bin path
 export PATH="/Users/stevenyap/.gem/ruby/2.6.0/bin:$PATH"
