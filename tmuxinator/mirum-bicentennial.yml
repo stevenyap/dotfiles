@@ -1,8 +1,0 @@
-name: Bicentennial
-root: ~/Workspace/mirum/bicentennial-site
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - parallax: history -s "(cd themes/bicentennial && live-server --open=/app/temp --watch=./js/*)"
-  - server: history -s "docker-compose start && (cd themes/bicentennial && gulp watch-bs)"

@@ -5,4 +5,4 @@ windows:
   - editor: nvim
   - bash: git fetch --all && git status
   - ngrok: history -s "/Applications/ngrok http 5000"
-  - server: history -s "yarn start"
+  - server: history -s "npm start"

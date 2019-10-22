@@ -4,4 +4,4 @@ root: ~/Workspace/happymatches/ios
 windows:
   - editor: nvim
   - bash: git fetch --all && git status
-  - server: history -s "yarn start"
+  - server: history -s "npm start"
