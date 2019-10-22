@@ -22,7 +22,7 @@ let g:NERDTreeAutoDeleteBuffer = 1
 let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
 
 " Syntax highlighting
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
