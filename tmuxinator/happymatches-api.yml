@@ -4,5 +4,5 @@ root: ~/Workspace/happymatches/api
 windows:
   - editor: nvim
   - bash: git fetch --all && git status
-  - ngrok: print -S "/Applications/ngrok http 5000"
+  - test: print -S "npm test"
   - server: print -S "npm start"
