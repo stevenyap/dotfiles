@@ -1,46 +1,13 @@
-" Clear all autocmd
+" Start declaring all Plugins
 autocmd!
-
-" Turn off python2
-let g:loaded_python_provider = 1
-
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+let g:loaded_python_provider = 1 " Turn off python2
 call plug#begin('~/.nvim/plugged')
 
-" *** Vim Plugs
 " Use solarized color scheme
 Plug 'iCyMind/NeoSolarized'
 
 " Read the file automatically when returning back to Vim
 Plug 'djoshea/vim-autoread'
-
-" Displays directory file system on the side
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
-
-" Syntax highlighting
-Plug 'dense-analysis/ale'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_filetype_changed = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_save = 0
-let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_elm_make_executable = 'elm-app' " Use local elm in create-elm-app
-nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
-nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
-
-" Syntax formatting
-Plug 'sbdchd/neoformat'
-" Use eslint_d to fix format
-" Use eslint-prettier to fix format through eslint_d
-let g:neoformat_enabled_javascript = ['eslint_d']
 
 " Toggles between relative and absolute line numbers automatically
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -54,30 +21,6 @@ let g:ctrlp_user_command = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore -
 Plug 'numkil/ag.nvim'
 let g:ag_prg = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --vimgrep --silent'
 
-" Project-level fine-tuning of Vim
-" index.ios.js: React Native projects
-" package.json: Default Javascript projects
-Plug 'tpope/vim-projectionist'
-let g:projectionist_heuristics = {
-      \   "src/*.js": {
-      \     "src/*.js": {"alternate": "specs/{}.spec.js"},
-      \     "specs/*.spec.js": {"alternate": "src/{}.js"},
-      \   },
-      \   "index.ios.js": {
-      \     "app/*.js": {"alternate": "specs/{}.spec.js"},
-      \     "specs/*.spec.js": {"alternate": "app/{}.js"},
-      \   },
-      \   "app/*.js": {
-      \     "app/*.js": {"alternate": "specs/{}.spec.js"},
-      \     "specs/*.spec.js": {"alternate": "app/{}.js"},
-      \   },
-      \   "src/*.elm": {
-      \     "src/*.elm": {"alternate": "tests/Tests/{}.elm"},
-      \     "tests/Tests/*.elm": {"alternate": "src/{}.elm"},
-      \   }
-      \ }
-
-" *** Coding Plugs
 " Easy commenting in code (gcc)
 Plug 'tpope/vim-commentary'
 
@@ -95,7 +38,8 @@ let g:AutoPairsShortcutBackInsert = '<C-b>'
 
 " Displays a | for indentation
 Plug 'Yggdroot/indentLine'
-let g:indentLine_char = '┆'
+let g:indentLine_char = '⁞'
+let g:indentLine_color_term = 254 " Solarized base2 color 
 
 " Nice status bar
 Plug 'vim-airline/vim-airline'
@@ -103,7 +47,42 @@ Plug 'vim-airline/vim-airline'
 let g:airline_extensions=['ale']
 let g:airline#extensions#ale#enabled = 1
 
-" Dark-powered Neovim autocompletion
+" Displays directory file system on the side
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
+
+" Track IDE time in wakatime.com
+Plug 'wakatime/vim-wakatime'
+
+" Always need a nyan cat to unwind
+Plug 'koron/nyancat-vim'
+
+""" Language Server
+" Linting
+Plug 'dense-analysis/ale'
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_save = 0
+let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
+let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_elm_make_executable = 'elm-app' " Use local elm in create-elm-app
+nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
+nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
+
+" Code Formatting
+Plug 'sbdchd/neoformat'
+" Use eslint_d to fix format
+" Use eslint-prettier to fix format through eslint_d
+let g:neoformat_enabled_javascript = ['eslint_d']
+
+" Auto-completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 " Map navigation & Enter in insert mode for deoplete auto-completion
@@ -111,36 +90,17 @@ inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" *** HTML/CSS/JSON Plugs
 " Syntax highlighting and indentation for JSON
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 
-" *** Javascript Plugs
 " Syntax highlighting and indentation for Javascript
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 let g:javascript_plugin_flow = 1
 
-" Syntax highlighting and indentation for JSX
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-let g:jsx_ext_required = 0
-
-" *** Ruby Plugs
-" Plugin for rails development
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-
-
-" *** Elm Plugs
 " Plugin for Elm development
 Plug 'Zaptic/elm-vim', { 'for': 'elm' }
 let g:elm_setup_keybindings = 0
-
-" *** Other Plugs
-" Track IDE time in wakatime.com
-Plug 'wakatime/vim-wakatime'
-
-" Always need a nyan cat to unwind
-Plug 'koron/nyancat-vim'
 
 " Initialize plugin system
 call plug#end()
