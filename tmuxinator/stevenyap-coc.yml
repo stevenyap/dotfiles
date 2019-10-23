@@ -1,5 +1,5 @@
-name: base
-root: ~/Workspace/base
+name: stevenyap-coc
+root: ~/Workspace/stevenyap/coc.nvim
 
 windows:
   - editor: nvim
