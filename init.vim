@@ -60,47 +60,28 @@ Plug 'wakatime/vim-wakatime'
 " Always need a nyan cat to unwind
 Plug 'koron/nyancat-vim'
 
-""" Language Server
-" Linting
-Plug 'dense-analysis/ale'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_filetype_changed = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_save = 0
-let g:ale_history_log_output = 1 " Type :ALEInfo to view and debug
-let g:ale_javascript_eslint_executable = 'eslint_d'
-let g:ale_elm_make_executable = 'elm-app' " Use local elm in create-elm-app
-nmap <silent> gk <Plug>(ale_previous_wrap) " Jump to previous error
-nmap <silent> gj <Plug>(ale_next_wrap) " Jump to next error
-
-" Code Formatting
-Plug 'sbdchd/neoformat'
-" Use eslint_d to fix format
-" Use eslint-prettier to fix format through eslint_d
-let g:neoformat_enabled_javascript = ['eslint_d']
-
-" Auto-completion
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
-" Map navigation & Enter in insert mode for deoplete auto-completion
-inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+" Autocomplete with Language Server Support
+" Requirements:
+" npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
+" soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [ 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html' ]
+nmap <silent> gk <Plug>(coc-diagnostic-prev)
+nmap <silent> gj <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Map navigation & Enter in insert mode for auto-completion
+" In .zshrc, we have map C-j to C-t so we target C-t for C-j
+inoremap <expr><C-t> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+set updatetime=300
+autocmd BufRead,BufNewFile *.elm set filetype=elm
 
-" Syntax highlighting and indentation for JSON
-Plug 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
-
-" Syntax highlighting and indentation for Javascript
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-let g:javascript_plugin_flow = 1
-
-" Plugin for Elm development
-Plug 'Zaptic/elm-vim', { 'for': 'elm' }
-let g:elm_setup_keybindings = 0
+" Syntax highlighting for elm
+Plug 'andys8/vim-elm-syntax'
 
 " Initialize plugin system
 call plug#end()
@@ -161,16 +142,12 @@ autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 
-" Turn on autoformatting from NeoFormat plugin
-autocmd BufWritePre *.js Neoformat
+" Don't hide "" in json
+autocmd BufNewFile,BufReadPost *.json IndentLinesToggle
 
 " Saves undo into a file and use it across all vim sessions
 set undodir=~/.nvim/undo
 set undofile
-
-" Set formatting for python
-autocmd BufNewFile,BufRead *.py set tabstop=4
-autocmd BufNewFile,BufRead *.py set shiftwidth=4
 
 " *****************************************
 "     Personal Key mapping
@@ -182,7 +159,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Navigation around windows
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
+nnoremap <c-t> <c-w>j " c-j is remapped to c-t in .zshrc
 nnoremap <c-k> <c-w>k
 nnoremap <tab><tab> <c-w><c-w>
 
@@ -229,8 +206,3 @@ map <Leader>r :reg<CR>
 
 " Yank the whole page
 map <Leader>y mcggVGy`c
-
-" vim-elm key-bindings
-map <Leader>w :ElmBrowseDocs<CR>
-map <Leader>d :ElmShowDocs<CR>
-map <Leader>e :ALEDetail<CR>
