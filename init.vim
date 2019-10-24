@@ -41,11 +41,15 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '⁞'
 let g:indentLine_color_term = 254 " Solarized base2 color 
 
+" Overwrites Yggdroot/indentLine conceal level properly for Json
+Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
+
 " Nice status bar
 Plug 'vim-airline/vim-airline'
 " Disable all extensions for vim-airline for better performance
-let g:airline_extensions=['ale']
-let g:airline#extensions#ale#enabled = 1
+let g:airline_extensions=['coc']
+let g:airline#extensions#coc#enabled = 1
 
 " Displays directory file system on the side
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -69,16 +73,24 @@ let g:coc_global_extensions = [ 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-c
 nmap <silent> gk <Plug>(coc-diagnostic-prev)
 nmap <silent> gj <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gf <Plug>(coc-diagnostic-info)
+nmap gn <Plug>(coc-rename)
+nmap ga :CocList --normal diagnostics<CR>
+nmap <silent> gh :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 " Map navigation & Enter in insert mode for auto-completion
 " In .zshrc, we have map C-j to C-t so we target C-t for C-j
 inoremap <expr><C-t> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-set updatetime=300
-autocmd BufRead,BufNewFile *.elm set filetype=elm
+" let $NVIM_COC_LOG_LEVEL = 'debug'
 
 " Syntax highlighting for elm
 Plug 'andys8/vim-elm-syntax'
@@ -93,11 +105,11 @@ call plug#end()
 " Color scheme
 set background=light
 colorscheme NeoSolarized
+highlight CocErrorHighlight ctermfg=Red guifg=White
+highlight CocWarningHighlight ctermfg=Brown guifg=White
 
-" Set highlighting for ALE
-highlight ALEErrorSign ctermbg=DarkRed ctermfg=White
-highlight ALEWarningSign ctermbg=Brown ctermfg=White
-
+set updatetime=300
+set signcolumn=yes
 set wildmenu
 set wildmode=full
 set switchbuf=useopen,usetab
@@ -110,7 +122,6 @@ set hlsearch
 set incsearch
 set nowrap
 set showcmd
-set autowriteall
 
 " Set the folding behaviors
 set foldmethod=syntax
@@ -141,9 +152,6 @@ autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 " Set markdown syntax highlight
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
-
-" Don't hide "" in json
-autocmd BufNewFile,BufReadPost *.json IndentLinesToggle
 
 " Saves undo into a file and use it across all vim sessions
 set undodir=~/.nvim/undo
@@ -206,3 +214,5 @@ map <Leader>r :reg<CR>
 
 " Yank the whole page
 map <Leader>y mcggVGy`c
+
+nmap <leader>f  <Plug>(coc-fix-current)

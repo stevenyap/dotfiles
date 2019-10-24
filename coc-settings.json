@@ -1,7 +1,12 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [ "elm", "javascript", "json" ],
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.refreshAfterSave": false,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": "~~> ",
   "languageserver": {
     "elmLS": {
+      "trace.server": "verbose",
       "command": "elm-language-server",
       "filetypes": [ "elm" ],
       "rootPatterns": [ "elm.json" ],
@@ -12,5 +17,6 @@
         "elmAnalyseTrigger": "change"
       }
     }
-  }
+  },
+  "codeLens.enable": true
 }
