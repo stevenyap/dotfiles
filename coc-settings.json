@@ -18,5 +18,8 @@
       }
     }
   },
-  "codeLens.enable": true
+  "codeLens.enable": true,
+  "snippets.ultisnips.directories": [
+    "/Users/stevenyap/Workspace/dotfiles/snippets"
+  ]
 }
