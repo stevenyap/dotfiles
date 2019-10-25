@@ -11,9 +11,9 @@
       "filetypes": [ "elm" ],
       "rootPatterns": [ "elm.json" ],
       "initializationOptions": {
-        "elmPath": "/Users/stevenyap/.nvm/versions/node/v10.15.3/bin/elm",
-        "elmFormatPath": "/Users/stevenyap/.nvm/versions/node/v10.15.3/bin/elm-format",
-        "elmTestPath": "/Users/stevenyap/.nvm/versions/node/v10.15.3/bin/elm-test",
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test",
         "elmAnalyseTrigger": "change"
       }
     }
