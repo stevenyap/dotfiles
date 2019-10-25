@@ -56,7 +56,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
-let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$']
+let NERDTreeIgnore=['node_modules', '.git$', '\.swp$', 'rethinkdb_data', '\.DS_Store$', '\.firebase']
 
 " Track IDE time in wakatime.com
 Plug 'wakatime/vim-wakatime'
