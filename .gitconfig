@@ -2,7 +2,7 @@
 	email = stevenyap@futureworkz.com
 	name = Steven Yap
 [core]
-	excludesfile = /Users/stevenyap/Workspace/dotfiles/.gitignore_global
+	excludesfile = /Users/stevenyap/.gitignore_global
   ignorecase = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
