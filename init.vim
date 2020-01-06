@@ -69,7 +69,7 @@ Plug 'koron/nyancat-vim'
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gk <Plug>(coc-diagnostic-prev)
 nmap <silent> gj <Plug>(coc-diagnostic-next)
@@ -95,6 +95,13 @@ inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Syntax highlighting for elm
 Plug 'andys8/vim-elm-syntax'
+
+" Syntax highlighting for Javascript
+Plug 'pangloss/vim-javascript'
+
+" Syntax highlighting for React Typescript
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'maxmellon/vim-jsx-pretty'
 
 " Initialize plugin system
 call plug#end()

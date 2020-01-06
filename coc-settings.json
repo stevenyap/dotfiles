@@ -1,9 +1,13 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [ "elm", "javascript", "json" ],
+  "coc.preferences.formatOnSaveFiletypes": [ "elm", "javascript", "typescriptreact", "json" ],
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "~~> ",
+  "codeLens.enable": true,
+  "snippets.ultisnips.directories": [
+    "/Users/stevenyap/Workspace/dotfiles/snippets"
+  ],
   "languageserver": {
     "elmLS": {
       "trace.server": "verbose",
@@ -17,9 +21,5 @@
         "elmAnalyseTrigger": "change"
       }
     }
-  },
-  "codeLens.enable": true,
-  "snippets.ultisnips.directories": [
-    "/Users/stevenyap/Workspace/dotfiles/snippets"
-  ]
+  }
 }
