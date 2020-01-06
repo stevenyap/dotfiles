@@ -2,7 +2,7 @@ name: rails
 root: ~/Workspace/rails
 
 windows:
-  - editor: vim
+  - editor: nvim
   - bash: git fetch --all && git status
   - test: tail -f log/test.log
   - console: history -s rails console
