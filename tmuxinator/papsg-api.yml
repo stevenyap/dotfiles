@@ -1,5 +1,5 @@
-name: happymatches-web
-root: ~/Workspace/happymatches/web
+name: papsg-api
+root: ~/Workspace/papsg/api
 
 pre_window: nvm use
 
