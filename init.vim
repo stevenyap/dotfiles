@@ -76,9 +76,9 @@ nmap <silent> gj <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gf <Plug>(coc-diagnostic-info)
+nmap <silent> gh :call <SID>show_documentation()<CR>
 nmap gn <Plug>(coc-rename)
 nmap ga :CocList --normal diagnostics<CR>
-nmap <silent> gh :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')

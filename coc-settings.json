@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [ "elm", "javascript", "typescriptreact", "json" ],
+  "coc.preferences.formatOnSaveFiletypes": [ "elm", "javascript", "typescript","typescriptreact",  "json" ],
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.virtualText": true,
