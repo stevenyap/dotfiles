@@ -103,6 +103,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Syntax highlighting for JSON-C files
+" Manually set individual json file to allow commenting at [JSONCFILES]
+Plug 'neoclide/jsonc.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -160,6 +164,9 @@ autocmd InsertLeave * set timeoutlen=300 ttimeoutlen=300
 " Set markdown syntax highlight
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.md set wrap linebreak
+
+" [JSONCFILES] Manually set individual json file to allow commenting
+autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 " Saves undo into a file and use it across all vim sessions
 set undodir=~/.nvim/undo
