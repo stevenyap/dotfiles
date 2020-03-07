@@ -1,0 +1,10 @@
+name: nexwave-web
+root: ~/Workspace/nexwave/web
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "npm test"
+  - server: print -S "npm start"

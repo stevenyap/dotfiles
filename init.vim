@@ -69,7 +69,7 @@ Plug 'koron/nyancat-vim'
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gk <Plug>(coc-diagnostic-prev)
 nmap <silent> gj <Plug>(coc-diagnostic-next)
@@ -106,6 +106,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Syntax highlighting for JSON-C files
 " Manually set individual json file to allow commenting at [JSONCFILES]
 Plug 'neoclide/jsonc.vim'
+
+" F# Syntax highlight
+Plug 'kongo2002/fsharp-vim'
 
 " Initialize plugin system
 call plug#end()

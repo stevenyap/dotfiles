@@ -1,0 +1,8 @@
+name: nexwave-api
+root: ~/Workspace/nexwave/api
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "RunDockerTest"
+  - server: print -S "RunDockerServer"
