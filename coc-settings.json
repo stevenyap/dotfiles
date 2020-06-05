@@ -5,7 +5,8 @@
     "typescript",
     "typescriptreact", 
     "json",
-    "fsharp"
+    "fsharp",
+    "html"
   ],
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
@@ -27,6 +28,6 @@
         "elmTestPath": "elm-test",
         "elmAnalyseTrigger": "change"
       }
-    }
-  }
+    },
+  },
 }
