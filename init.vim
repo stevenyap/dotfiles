@@ -171,6 +171,10 @@ autocmd BufNewFile,BufReadPost *.md set wrap linebreak
 " [JSONCFILES] Manually set individual json file to allow commenting
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
+" Hides ^M when opening Windows files
+autocmd BufReadPre,BufNewFile *.fsproj set fileformat=unix
+autocmd BufReadPre,BufNewFile *.fs set fileformat=unix
+
 " Saves undo into a file and use it across all vim sessions
 set undodir=~/.nvim/undo
 set undofile
