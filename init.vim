@@ -110,6 +110,9 @@ Plug 'neoclide/jsonc.vim'
 " F# Syntax highlight
 Plug 'kongo2002/fsharp-vim'
 
+" firestore.rules Syntax highlight
+Plug 'delphinus/vim-firestore'
+
 " Initialize plugin system
 call plug#end()
 
