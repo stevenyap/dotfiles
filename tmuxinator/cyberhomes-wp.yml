@@ -1,0 +1,8 @@
+name: cyberhomes-wp
+root: ~/Workspace/cyberhomes/wp
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "composer test"
+  - server: print -S "composer start"
