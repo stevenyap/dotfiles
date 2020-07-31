@@ -42,17 +42,6 @@ bindkey '' down-history
 # Load zsh autocomplete
 autoload -U compinit && compinit
 
-# For react native android emulator
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-
-# For fastlane
-export PATH="$HOME/.fastlane/bin:$PATH"
-
-# Use local npm binaries over global npm binaries
-export PATH=./node_modules/.bin:${PATH}
-
 # Manual link to stree
 alias stree="/Applications/SourceTree.app/Contents/Resources/stree"
 
@@ -63,9 +52,26 @@ alias ag="ag --path-to-ignore $HOME/Workspace/dotfiles/.agignore"
 export TMUXINATOR_CONFIG="$HOME/Workspace/dotfiles/tmuxinator"
 alias mux="tmuxinator"
 
+### Coding Specific Configs ###
+
+# NodeJS
+# Use local npm binaries over global npm binaries
+export PATH=./node_modules/.bin:${PATH}
+# NVM
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
+# React Native android emulator
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+# Ruby
+# For fastlane
+export PATH="$HOME/.fastlane/bin:$PATH"
 # Add gem bin path
 export PATH="/Users/stevenyap/.gem/ruby/2.6.0/bin:$PATH"
+
+# MySQL
+export PATH=/usr/local/mysql/bin:$PATH
