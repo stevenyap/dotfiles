@@ -182,6 +182,8 @@ autocmd BufReadPre,BufNewFile *.fs set fileformat=unix
 set undodir=~/.nvim/undo
 set undofile
 
+autocmd BufNewFile,BufReadPost *.mjml set filetype=html
+
 " *****************************************
 "     Personal Key mapping
 " *****************************************
