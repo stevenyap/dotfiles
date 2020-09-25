@@ -1,0 +1,7 @@
+name: wesmedical-theme
+root: ~/Workspace/wesmedical/theme
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - server: print -S "npm start"

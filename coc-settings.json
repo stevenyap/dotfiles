@@ -8,6 +8,11 @@
     "fsharp",
     "html"
   ],
+  "coc.preferences.rootPatterns": [
+    ".git", 
+    "elm.json", 
+    "package.json"
+  ],
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.virtualText": true,
