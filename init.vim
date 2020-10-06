@@ -113,6 +113,9 @@ Plug 'kongo2002/fsharp-vim'
 " firestore.rules Syntax highlight
 Plug 'delphinus/vim-firestore'
 
+" Markdown
+Plug 'gabrielelana/vim-markdown'
+
 " Initialize plugin system
 call plug#end()
 
