@@ -1,0 +1,11 @@
+name: allride-mobile
+root: ~/Workspace/allride/mobile
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - ios: print -S "npx react-native run-ios"
+  - android: print -S "npx react-native run-android"
+  - server: print -S "npm run lint:watch"

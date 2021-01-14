@@ -8,4 +8,3 @@ windows:
   - bash: git fetch --all && git status
   - test: print -S "npm test"
   - web: print -S "npm start"
-  - api: cd backend && print -S "npm start"
