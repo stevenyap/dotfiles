@@ -6,7 +6,9 @@
     "typescriptreact", 
     "json",
     "fsharp",
-    "html"
+    "html",
+    "yaml",
+    "yml"
   ],
   "coc.preferences.rootPatterns": [
     ".git", 
@@ -21,9 +23,12 @@
   "snippets.ultisnips.directories": [
     "/Users/stevenyap/Workspace/dotfiles/snippets"
   ],
+  "typescript.updateImportsOnFileMove.enable": false,
+  "javascript.updateImportsOnFileMove.enable": false,
+  "yaml.format.enable": true,
+  "tsserver.disableAutomaticTypeAcquisition": false,
   "languageserver": {
     "elmLS": {
-      "trace.server": "verbose",
       "command": "elm-language-server",
       "filetypes": [ "elm" ],
       "rootPatterns": [ "elm.json" ],

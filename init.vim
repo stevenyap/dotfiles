@@ -16,6 +16,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_user_command = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --literal --files-with-matches --nocolor --hidden -g "" %s'
+nnoremap <c-b> :CtrlPBuffer<CR>
 
 " Ag silver searcher plugin
 Plug 'numkil/ag.nvim'
@@ -69,16 +70,20 @@ Plug 'koron/nyancat-vim'
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp', 'coc-yaml' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gk <Plug>(coc-diagnostic-prev)
 nmap <silent> gj <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gb <C-o>
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gf <Plug>(coc-diagnostic-info)
 nmap <silent> gh :call <SID>show_documentation()<CR>
 nmap gn <Plug>(coc-rename)
 nmap ga :CocList --normal diagnostics<CR>
+" sometimes coc floating windows refuses to close
+nmap go :call coc#float#close_all()<CR> 
+nmap gp <C-w>p
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
