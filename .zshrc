@@ -39,9 +39,6 @@ bindkey '' up-history
 # We map Ctrl-J in iterm2 to Ctrl-T and capture it here
 bindkey '' down-history 
 
-# Load zsh autocomplete
-autoload -U compinit && compinit
-
 # Manual link to stree
 alias stree="/Applications/SourceTree.app/Contents/Resources/stree"
 
@@ -52,13 +49,16 @@ alias ag="ag --path-to-ignore $HOME/Workspace/dotfiles/.agignore"
 export TMUXINATOR_CONFIG="$HOME/Workspace/dotfiles/tmuxinator"
 alias mux="tmuxinator"
 
+# Autojump plugin: https://github.com/wting/autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 ### Coding Specific Configs ###
 
 # NodeJS
 # NVM
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 # Use local npm binaries over global npm binaries
 export PATH=./node_modules/.bin:${PATH}
 
@@ -75,3 +75,4 @@ export PATH="/Users/stevenyap/.gem/ruby/2.6.0/bin:$PATH"
 
 # MySQL
 export PATH=/usr/local/mysql/bin:$PATH
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
