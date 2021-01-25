@@ -1,6 +1,6 @@
 " Start declaring all Plugins
 autocmd!
-let g:loaded_python_provider = 1 " Turn off python2
+let g:node_host_prog = expand('~/.nvm/versions/node/v14.15.4/bin/neovim-node-host')
 call plug#begin('~/.nvim/plugged')
 
 " Use solarized color scheme

@@ -16,7 +16,6 @@
     "package.json"
   ],
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.refreshAfterSave": false,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextPrefix": "~~> ",
   "codeLens.enable": true,
@@ -38,6 +37,6 @@
         "elmTestPath": "elm-test",
         "elmAnalyseTrigger": "change"
       }
-    },
-  },
+    }
+  }
 }
