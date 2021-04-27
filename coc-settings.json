@@ -25,6 +25,7 @@
   "tsserver.disableAutomaticTypeAcquisition": false,
   "typescript.updateImportsOnFileMove.enable": false,
   "javascript.updateImportsOnFileMove.enable": false,
+  "javascript.suggestionActions.enabled": false,
   "yaml.format.enable": true,
   "yaml.schemaStore.enable": true,
   "yaml.customTags": [
