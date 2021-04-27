@@ -37,6 +37,7 @@ bindkey '' backward-delete-word
 bindkey '' up-history
 # CTRL-J is a return line in terminal
 # We map Ctrl-J in iterm2 to Ctrl-T and capture it here
+# Add hex code 0x14 to Ctrl-J
 bindkey '' down-history 
 
 # Manual link to stree
@@ -51,6 +52,14 @@ alias mux="tmuxinator"
 
 # Autojump plugin: https://github.com/wting/autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# History of commands
+# Save all commands to a history file
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+export HISTFILE=~/.zsh_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt INC_APPEND_HISTORY
 
 ### Coding Specific Configs ###
 
