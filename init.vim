@@ -40,7 +40,7 @@ let g:AutoPairsShortcutBackInsert = '<C-b>'
 " Displays a | for indentation
 Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '⁞'
-let g:indentLine_color_term = 254 " Solarized base2 color 
+let g:indentLine_color_term = 239 " Solarized base2 color 
 
 " Overwrites Yggdroot/indentLine conceal level properly for Json
 Plug 'elzr/vim-json'
@@ -92,8 +92,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Map navigation & Enter in insert mode for auto-completion
-" In .zshrc, we have map C-j to C-t so we target C-t for C-j
-inoremap <expr><C-t> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " let $NVIM_COC_LOG_LEVEL = 'debug'
@@ -129,7 +128,7 @@ call plug#end()
 " *****************************************
 
 " Color scheme
-set background=light
+set background=dark
 colorscheme NeoSolarized
 highlight CocErrorHighlight ctermfg=Red guifg=White
 highlight CocWarningHighlight ctermfg=Brown guifg=White
@@ -203,7 +202,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Navigation around windows
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-nnoremap <c-t> <c-w>j " c-j is remapped to c-t in .zshrc
+nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <tab><tab> <c-w><c-w>
 
