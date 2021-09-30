@@ -1,0 +1,32 @@
+name: hobnob-side
+root: ~/Workspace/hobnob/app
+
+pre_window:
+  - tmux set status off
+  - tmux set pane-border-status top
+
+windows:
+  - side:
+      layout: tiled
+      panes:
+        - web_test:
+            - printf '\033]2;%s\033\\' 'Web Test'
+            - cd portal
+            - nvm use
+            - source .envrc
+            - print -S "make test"
+        - empty_panel:
+            - printf '\033]2;%s\033\\' 'Empty Panel'
+            - cd portal
+            - nvm use
+            - source .envrc
+            - echo This panel is free for use.
+        - web_server:
+            - printf '\033]2;%s\033\\' 'Web Server'
+            - cd portal
+            - nvm use
+            - source .envrc
+            - print -S "make watch"
+        - api_server:
+            - printf '\033]2;%s\033\\' 'API Server'
+            - make up-services

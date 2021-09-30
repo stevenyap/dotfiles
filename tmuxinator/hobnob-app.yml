@@ -1,0 +1,9 @@
+name: hobnob-app
+root: ~/Workspace/hobnob/app
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - cypress: print -S "make test-integration-local"
