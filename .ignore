@@ -1,0 +1,13 @@
+# Use by ag
+_book
+ios
+android
+.git
+node_modules
+*.min.js
+*.min.css.map
+*.min.css
+build
+
+# TODO ag can't seem to read portal/public/assets/client*.js
+portal/public/assets/client.js

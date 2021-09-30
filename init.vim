@@ -15,12 +15,12 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " Fuzzy file matching
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --literal --files-with-matches --nocolor --hidden -g "" %s'
+let g:ctrlp_user_command = 'ag --path-to-ignore ~/Workspace/dotfiles/.ignore --literal --files-with-matches --nocolor --hidden -g "" %s'
 nnoremap <c-b> :CtrlPBuffer<CR>
 
 " Ag silver searcher plugin
 Plug 'numkil/ag.nvim'
-let g:ag_prg = 'ag --path-to-ignore ~/Workspace/dotfiles/.agignore --vimgrep --silent'
+let g:ag_prg = 'ag --path-to-ignore ~/Workspace/dotfiles/.ignore --vimgrep --silent'
 
 " Easy commenting in code (gcc)
 Plug 'tpope/vim-commentary'
@@ -128,6 +128,7 @@ call plug#end()
 " *****************************************
 
 " Color scheme
+set termguicolors
 set background=dark
 colorscheme NeoSolarized
 highlight CocErrorHighlight ctermfg=Red guifg=White

@@ -1,9 +1,0 @@
-_book
-ios
-android
-.git
-node_modules
-*.min.js
-*.min.css.map
-*.min.css
-build
