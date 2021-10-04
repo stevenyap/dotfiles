@@ -123,6 +123,9 @@ Plug 'delphinus/vim-firestore'
 " Markdown
 Plug 'gabrielelana/vim-markdown'
 
+" GraphQL
+Plug 'jparise/vim-graphql'
+
 " Initialize plugin system
 call plug#end()
 
