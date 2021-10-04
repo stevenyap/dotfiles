@@ -22,6 +22,9 @@ nnoremap <c-b> :CtrlPBuffer<CR>
 Plug 'numkil/ag.nvim'
 let g:ag_prg = 'ag --path-to-ignore ~/Workspace/dotfiles/.ignore --vimgrep --silent'
 
+" Git plugin
+Plug 'tpope/vim-fugitive'
+
 " Easy commenting in code (gcc)
 Plug 'tpope/vim-commentary'
 
@@ -128,7 +131,6 @@ call plug#end()
 " *****************************************
 
 " Color scheme
-set termguicolors
 set background=dark
 colorscheme NeoSolarized
 highlight CocErrorHighlight ctermfg=Red guifg=White
