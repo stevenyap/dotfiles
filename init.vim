@@ -134,10 +134,10 @@ call plug#end()
 " *****************************************
 
 " Color scheme
+set termguicolors
 set background=dark
 colorscheme NeoSolarized
-highlight CocErrorHighlight ctermfg=Red guifg=White
-highlight CocWarningHighlight ctermfg=Brown guifg=White
+highlight CocFloating guibg=#585858 
 
 set updatetime=300
 set signcolumn=yes
