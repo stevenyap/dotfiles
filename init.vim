@@ -137,7 +137,7 @@ call plug#end()
 set termguicolors
 set background=dark
 colorscheme NeoSolarized
-highlight CocFloating guibg=#585858 
+highlight CocFloating guibg=#1c1c1c 
 
 set updatetime=300
 set signcolumn=yes
@@ -224,6 +224,10 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Insert a line break above
 nmap K 0i<cr><esc>
+
+" Toggle relative line number
+nnoremap <silent> <C-n> :set relativenumber!<cr>
+
 
 " *****************************************
 "     Leader Mappings
