@@ -7,26 +7,20 @@ pre_window:
 
 windows:
   - side:
-      layout: tiled
+      layout: main-vertical
       panes:
-        - web_test:
-            - printf '\033]2;%s\033\\' 'Web Test'
-            - cd portal
-            - nvm use
-            - source .envrc
-            - print -S "make test"
-        - empty_panel:
-            - printf '\033]2;%s\033\\' 'Empty Panel'
-            - cd portal
-            - nvm use
-            - source .envrc
-            - echo This panel is free for use.
         - web_server:
             - printf '\033]2;%s\033\\' 'Web Server'
             - cd portal
             - nvm use
             - source .envrc
             - print -S "make watch"
+        - web_test:
+            - printf '\033]2;%s\033\\' 'Web Test'
+            - cd portal
+            - nvm use
+            - source .envrc
+            - print -S "make test"
         - api_server:
             - printf '\033]2;%s\033\\' 'API Server'
             - make up-services
