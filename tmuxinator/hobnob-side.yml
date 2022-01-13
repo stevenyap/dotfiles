@@ -9,18 +9,18 @@ windows:
   - side:
       layout: main-vertical
       panes:
-        - web_server:
+        - compile:
+            - printf '\033]2;%s\033\\' 'Compile'
+            - cd portal
+            - nvm use
+            - source .envrc
+            - print -S "make watch-compile"
+        - server:
             - printf '\033]2;%s\033\\' 'Web Server'
             - cd portal
             - nvm use
             - source .envrc
-            - print -S "make watch"
-        - web_test:
-            - printf '\033]2;%s\033\\' 'Web Test'
-            - cd portal
-            - nvm use
-            - source .envrc
-            - print -S "make test"
-        - api_server:
+            - print -S "make watch-run"
+        - hasura:
             - printf '\033]2;%s\033\\' 'API Server'
             - make up-services
