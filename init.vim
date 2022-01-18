@@ -1,7 +1,7 @@
 " Start declaring all Plugins
 autocmd!
-let g:node_host_prog = expand('~/.nvm/versions/node/v14.15.4/bin/neovim-node-host')
-call plug#begin('~/.nvim/plugged')
+let g:node_host_prog = expand('~/.nvm/versions/node/v16.13.2/bin/neovim-node-host')
+call plug#begin('~/.config/nvim/plugged')
 
 " Use solarized color scheme
 Plug 'iCyMind/NeoSolarized'
