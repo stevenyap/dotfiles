@@ -18,6 +18,7 @@ One should know how to use the dotfiles else don't use it.
 
 Always start with:
 - `xcode-select --install`
+- `brew install ruby` -> needed for cocoapods and tmuxinator
 
 iTerm2 escape shortcut:
 - Shift+Enter to send Hex code `1B`
