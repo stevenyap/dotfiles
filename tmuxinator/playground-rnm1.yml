@@ -1,5 +1,5 @@
-name: react-native
-root: ~/Workspace/react-native
+name: rnm1
+root: ~/Workspace/playground/rnm1
 
 pre_window: nvm use
 

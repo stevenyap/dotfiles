@@ -11,6 +11,7 @@ No installation steps are provided in this git.
 One should know how to use the dotfiles else don't use it.
 
 ## Notable apps:
+- https://rectangleapp.com/pro
 - https://alt-tab-macos.netlify.app/ 
 - https://fork.dev/
 
@@ -18,6 +19,7 @@ One should know how to use the dotfiles else don't use it.
 
 Always start with:
 - `xcode-select --install`
+- Install Xcode App
 - `brew install ruby` -> needed for cocoapods and tmuxinator
 
 iTerm2 escape shortcut:
