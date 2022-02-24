@@ -1,0 +1,11 @@
+name: gala-api
+root: ~/Workspace/gala/api/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - lint: print -S "npm run lint:watch"
+  - test: print -S "npm run test:watch"
+  - api: print -S "npm start"
