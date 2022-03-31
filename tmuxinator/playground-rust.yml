@@ -1,0 +1,7 @@
+name: playground-rust
+root: ~/Workspace/playground/rust
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - runner: print -S "echo do something"

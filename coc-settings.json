@@ -1,18 +1,20 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "elm",
-    "javascript",
-    "typescript",
-    "typescriptreact", 
-    "json",
     "fsharp",
     "html",
+    "javascript",
+    "json",
+    "rust",
+    "typescript",
+    "typescriptreact", 
     "yaml",
     "yml"
   ],
   "coc.preferences.rootPatterns": [
     ".git", 
     "elm.json", 
+    "Cargo.toml",
     "package.json"
   ],
   "diagnostic.refreshOnInsertMode": true,
