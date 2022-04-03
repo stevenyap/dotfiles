@@ -1,0 +1,7 @@
+name: exercism-rust
+root: ~/Exercism/rust
+
+windows:
+  - editor: nvim
+  - bash: print -S "exercism version"
+  - test: print -S "echo do something"
