@@ -79,6 +79,8 @@ let g:coc_snippet_next = '<c-t>'
 nmap <silent> gk <Plug>(coc-diagnostic-prev)
 nmap <silent> gj <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gb <C-o>
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gf <Plug>(coc-diagnostic-info)
@@ -140,6 +142,7 @@ set termguicolors
 set background=dark
 colorscheme NeoSolarized
 highlight CocFloating guibg=#1c1c1c 
+highlight CocHintSign guifg=#666666 
 
 set updatetime=300
 set signcolumn=yes
