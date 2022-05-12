@@ -1,5 +1,5 @@
-name: reactjs
-root: ~/Workspace/reactjs
+name: liwei-app
+root: ~/Workspace/playground/liwei-app
 
 pre_window: nvm use
 
