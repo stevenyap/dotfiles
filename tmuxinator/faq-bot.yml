@@ -1,0 +1,10 @@
+name: faq-bot
+root: ~/Workspace/faq/bot
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "npm test"
+  - web: print -S "npm start"
