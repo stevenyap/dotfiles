@@ -6,6 +6,7 @@
     "javascript",
     "json",
     "rust",
+    "sql",
     "typescript",
     "typescriptreact", 
     "yaml",
@@ -25,6 +26,7 @@
   "snippets.ultisnips.directories": [
     "/Users/stevenyap/Workspace/dotfiles/snippets"
   ],
+  "sql.database": "postgresql",
   "tsserver.disableAutomaticTypeAcquisition": false,
   "typescript.updateImportsOnFileMove.enable": false,
   "javascript.updateImportsOnFileMove.enable": false,
