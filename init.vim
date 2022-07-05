@@ -73,6 +73,8 @@ Plug 'koron/nyancat-vim'
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 " rustup component add rls rust-analysis rust-src
+" ghcup install hls
+" brew install ormolu
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql' ]
 let g:coc_snippet_next = '<c-t>'

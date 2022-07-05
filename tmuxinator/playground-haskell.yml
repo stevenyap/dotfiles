@@ -1,0 +1,7 @@
+name: playground-haskell
+root: ~/Workspace/playground/haskell
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - runner: print -S "echo do something"
