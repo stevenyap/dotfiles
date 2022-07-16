@@ -1,0 +1,3 @@
+[submodule "displayplacer"]
+	path = displayplacer
+	url = git@github.com:jakehilborn/displayplacer.git
