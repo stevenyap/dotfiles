@@ -69,42 +69,44 @@ Plug 'wakatime/vim-wakatime'
 Plug 'koron/nyancat-vim'
 
 " Autocomplete with Language Server Support
+" https://github.com/neoclide/coc.nvim/wiki/Debug-language-server#using-output-channel
+" let $NVIM_COC_LOG_LEVEL = 'debug'
+" :CocCommand workspace.showOutput
 " Requirements:
-" npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
+" npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " rustup component add rls rust-analysis rust-src
-" ghcup install hls
-" brew install ormolu
+" cabal install hlint ormolu
+" We need the master build of hls because 1.7.0.0 uses an outdated hlint
+" ghcup compile hls --git-ref 21e8ac565b -o 1.7.0.0-nightly --ghc 9.0.2
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql' ]
 let g:coc_snippet_next = '<c-t>'
-nmap <silent> gk <Plug>(coc-diagnostic-prev)
-nmap <silent> gj <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gb <C-o>
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gf <Plug>(coc-diagnostic-info)
-nmap <silent> gh :call <SID>show_documentation()<CR>
-nmap gn <Plug>(coc-rename)
-nmap ga :CocList --normal diagnostics<CR>
-" sometimes coc floating windows refuses to close
-nmap go :call coc#float#close_all()<CR> 
-nmap gp <C-w>p
-nmap ge <Plug>(coc-codelens-action)
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+nmap          gn <Plug>(coc-rename)
+nmap <silent> gh :call ShowDocumentation()<CR>
+nmap          go <Plug>(coc-float-jump)
+nmap          gl <Plug>(coc-codelens-action)
+nmap          gf <Plug>(coc-fix-current)
+nmap          ga <Plug>(coc-codeaction-selected)<CR>
+nmap          gA <Plug>(coc-codeaction)
+nmap <silent> gk <Plug>(coc-diagnostic-prev)
+nmap <silent> gj <Plug>(coc-diagnostic-next)
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
+
 " Map navigation & Enter in insert mode for auto-completion
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" let $NVIM_COC_LOG_LEVEL = 'debug'
 
 " Syntax highlighting for elm
 Plug 'andys8/vim-elm-syntax'
@@ -136,8 +138,10 @@ Plug 'jparise/vim-graphql'
 call plug#end()
 
 " *****************************************
-"     Vim Settings
+"     NeoVim Settings
 " *****************************************
+
+let g:loaded_perl_provider = 0
 
 " Color scheme
 set termguicolors
@@ -266,5 +270,3 @@ map <Leader>r :reg<CR>
 
 " Yank the whole page
 map <Leader>y mcggVGy`c
-
-nmap <leader>f  <Plug>(coc-fix-current)

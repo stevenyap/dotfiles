@@ -17,7 +17,8 @@
     ".git", 
     "elm.json", 
     "Cargo.toml",
-    "haskell.cabal",
+    "*.cabal",
+    "stack.yaml",
     "package.json"
   ],
   "diagnostic.refreshOnInsertMode": true,
@@ -64,9 +65,10 @@
       "command": "haskell-language-server-wrapper",
       "filetypes": ["haskell"],
       "rootPatterns": [
-        "haskell.cabal"
+        "*.cabal",
+        "stack.yaml"
       ],
-      "args": ["--lsp"]
+      "args": ["--lsp", "-j 10"]
     }
   }
 }
