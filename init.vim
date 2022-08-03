@@ -104,9 +104,9 @@ function! ShowDocumentation()
 endfunction
 
 " Map navigation & Enter in insert mode for auto-completion
-inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr><CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap         <expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+inoremap         <expr> <CR>  coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Syntax highlighting for elm
 Plug 'andys8/vim-elm-syntax'
