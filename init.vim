@@ -80,7 +80,7 @@ Plug 'koron/nyancat-vim'
 " We need the master build of hls because 1.7.0.0 uses an outdated hlint
 " ghcup compile hls --git-ref 21e8ac565b -o 1.7.0.0-nightly --ghc 9.0.2
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-snippets', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
