@@ -26,9 +26,6 @@
   "diagnostic.virtualTextPrefix": "~~> ",
   "codeLens.enable": true,
   "codeLens.position": "eol",
-  "snippets.ultisnips.directories": [
-    "/Users/stevenyap/Workspace/dotfiles/snippets"
-  ],
   "sql.database": "postgresql",
   "tsserver.disableAutomaticTypeAcquisition": false,
   "typescript.updateImportsOnFileMove.enable": false,
