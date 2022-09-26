@@ -1,0 +1,10 @@
+name: playground-purescript
+root: ~/Workspace/playground/purescript
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "spago test"
+  - server: print -S "spago run"

@@ -75,6 +75,8 @@ Plug 'koron/nyancat-vim'
 " Requirements:
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
+" npm i -g purescript-language-server purs-tidy
+" brew install dhall-lsp-server
 " rustup component add rls rust-analysis rust-src
 " cabal install hlint ormolu
 " We need the master build of hls because 1.7.0.0 uses an outdated hlint
@@ -110,6 +112,12 @@ inoremap         <expr> <CR>  coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " Syntax highlighting for elm
 Plug 'andys8/vim-elm-syntax'
+
+" Syntax highlighting for Purescript
+Plug 'purescript-contrib/purescript-vim'
+
+" Syntax highlighting for Dhall
+Plug 'vmchale/dhall-vim'
 
 " Syntax highlighting for Javascript
 Plug 'pangloss/vim-javascript'
@@ -206,6 +214,7 @@ autocmd BufReadPre,BufNewFile *.fs set fileformat=unix
 set undodir=~/.nvim/undo
 set undofile
 
+autocmd BufNewFile,BufReadPost *.purs set filetype=purescript
 autocmd BufNewFile,BufReadPost *.mjml set filetype=html
 autocmd BufNewFile,BufReadPost Jenkinsfile set filetype=groovy
 

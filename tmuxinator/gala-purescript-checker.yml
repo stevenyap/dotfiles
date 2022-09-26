@@ -1,0 +1,11 @@
+name: gala-purescript-checker
+root: ~/Workspace/gala/purescript-checker/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - lint: print -S "make lint:watch"
+  - test: print -S "make test:watch"
+  - api: print -S "make start"
