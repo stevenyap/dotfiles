@@ -248,6 +248,9 @@ nmap K 0i<cr><esc>
 " Toggle relative line number
 nnoremap <silent> <C-n> :set relativenumber!<cr>
 
+" Coding shorthands
+inoremap <c-f> ∀
+inoremap <c-l> ->
 
 " *****************************************
 "     Leader Mappings
