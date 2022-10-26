@@ -10,6 +10,7 @@
     "json",
     "purescript",
     "rust",
+    "sh",
     "sql",
     "typescript",
     "typescriptreact", 
@@ -88,6 +89,20 @@
     "dhall": {
       "command": "dhall-lsp-server",
       "filetypes": [ "dhall" ]
+    }
+  },
+  // use coc-diagnostic (diagnostic-languageserver) to provide bash formatting
+  // Ref https://github.com/meatwallace/dotfiles/issues/129#issuecomment-560035270
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt"
+  },
+  "diagnostic-languageserver.formatters": {
+    "shfmt": {
+      "command": "shfmt",
+      "args": ["-i", "2", "-bn", "-ci", "-sr"]
     }
   }
 }

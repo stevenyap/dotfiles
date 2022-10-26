@@ -68,21 +68,31 @@ Plug 'wakatime/vim-wakatime'
 " Always need a nyan cat to unwind
 Plug 'koron/nyancat-vim'
 
-" Autocomplete with Language Server Support
-" https://github.com/neoclide/coc.nvim/wiki/Debug-language-server#using-output-channel
-" let $NVIM_COC_LOG_LEVEL = 'debug'
-" :CocCommand workspace.showOutput
-" Requirements:
+" CoC - Autocomplete with Language Server Support
+" Setup:
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
-" npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
+" Bash:
+" brew install bash
+" npm i -g bash-language-server
+" brew install shfmt 
+" brew install shellcheck 
+" Purescript:
 " npm i -g purescript-language-server purs-tidy
 " brew install dhall-lsp-server
-" rustup component add rls rust-analysis rust-src
+" Haskell:
 " cabal install hlint ormolu
 " We need the master build of hls because 1.7.0.0 uses an outdated hlint
 " ghcup compile hls --git-ref 21e8ac565b -o 1.7.0.0-nightly --ghc 9.0.2
+" Elm:
+" npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
+" Rust:
+" rustup component add rls rust-analysis rust-src
+" Debug:
+" https://github.com/neoclide/coc.nvim/wiki/Debug-language-server#using-output-channel
+" let $NVIM_COC_LOG_LEVEL = 'debug'
+" :CocCommand workspace.showOutput
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql', 'coc-sh', 'coc-diagnostic' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
