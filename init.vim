@@ -72,10 +72,8 @@ Plug 'koron/nyancat-vim'
 " Setup:
 " soft link `ln -s <PATH>/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 " Bash:
-" brew install bash
+" brew install bash shfmt shellcheck
 " npm i -g bash-language-server
-" brew install shfmt 
-" brew install shellcheck 
 " Purescript:
 " npm i -g purescript-language-server purs-tidy
 " brew install dhall-lsp-server
