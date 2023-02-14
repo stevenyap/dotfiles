@@ -1,0 +1,10 @@
+name: oss-elm-css
+root: ~/Workspace/oss/elm-css
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "npm test"
+  - server: print -S "npm run serve"

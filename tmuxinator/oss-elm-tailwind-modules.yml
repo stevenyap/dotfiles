@@ -1,0 +1,10 @@
+name: oss-elm-tailwind-modules
+root: ~/Workspace/oss/elm-tailwind-modules
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "npm test"
+  - server: print -S "npm run serve"

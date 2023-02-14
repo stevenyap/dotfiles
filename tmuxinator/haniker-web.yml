@@ -1,0 +1,11 @@
+name: haniker-web
+root: ~/Workspace/haniker/web/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - build: print -S "make build"
+  - test: print -S "make run-test"
+  - server: print -S "make server"
