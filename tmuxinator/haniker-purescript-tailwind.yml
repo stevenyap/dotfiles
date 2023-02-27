@@ -1,0 +1,10 @@
+name: haniker-purescript-tailwind
+root: ~/Workspace/haniker/purescript-tailwind/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - build: print -S "make build"
+  - test: print -S "make run-test"
