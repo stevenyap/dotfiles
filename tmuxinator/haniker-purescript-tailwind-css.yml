@@ -1,5 +1,5 @@
-name: haniker-purescript-tailwind
-root: ~/Workspace/haniker/purescript-tailwind/
+name: haniker-purescript-tailwind-css
+root: ~/Workspace/haniker/purescript-tailwind-css/
 
 pre_window: nvm use
 
