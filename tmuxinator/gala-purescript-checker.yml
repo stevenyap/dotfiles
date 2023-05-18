@@ -6,6 +6,6 @@ pre_window: nvm use
 windows:
   - editor: nvim
   - bash: git fetch --all && git status
-  - lint: print -S "make lint:watch"
-  - test: print -S "make test:watch"
+  - ssh: print -S "make ssh-production"
+  - test: print -S "make run-test"
   - api: print -S "make start"

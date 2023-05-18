@@ -1,0 +1,11 @@
+name: agilelab-devops
+root: ~/Workspace/agilelab/devops/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - ssh: print -S "make ssh-production"
+  - repo: cd repo
+  - guides: cd repo/guides

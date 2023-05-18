@@ -1,0 +1,6 @@
+name: notes
+root: ~/Desktop
+
+windows:
+  - editor: nvim
+  - shell: print -S "ll"
