@@ -85,12 +85,14 @@ Plug 'koron/nyancat-vim'
 " npm install -g @elm-tooling/elm-language-server elm elm-test elm-format 
 " Rust:
 " rustup component add rls rust-analysis rust-src
+" Cloudformation:
+" brew install cfn-lint
 " Debug:
 " https://github.com/neoclide/coc.nvim/wiki/Debug-language-server#using-output-channel
 " let $NVIM_COC_LOG_LEVEL = 'debug'
 " :CocCommand workspace.showOutput
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql', 'coc-sh', 'coc-diagnostic' ]
+let g:coc_global_extensions = [ 'coc-tsserver', 'coc-eslint', 'coc-json', 'coc-prettier', 'coc-css', 'coc-html', 'coc-fsharp', 'coc-yaml', 'coc-groovy', 'coc-rust-analyzer', 'coc-sql', 'coc-sh', 'coc-diagnostic', 'coc-cfn-lint' ]
 let g:coc_snippet_next = '<c-t>'
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
