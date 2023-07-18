@@ -1,0 +1,11 @@
+name: bedrock-typescript
+root: ~/Workspace/bedrock/typescript
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - build: print -S "runner build"
+  - test: print -S "runner test"
+  - server: print -S "runner start:dev"

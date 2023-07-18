@@ -1,0 +1,9 @@
+name: google-html5-ads
+root: ~/Workspace/haniker/google-html5-ads
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - runner: print -S "echo do something"
