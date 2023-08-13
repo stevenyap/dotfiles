@@ -8,4 +8,4 @@ windows:
   - bash: git fetch --all && git status
   - build: print -S "runner build"
   - test: print -S "runner test"
-  - server: print -S "runner start:dev"
+  - server: print -S "runner dev:start"
