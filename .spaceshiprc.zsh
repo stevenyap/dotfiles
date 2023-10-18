@@ -1,0 +1,1 @@
+SPACESHIP_AZURE_SHOW=false

@@ -26,6 +26,16 @@ Always start with:
 iTerm2 escape shortcut:
 - Shift+Enter to send Hex code `1B`
 
-Neovim/COC settings:
+Soft links settings:
 - `ln -s ~/Workspace/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
 - `ln -s ~/Workspace/dotfiles/init.vim ~/.config/nvim/init.vim`
+- `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
+- `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
+- `ln -s ~/Workspace/dotfiles/.tmuxinator ~/.tmuxinator`
+- `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
+- `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
+- `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
+
+
+
+
