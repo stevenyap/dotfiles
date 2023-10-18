@@ -4,6 +4,7 @@
 [core]
 	excludesfile = /Users/stevenyap/.gitignore_global
   ignorecase = false
+	autocrlf = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
