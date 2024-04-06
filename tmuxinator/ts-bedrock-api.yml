@@ -1,0 +1,11 @@
+name: ts-bedrock-api
+root: ~/Workspace/ts-bedrock/api
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - database: npm run db:start
+  - test: print -S "npm run test:watch"
+  - api: print -S "npm start"

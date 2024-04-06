@@ -1,0 +1,10 @@
+name: ts-bedrock-web
+root: ~/Workspace/ts-bedrock/web/
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - test: print -S "npm run test:watch"
+  - server: print -S "npm start"
