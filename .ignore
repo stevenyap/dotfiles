@@ -8,6 +8,6 @@ node_modules
 *.min.css.map
 *.min.css
 build
-
-# TODO ag can't seem to read portal/public/assets/client*.js
-portal/public/assets/client.js
+dist
+package-lock.json
+yarn.lock
