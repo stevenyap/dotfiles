@@ -12,3 +12,4 @@ tags
 
 # Others
 .eslintcache
+pyenv/ # for dotfiles python virtual env used in neovim python provider

@@ -16,6 +16,14 @@ One should know how to use the dotfiles else don't use it.
 - https://fork.dev/
 - https://www.alfredapp.com/
 
+## Neovim:
+For python-provider, we need to:
+- `brew install python3`
+- `python3 -m venv ./pyenv`
+- `source ./pyenv/bin/activate`
+- `pip install pynvim`
+- Add `vim.g.python3_host_prog = './pyenv/bin/python'` in `init.lua`
+
 ## Tricky bits
 
 Always start with:
@@ -27,8 +35,7 @@ iTerm2 escape shortcut:
 - Shift+Enter to send Hex code `1B`
 
 Soft links settings:
-- `ln -s ~/Workspace/dotfiles/coc-settings.json ~/.config/nvim/coc-settings.json`
-- `ln -s ~/Workspace/dotfiles/init.vim ~/.config/nvim/init.vim`
+- `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
 - `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
 - `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
 - `ln -s ~/Workspace/dotfiles/.tmuxinator ~/.tmuxinator`
