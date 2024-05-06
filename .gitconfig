@@ -30,10 +30,10 @@
 [init]
 	defaultBranch = main
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only --features=interactive
 
 [delta]
-    features = decorations
+  features = decorations
   line-numbers = true
 [delta "interactive"]
     keep-plus-minus-markers = false

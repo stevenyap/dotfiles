@@ -67,7 +67,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- Leader Mappings
 vim.g.mapleader = " "
-vim.keymap.set("n", "<Leader>n", ":Neotree toggle<CR>")
 vim.keymap.set("n", "<Leader>s", ":w<CR>")
 vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
 vim.keymap.set("n", "<Leader>k", "i<cr><esc>")
@@ -96,6 +95,8 @@ require("lazy").setup({
 					-- Solarized colors: https://ethanschoonover.com/solarized/
 					return {
 						Visual = { bg = colors.yellow, fg = colors.base03 },
+						Search = { bg = colors.yellow, fg = colors.base03 },
+
 						-- NeoTree colorscheme: https://github.com/loctvl842/monokai-pro.nvim/blob/master/lua/monokai-pro/theme/plugins/neo-tree.lua
 						NeoTreeRootName = { fg = colors.blue },
 						NeoTreeDirectoryIcon = { fg = colors.blue },
@@ -132,6 +133,8 @@ require("lazy").setup({
 					},
 				},
 			})
+
+			vim.keymap.set("n", "<Leader>n", ":Neotree toggle<CR>")
 		end,
 	},
 
@@ -243,13 +246,14 @@ require("lazy").setup({
 
 	-- Syntax Highlight
 	-- https://github.com/nvim-treesitter/nvim-treesitter
+	-- brew install tree-sitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-				ensure_installed = { "lua", "markdown", "markdown_inline", "typescript", "purescript" },
+				ensure_installed = { "lua", "vimdoc", "markdown", "markdown_inline", "typescript", "purescript" },
 				sync_install = true,
 				highlight = {
 					enable = true,
@@ -268,15 +272,23 @@ require("lazy").setup({
 			local noremapsilent = { noremap = true, silent = true }
 
 			require("lspsaga").setup({
+				symbol_in_winbar = {
+					enable = false,
+				},
 				lightbulb = {
 					enable = false,
+				},
+				finder = {
+					keys = {
+						toggle_or_open = "<CR>",
+					},
 				},
 			})
 			vim.keymap.set("n", "gj", "<Cmd>Lspsaga diagnostic_jump_next<CR>", noremapsilent)
 			vim.keymap.set("n", "gk", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", noremapsilent)
 			vim.keymap.set("n", "gh", "<Cmd>Lspsaga hover_doc<CR>", noremapsilent)
 			vim.keymap.set("n", "gd", "<Cmd>Lspsaga goto_definition<CR>", noremapsilent)
-			vim.keymap.set("n", "gr", "<Cmd>Lspsaga finder<CR>", noremapsilent)
+			vim.keymap.set("n", "gr", "<Cmd>Lspsaga finder ref<CR>", noremapsilent)
 			vim.keymap.set("n", "gn", "<Cmd>Lspsaga rename<CR>", noremapsilent)
 			vim.keymap.set("n", "ga", "<Cmd>Lspsaga code_action<CR>", noremapsilent)
 			vim.keymap.set("n", "gl", "<Cmd>Lspsaga preview_definition<CR>", noremapsilent)
@@ -293,6 +305,8 @@ require("lazy").setup({
 			vim.diagnostic.config({
 				virtual_text = false,
 			})
+
+			vim.keymap.set("", "<Leader>e", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 		end,
 	},
 
@@ -430,7 +444,6 @@ require("lazy").setup({
 
 			-- Lua LSP
 			-- brew install lua-language-server
-
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 				settings = {
