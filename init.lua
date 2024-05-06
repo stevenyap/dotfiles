@@ -95,6 +95,7 @@ require("lazy").setup({
 				highlights = function(colors)
 					-- Solarized colors: https://ethanschoonover.com/solarized/
 					return {
+						Visual = { bg = colors.yellow, fg = colors.base03 },
 						-- NeoTree colorscheme: https://github.com/loctvl842/monokai-pro.nvim/blob/master/lua/monokai-pro/theme/plugins/neo-tree.lua
 						NeoTreeRootName = { fg = colors.blue },
 						NeoTreeDirectoryIcon = { fg = colors.blue },
@@ -157,7 +158,7 @@ require("lazy").setup({
 		config = function()
 			require("hlchunk").setup({
 				indent = {
-					chars = { ".", "¦" }, -- more code can be found in https://unicodeplus.com/
+					chars = { "·", "¦" }, -- more code can be found in https://unicodeplus.com/
 
 					style = {
 						"#002b36", -- base03

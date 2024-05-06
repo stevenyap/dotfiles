@@ -13,7 +13,6 @@ One should know how to use the dotfiles else don't use it.
 ## Notable apps:
 - https://rectangleapp.com/pro
 - https://alt-tab-macos.netlify.app/ 
-- https://fork.dev/
 - https://www.alfredapp.com/
 
 ## Neovim:
