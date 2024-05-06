@@ -404,7 +404,10 @@ require("lazy").setup({
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "prettierd" },
+				javascript = { { "prettier", "prettierd" } },
+				javascriptreact = { { "prettier", "prettierd" } },
+				typescript = { { "prettier", "prettierd" } },
+				typescriptreact = { { "prettier", "prettierd" } },
 				purescript = { "purs-tidy" },
 			},
 			format_on_save = {
@@ -458,6 +461,7 @@ require("lazy").setup({
 	},
 
 	-- TypeScript LSP
+	-- https://github.com/pmizio/typescript-tools.nvim
 	-- npm install -g typescript typescript-language-server
 	{
 		"pmizio/typescript-tools.nvim",
@@ -468,6 +472,12 @@ require("lazy").setup({
 		config = function()
 			require("typescript-tools").setup({
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				on_attach = function(client)
+					-- Disable formatting from the language server
+					-- We use stevearc/conform.nvim
+					client.server_capabilities.documentFormattingProvider = false
+					client.server_capabilities.documentRangeFormattingProvider = false
+				end,
 			})
 		end,
 	},
