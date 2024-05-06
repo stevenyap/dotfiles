@@ -90,7 +90,17 @@ require("lazy").setup({
 				enables = {
 					editor = true,
 					syntax = true,
+					neotree = true,
 				},
+				highlights = function(colors)
+					-- Solarized colors: https://ethanschoonover.com/solarized/
+					return {
+						-- NeoTree colorscheme: https://github.com/loctvl842/monokai-pro.nvim/blob/master/lua/monokai-pro/theme/plugins/neo-tree.lua
+						NeoTreeRootName = { fg = colors.blue },
+						NeoTreeDirectoryIcon = { fg = colors.blue },
+						NeoTreeDirectoryName = { fg = colors.blue },
+					}
+				end,
 			})
 			vim.o.background = "dark" -- or 'light'
 			vim.cmd.colorscheme("solarized")
