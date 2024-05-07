@@ -273,7 +273,7 @@ require("lazy").setup({
 
 			require("lspsaga").setup({
 				symbol_in_winbar = {
-					enable = false,
+					enable = false, -- We using utilyre/barbecue.nvim
 				},
 				lightbulb = {
 					enable = false,
@@ -293,6 +293,21 @@ require("lazy").setup({
 			vim.keymap.set("n", "ga", "<Cmd>Lspsaga code_action<CR>", noremapsilent)
 			vim.keymap.set("n", "gl", "<Cmd>Lspsaga preview_definition<CR>", noremapsilent)
 		end,
+	},
+
+	-- winbar Plugin (bar at the top of the editor)
+	-- https://github.com/utilyre/barbecue.nvim
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			-- configurations go here
+		},
 	},
 
 	-- CodeLen Plugin
