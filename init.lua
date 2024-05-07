@@ -16,12 +16,13 @@ vim.opt.rtp:prepend(lazypath)
 -- NeoVim Settings
 vim.g.python3_host_prog = "./pyenv/bin/python"
 vim.g.loaded_perl_provider = 0
-vim.cmd("syntax enable")
-vim.cmd("syntax on")
+vim.o.syntax = "on"
 vim.cmd("filetype plugin indent on")
 
 -- Editor behavior and appearance settings
 vim.opt.switchbuf = "useopen,usetab" -- Controls buffer switching behavior, 'useopen' finds existing window, 'usetab' switches tabs
+vim.opt.splitbelow = true -- split and focus
+vim.opt.splitright = true -- split and focus
 vim.opt.hlsearch = true -- Highlights matches of the last searched pattern
 vim.opt.incsearch = true -- Shows incremental search highlights as you type
 vim.opt.wrap = false -- Disables text wrapping
@@ -71,6 +72,8 @@ vim.keymap.set("n", "<Leader>s", ":w<CR>")
 vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
 vim.keymap.set("n", "<Leader>k", "i<cr><esc>")
 vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
+vim.keymap.set("n", "<Leader>l", ":vsp<CR>")
+vim.keymap.set("n", "<Leader>j", ":sp<CR>")
 
 --------------------
 --- The plugins ----
