@@ -307,10 +307,18 @@ require("lazy").setup({
 		dependencies = {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons",
+			"maxmx03/solarized.nvim", -- We using the colors function
 		},
-		opts = {
-			-- configurations go here
-		},
+		opts = {},
+		config = function()
+			local palette = require("solarized.palette")
+			local colors = palette.get_colors()
+			require("barbecue").setup({
+				theme = {
+					dirname = { fg = colors.base01 },
+				},
+			})
+		end,
 	},
 
 	-- CodeLen Plugin
