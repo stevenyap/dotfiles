@@ -149,7 +149,6 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- Requires: `brew tap homebrew/cask-fonts && brew install font-fira-code-nerd-font`
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim", -- image support in preview window
 		},
 		config = function()
 			require("neo-tree").setup({
