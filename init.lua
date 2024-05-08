@@ -99,6 +99,7 @@ require("lazy").setup({
 					return {
 						Visual = { bg = colors.yellow, fg = colors.base03 },
 						Search = { bg = colors.yellow, fg = colors.base03 },
+						CurSearch = { bg = colors.orange, fg = colors.base03 },
 
 						-- NeoTree colorscheme: https://github.com/loctvl842/monokai-pro.nvim/blob/master/lua/monokai-pro/theme/plugins/neo-tree.lua
 						NeoTreeRootName = { fg = colors.blue },
@@ -112,6 +113,33 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Syntax Highlight
+	-- https://github.com/nvim-treesitter/nvim-treesitter
+	-- brew install tree-sitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
+				ensure_installed = {
+					"lua",
+					"vimdoc",
+					"markdown",
+					"markdown_inline",
+					"html",
+					"typescript",
+					"purescript",
+				},
+				sync_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+			})
+		end,
+	},
+
 	-- File explorer
 	-- https://github.com/nvim-neo-tree/neo-tree.nvim
 	{
@@ -121,12 +149,22 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- Requires: `brew tap homebrew/cask-fonts && brew install font-fira-code-nerd-font`
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			"3rd/image.nvim", -- image support in preview window
 		},
 		config = function()
 			require("neo-tree").setup({
 				window = {
 					width = 25,
+					mappings = {
+						["o"] = "open",
+						["oc"] = false,
+						["od"] = false,
+						["og"] = false,
+						["om"] = false,
+						["on"] = false,
+						["os"] = false,
+						["ot"] = false,
+					},
 				},
 				filesystem = {
 					filtered_items = {
@@ -245,25 +283,6 @@ require("lazy").setup({
 		opts = {
 			-- add any options here
 		},
-	},
-
-	-- Syntax Highlight
-	-- https://github.com/nvim-treesitter/nvim-treesitter
-	-- brew install tree-sitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-				ensure_installed = { "lua", "vimdoc", "markdown", "markdown_inline", "typescript", "purescript" },
-				sync_install = true,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			})
-		end,
 	},
 
 	-- UI to LSP Plugin
