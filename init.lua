@@ -44,19 +44,11 @@ vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "K", "0i<cr><esc>")
 
 -- Switch between relative and absolute line numbers
-vim.opt.relativenumber = true
-vim.opt.number = true
+vim.opt.relativenumber = true -- Show relative numbers by default
 vim.opt.signcolumn = "yes" -- Always display the sign column, prevents text shifting when signs are displayed
 vim.opt.number = true -- Enables line numbers on the left side of the window
 vim.opt.cursorline = true -- Highlights the line under the cursor
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
-	pattern = "*",
-	command = "set relativenumber",
-})
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
-	pattern = "*",
-	command = "set norelativenumber",
-})
+vim.keymap.set("n", "<c-n>", ":set norelativenumber!<CR>")
 
 -- File type overrides
 vim.api.nvim_create_augroup("FileTypeOverrides", { clear = true })
@@ -70,7 +62,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.g.mapleader = " "
 vim.keymap.set("n", "<Leader>s", ":w<CR>")
 vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
-vim.keymap.set("n", "<Leader>k", "i<cr><esc>")
+vim.keymap.set("n", "<Leader>k", "i<CR><esc>")
 vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
 vim.keymap.set("n", "<Leader>l", ":vsp<CR>")
 vim.keymap.set("n", "<Leader>j", ":sp<CR>")
@@ -153,7 +145,7 @@ require("lazy").setup({
 		config = function()
 			require("neo-tree").setup({
 				window = {
-					width = 25,
+					width = 40,
 					mappings = {
 						["o"] = "open",
 						["oc"] = false,
@@ -507,6 +499,7 @@ require("lazy").setup({
 	-- TypeScript LSP
 	-- https://github.com/pmizio/typescript-tools.nvim
 	-- npm install -g typescript typescript-language-server
+	-- Note that this doesn't support eslint
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
