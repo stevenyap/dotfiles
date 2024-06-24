@@ -1,3 +1,20 @@
+-- Helper functions
+local function get_project_name()
+	local project_directory, err = vim.loop.cwd()
+	if project_directory == nil then
+		vim.notify(err, vim.log.levels.WARN)
+		return "global"
+	end
+
+	local project_name = vim.fs.basename(project_directory)
+	if project_name == nil then
+		vim.notify("Unable to get the project name", vim.log.levels.WARN)
+		return "global"
+	end
+
+	return project_name
+end
+
 -- Using lazy.nvim to manage our plugins
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -327,6 +344,24 @@ require("lazy").setup({
 				theme = {
 					dirname = { fg = colors.base01 },
 				},
+			})
+		end,
+	},
+
+	-- Global Note Plugin for taking notes anywhere anytime
+	-- https://github.com/backdround/global-note.nvim
+	{
+		"backdround/global-note.nvim",
+		config = function()
+			local global_note = require("global-note")
+			local project_name = get_project_name()
+			global_note.setup({
+				filename = project_name .. ".md",
+				title = "Note :: " .. project_name,
+			})
+
+			vim.keymap.set("n", "<Leader>g", global_note.toggle_note, {
+				desc = "Toggle global note",
 			})
 		end,
 	},
