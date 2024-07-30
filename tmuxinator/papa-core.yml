@@ -2,8 +2,10 @@ name: papa-core
 root: ~/Workspace/papa/core
 
 pre_window: nvm use
+attach: false
 
 windows:
   - editor: nvim
-  - bash: git fetch --all && git status
+  - bash: git fetch --all && git status && npm run check:all
   - test: print -S "npm run test:watch"
+  - ssh: print -S "./devops/ssh.sh staging media"

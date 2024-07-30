@@ -2,6 +2,7 @@ name: papa-admin
 root: ~/Workspace/papa/admin
 
 pre_window: nvm use
+attach: false
 
 windows:
   - editor: nvim

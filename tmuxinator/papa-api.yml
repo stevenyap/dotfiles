@@ -2,6 +2,7 @@ name: papa-api
 root: ~/Workspace/papa/api
 
 pre_window: nvm use
+attach: false
 
 windows:
   - editor: nvim

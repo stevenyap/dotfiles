@@ -2,6 +2,7 @@ name: papa-media
 root: ~/Workspace/papa/media-service
 
 pre_window: nvm use
+attach: false
 
 windows:
   - editor: nvim

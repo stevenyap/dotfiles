@@ -472,20 +472,22 @@ require("lazy").setup({
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				javascript = { { "prettier", "prettierd" } },
-				javascriptreact = { { "prettier", "prettierd" } },
-				typescript = { { "prettier", "prettierd" } },
-				typescriptreact = { { "prettier", "prettierd" } },
-				purescript = { "purs-tidy" },
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-		},
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					javascript = { "prettier", "prettierd", stop_after_first = true },
+					javascriptreact = { "prettier", "prettierd", stop_after_first = true },
+					typescript = { "prettier", "prettierd", stop_after_first = true },
+					typescriptreact = { "prettier", "prettierd", stop_after_first = true },
+					purescript = { "purs-tidy" },
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_fallback = true,
+				},
+			})
+		end,
 	},
 
 	-- LSP Config Plugin
