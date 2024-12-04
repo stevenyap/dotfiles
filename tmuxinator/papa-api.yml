@@ -7,6 +7,6 @@ attach: false
 windows:
   - editor: nvim
   - bash: git fetch --all && git status
-  - database: npm run db:start
+  - database: sleep 10 && npm run db:start
   - test: print -S "npm run test:watch"
   - api: print -S "npm start"
