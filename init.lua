@@ -36,6 +36,14 @@ vim.g.loaded_perl_provider = 0
 vim.o.syntax = "on"
 vim.cmd("filetype plugin indent on")
 
+-- Fix corrupted shada in multiple neovim/tmux sessions
+vim.opt.shadafile = vim.fn.stdpath("state") .. "/shada/main.shada"
+vim.api.nvim_create_autocmd({ "FocusLost", "BufLeave" }, {
+	callback = function()
+		vim.cmd("silent! wshada")
+	end,
+})
+
 -- Editor behavior and appearance settings
 vim.opt.switchbuf = "useopen,usetab" -- Controls buffer switching behavior, 'useopen' finds existing window, 'usetab' switches tabs
 vim.opt.splitbelow = true -- split and focus
