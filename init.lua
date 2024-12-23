@@ -68,6 +68,9 @@ vim.keymap.set("n", "<c-k>", "<c-w>k")
 -- Insert a line break above
 vim.keymap.set("n", "K", "0i<cr><esc>")
 
+-- Shift + Enter = Esc
+vim.api.nvim_set_keymap("i", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+
 -- Switch between relative and absolute line numbers
 vim.opt.relativenumber = true -- Show relative numbers by default
 vim.opt.signcolumn = "yes" -- Always display the sign column, prevents text shifting when signs are displayed
