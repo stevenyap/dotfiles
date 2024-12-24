@@ -31,7 +31,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
 # Extra bindings
-bindkey '' autosuggest-accept # move right to accept suggestion
+bindkey '^L' autosuggest-accept # move right to accept suggestion
 bindkey '^D' backward-delete-word
 
 # Manual link to stree
