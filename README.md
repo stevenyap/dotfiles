@@ -35,6 +35,7 @@ iTerm2 escape shortcut:
 
 Soft links settings:
 - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
+- `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua
 - `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
 - `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
 - `ln -s ~/Workspace/dotfiles/.tmuxinator ~/.tmuxinator`

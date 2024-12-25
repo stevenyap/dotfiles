@@ -61,6 +61,9 @@ setopt INC_APPEND_HISTORY
 # https://gitlab.haskell.org/ghc/ghc/-/issues/20592#note_391266
 export C_INCLUDE_PATH="$(xcrun --show-sdk-path)/usr/include/ffi"
 
+# Add Wezterm to PATH
+export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+
 # Our own compiled binaries
 # TODO Remove elm-format when arm64 binary is available
 export PATH=$PATH:$HOME/Workspace/dotfiles/bin
@@ -105,3 +108,17 @@ export PATH=/usr/local/mysql/bin:$PATH
 # brew install llvm
 # For compiling of elm-format using ghcup
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+### Startup script for productivity ###
+# List of tmuxinator projects to start
+projects=("papa-core" "papa-media" "papa-api" "papa-admin" "papa-mobile" "dotfiles")
+
+# Check if there are any existing tmux sessions
+if ! tmux list-sessions 2>/dev/null; then
+  for project in "${projects[@]}"; do
+    echo "Starting tmux session for $project..."
+    tmuxinator start "$project"
+  done
+else
+  echo "Skipped startup script in .zshrc"
+fi

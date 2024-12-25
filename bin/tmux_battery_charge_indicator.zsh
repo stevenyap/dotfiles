@@ -9,7 +9,7 @@ if [[ $charge_status == '' ]]; then
   echo -n 'A/C#[fg=yellow]'
 elif [[ $charge_status -lt 20 ]]; then
   echo -n '#[fg=red]'
-  echo -n "$charge_status%🪫"
+  echo -n "$charge_status% 🪫"
 else
-  echo -n "$charge_status%🔋"
+  echo -n "$charge_status% 🔋"
 fi
