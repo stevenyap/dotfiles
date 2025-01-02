@@ -31,18 +31,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Neovide MacOS GUI app settings
-if vim.g.neovide then
-	vim.g.neovide_cursor_vfx_mode = "railgun"
-
-	-- Set the working directory
-	vim.api.nvim_create_autocmd("VimEnter", {
-		callback = function()
-			vim.cmd("cd ~/Desktop")
-		end,
-	})
-end
-
 -- NeoVim Settings
 vim.g.python3_host_prog = "./pyenv/bin/python"
 vim.g.loaded_perl_provider = 0
@@ -122,9 +110,6 @@ require("lazy").setup({
 			require("solarized").setup({
 				palette = "solarized",
 				variant = "autumn",
-				transparent = {
-					enabled = true,
-				},
 				on_highlights = function(colors)
 					-- Solarized colors: https://ethanschoonover.com/solarized/
 					return {
@@ -348,6 +333,28 @@ require("lazy").setup({
 		end,
 	},
 
+	-- winbar Plugin (bar at the top of the editor)
+	-- https://github.com/utilyre/barbecue.nvim
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons",
+			"maxmx03/solarized.nvim", -- We using the colors function
+		},
+		opts = {},
+		config = function()
+			local colors = require("solarized.utils").get_colors()
+			require("barbecue").setup({
+				theme = {
+					dirname = { fg = colors.base01 },
+				},
+			})
+		end,
+	},
+
 	-- Global Note Plugin for taking notes anywhere anytime
 	-- https://github.com/backdround/global-note.nvim
 	{
@@ -560,3 +567,16 @@ require("lazy").setup({
 	-- https://github.com/purescript-contrib/purescript-vim
 	{ "purescript-contrib/purescript-vim" },
 })
+
+-- Neovide MacOS GUI app settings
+-- https://neovide.dev/configuration.html
+if vim.g.neovide then
+	vim.g.neovide_cursor_vfx_mode = "railgun"
+
+	-- Set the working directory
+	vim.api.nvim_create_autocmd("VimEnter", {
+		callback = function()
+			vim.cmd("cd ~/Desktop")
+		end,
+	})
+end
