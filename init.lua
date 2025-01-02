@@ -31,6 +31,18 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Neovide MacOS GUI app settings
+if vim.g.neovide then
+	vim.g.neovide_cursor_vfx_mode = "railgun"
+
+	-- Set the working directory
+	vim.api.nvim_create_autocmd("VimEnter", {
+		callback = function()
+			vim.cmd("cd ~/Desktop")
+		end,
+	})
+end
+
 -- NeoVim Settings
 vim.g.python3_host_prog = "./pyenv/bin/python"
 vim.g.loaded_perl_provider = 0
@@ -109,13 +121,11 @@ require("lazy").setup({
 		config = function()
 			require("solarized").setup({
 				palette = "solarized",
-				theme = "neo",
-				enables = {
-					editor = true,
-					syntax = true,
-					neotree = true,
+				variant = "autumn",
+				transparent = {
+					enabled = true,
 				},
-				highlights = function(colors)
+				on_highlights = function(colors)
 					-- Solarized colors: https://ethanschoonover.com/solarized/
 					return {
 						Visual = { bg = colors.yellow, fg = colors.base03 },
