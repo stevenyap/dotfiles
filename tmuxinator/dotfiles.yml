@@ -4,3 +4,4 @@ root: ~/Workspace/dotfiles
 windows:
   - editor: nvim init.lua
   - shell: git fetch --all && git status
+  - ollama: ollama run taozhiyuai/llama-3-8b-lexi-uncensored:f16
