@@ -660,12 +660,12 @@ require("lazy").setup({
 -- Neovide MacOS GUI app settings
 -- https://neovide.dev/configuration.html
 if vim.g.neovide then
+	vim.g.neovide_scale_factor = 1.5
 	vim.g.neovide_cursor_vfx_mode = "railgun"
-
-	-- Set the working directory
-	vim.api.nvim_create_autocmd("VimEnter", {
-		callback = function()
-			vim.cmd("cd ~/Desktop")
-		end,
-	})
+	vim.g.neovide_input_use_logo = true
+	vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("n", "<D-v>", '"+P', { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+	vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 end
