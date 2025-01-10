@@ -30,9 +30,6 @@ Always start with:
 - Install Xcode App
 - `brew install ruby` -> needed for cocoapods and tmuxinator
 
-iTerm2 escape shortcut:
-- Shift+Enter to send Hex code `1B`
-
 Soft links settings:
 - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
 - `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua
@@ -42,7 +39,5 @@ Soft links settings:
 - `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
 - `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
 - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
-
-
-
-
+- `ln -s ~/Notes ~/Workspace/dotfiles//Users/stevenyap/Dropbox/Notes`
+  - This is for easy access to Notes in dotfiles tmux session
