@@ -71,6 +71,10 @@ vim.keymap.set("n", "K", "0i<cr><esc>")
 
 -- Shift + Enter = Esc
 vim.api.nvim_set_keymap("i", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<S-CR>", "<Esc>", { noremap = true, silent = true })
 
 -- Switch between relative and absolute line numbers
 vim.opt.relativenumber = true -- Show relative numbers by default
@@ -84,6 +88,12 @@ vim.api.nvim_create_augroup("FileTypeOverrides", { clear = true })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.purs",
 	command = "set filetype=purescript",
+	group = "FileTypeOverrides",
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.txt", "*.md" },
+	command = "setlocal wrap",
 	group = "FileTypeOverrides",
 })
 
@@ -104,21 +114,40 @@ local workspace_data_dir = vim.fn.stdpath("data"):gsub("/$", "") .. vim.fn.getcw
 
 require("lazy").setup({
 	-- AI Plugin
-	-- Install ollama first: https://github.com/ollama/ollama
-	-- ollama pull codellama:34b
-	-- ollama pull taozhiyuai/llama-3-8b-lexi-uncensored:f16
 	-- https://github.com/Robitx/gp.nvim
 	{
 		"robitx/gp.nvim",
+		dependencies = {
+			-- copilot AI
+			-- Run in neovim: `:Copilot setup`
+			"github/copilot.vim",
+			-- local ollama AI
+			-- Install ollama first: https://github.com/ollama/ollama
+			-- ollama pull codellama:34b
+			-- ollama pull taozhiyuai/llama-3-8b-lexi-uncensored:f16
+		},
 		config = function()
 			require("gp").setup({
-				default_chat_agent = "llama",
-				default_command_agent = "codellama",
+				default_chat_agent = "ChatCopilot",
+				default_command_agent = "CodeCopilot",
 				-- Keep each chat in it own directory
 				chat_dir = workspace_data_dir .. "/gp/chats",
 				state_dir = workspace_data_dir .. "/gp/persisted",
 				log_file = workspace_data_dir .. "/gp.nvim.log",
+				log_sensitive = true,
 				providers = {
+					copilot = {
+						-- Requires Github Personal Access Token
+						-- brew install gh
+						-- gh auth login
+						-- gh extension install github/gh-copilot
+						endpoint = "https://api.githubcopilot.com/chat/completions",
+						secret = {
+							"bash",
+							"-c",
+							"cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
+						},
+					},
 					openai = {
 						disable = true,
 					},
@@ -128,6 +157,22 @@ require("lazy").setup({
 					},
 				},
 				agents = {
+					{
+						provider = "copilot",
+						name = "ChatCopilot",
+						chat = true,
+						command = false,
+						model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
+						system_prompt = require("gp.defaults").chat_system_prompt,
+					},
+					{
+						provider = "copilot",
+						name = "CodeCopilot",
+						chat = false,
+						command = true,
+						model = { model = "gpt-4o", temperature = 0.8, top_p = 1, n = 1 },
+						system_prompt = require("gp.defaults").code_system_prompt,
+					},
 					{
 						provider = "ollama",
 						name = "llama",
@@ -175,7 +220,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<C-g>d", "<cmd>GpChatDelete<cr>", keymapOptions("Delete Chat"))
 			vim.keymap.set("n", "<C-g>f", "<cmd>GpChatFinder<cr>", keymapOptions("Delete Chat"))
 
-			-- Prompt commands
+			-- Editing commands
 			vim.keymap.set({ "n", "i" }, "<C-g>i", "<cmd>GpRewrite<cr>", keymapOptions("Inline Rewrite"))
 			vim.keymap.set({ "n", "i" }, "<C-g>a", "<cmd>GpAppend<cr>", keymapOptions("Append (after)"))
 			vim.keymap.set({ "n", "i" }, "<C-g>b", "<cmd>GpPrepend<cr>", keymapOptions("Prepend (before)"))
@@ -186,6 +231,14 @@ require("lazy").setup({
 
 			vim.keymap.set({ "n", "i" }, "<C-g>p", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
 			vim.keymap.set("v", "<C-g>p", ":<C-u>'<,'>GpPopup<cr>", keymapOptions("Visual Popup"))
+
+			vim.keymap.set("i", "<C-g>l", 'copilot#Accept("\\<CR>")', {
+				expr = true,
+				replace_keycodes = false,
+				desc = "Accept Copilot completion",
+			})
+			vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)", keymapOptions("Previous suggestion"))
+			vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)", keymapOptions("Next suggestion"))
 		end,
 	},
 
