@@ -93,7 +93,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.txt", "*.md" },
-	command = "setlocal wrap",
+	command = "setlocal wrap tabstop=2 shiftwidth=2 expandtab",
 	group = "FileTypeOverrides",
 })
 
@@ -232,13 +232,14 @@ require("lazy").setup({
 			vim.keymap.set({ "n", "i" }, "<C-g>p", "<cmd>GpPopup<cr>", keymapOptions("Popup"))
 			vim.keymap.set("v", "<C-g>p", ":<C-u>'<,'>GpPopup<cr>", keymapOptions("Visual Popup"))
 
-			vim.keymap.set("i", "<C-g>l", 'copilot#Accept("\\<CR>")', {
+			vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)", keymapOptions("Previous suggestion"))
+			vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)", keymapOptions("Next suggestion"))
+			vim.keymap.set("i", "<C-w>", "<Plug>(copilot-accept-word)")
+			vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
 				expr = true,
 				replace_keycodes = false,
 				desc = "Accept Copilot completion",
 			})
-			vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)", keymapOptions("Previous suggestion"))
-			vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)", keymapOptions("Next suggestion"))
 		end,
 	},
 
