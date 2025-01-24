@@ -108,17 +108,3 @@ export PATH=/usr/local/mysql/bin:$PATH
 # brew install llvm
 # For compiling of elm-format using ghcup
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
-### Startup script for productivity ###
-# List of tmuxinator projects to start
-projects=("papa-core" "papa-media" "papa-api" "papa-admin" "papa-mobile" "dotfiles")
-
-# Check if there are any existing tmux sessions
-if ! tmux list-sessions 2>/dev/null; then
-  for project in "${projects[@]}"; do
-    echo "Starting tmux session for $project..."
-    tmuxinator start "$project"
-  done
-else
-  echo "Skipped startup script in .zshrc"
-fi
