@@ -11,6 +11,6 @@ task_start:work() {
 
   for project in "${projects[@]}"; do
     echo "Starting tmux session for $project..."
-    tmuxinator start "$project"
+    tmuxinator start "$project" --no-attach
   done
 }

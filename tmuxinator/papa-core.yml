@@ -2,7 +2,6 @@ name: papa-core
 root: ~/Workspace/papa/core
 
 pre_window: nvm use
-attach: false
 
 windows:
   - editor: nvim

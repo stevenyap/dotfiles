@@ -2,7 +2,6 @@ name: papa-mobile
 root: ~/Workspace/papa/mobile
 
 pre_window: nvm use
-attach: false
 
 windows:
   - editor: nvim
