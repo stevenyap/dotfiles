@@ -1,0 +1,9 @@
+name: bedrock-ts-core
+root: ~/Workspace/bedrock/typescript/core
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status && npm run check:all
+  - test: print -S "npm run test:watch"

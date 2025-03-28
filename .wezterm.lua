@@ -7,7 +7,7 @@ local mux = wezterm.mux
 
 config.color_scheme = "Solarized (dark) (terminal.sexy)"
 config.font = wezterm.font("FiraCode Nerd Font Mono")
-config.font_size = 18.0
+config.font_size = 18
 config.enable_tab_bar = false
 config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "NONE"

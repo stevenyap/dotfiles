@@ -14,3 +14,12 @@ task_start:work() {
     tmuxinator start "$project" --no-attach
   done
 }
+
+task_start:bedrock() {
+projects=("bedrock-ts-core" "bedrock-ts-api" "bedrock-ts-web")
+
+  for project in "${projects[@]}"; do
+    echo "Starting tmux session for $project..."
+    tmuxinator start "$project" --no-attach
+  done
+}
