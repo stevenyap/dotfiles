@@ -111,6 +111,15 @@ vim.keymap.set("n", "<Leader>j", ":sp<CR>")
 --------------------
 -- A dir for different workspaces to store neovim project-specific data
 local workspace_data_dir = vim.fn.stdpath("data"):gsub("/$", "") .. vim.fn.getcwd():gsub("/$", "")
+local Prompts = {}
+Prompts.chat = "You are an AI who respond in the following ways:\n\n"
+	.. "- Ask question if you need clarification to provide better answer.\n"
+	.. "- Don't omit any code from your output if the answer requires coding.\n"
+	.. "- Reply in a concise manner with minimum explanation.\n"
+
+Prompts.code = "You are an AI working as a code editor.\n\n"
+	.. "Please AVOID COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE.\n"
+	.. "START AND END YOUR ANSWER WITH:\n\n```"
 
 require("lazy").setup({
 	-- AI Plugin
@@ -163,7 +172,7 @@ require("lazy").setup({
 						chat = true,
 						command = false,
 						model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
-						system_prompt = require("gp.defaults").chat_system_prompt,
+						system_prompt = Prompts.chat,
 					},
 					{
 						provider = "copilot",
@@ -171,7 +180,7 @@ require("lazy").setup({
 						chat = false,
 						command = true,
 						model = { model = "gpt-4o", temperature = 0.8, top_p = 1, n = 1 },
-						system_prompt = require("gp.defaults").code_system_prompt,
+						system_prompt = Prompts.code,
 					},
 					{
 						provider = "ollama",
@@ -184,6 +193,7 @@ require("lazy").setup({
 							top_p = 1,
 							min_p = 0.05,
 						},
+						-- https://github.com/Robitx/gp.nvim/blob/main/lua/gp/defaults.lua
 						system_prompt = require("gp.defaults").chat_system_prompt,
 					},
 					{
