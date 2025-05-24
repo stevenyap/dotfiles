@@ -161,17 +161,44 @@ require("lazy").setup({
 						disable = true,
 					},
 					ollama = {
-						disable = false,
+						disable = true,
 						endpoint = "http://localhost:11434/v1/chat/completions",
+					},
+					tysumiCmd = {
+						disable = false,
+						endpoint = "http://localhost:65432/openai/command",
+						secret = "required else gp.nvim will throw",
+					},
+					tysumiChat = {
+						disable = false,
+						endpoint = "http://localhost:65432/openai/chat",
+						secret = "required else gp.nvim will throw",
 					},
 				},
 				agents = {
+					{
+						provider = "tysumiCmd",
+						name = "TysumiCmd",
+						chat = false,
+						command = true,
+						model = { model = "OpenAI" },
+						system_prompt = '{"cwd":"' .. vim.fn.getcwd() .. '"}',
+					},
+					{
+						provider = "tysumiChat",
+						name = "TysumiChat",
+						chat = true,
+						command = false,
+						model = { model = "OpenAI" },
+						system_prompt = '{"cwd":"' .. vim.fn.getcwd() .. '"}',
+					},
+					-- Available copilot models: https://docs.github.com/en/copilot/about-github-copilot/plans-for-github-copilot#models
 					{
 						provider = "copilot",
 						name = "ChatCopilot",
 						chat = true,
 						command = false,
-						model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
+						model = { model = "gpt-4.1", temperature = 0 },
 						system_prompt = Prompts.chat,
 					},
 					{
@@ -179,7 +206,7 @@ require("lazy").setup({
 						name = "CodeCopilot",
 						chat = false,
 						command = true,
-						model = { model = "gpt-4o", temperature = 0.8, top_p = 1, n = 1 },
+						model = { model = "gpt-4.1", temperature = 0 },
 						system_prompt = Prompts.code,
 					},
 					{
@@ -210,6 +237,52 @@ require("lazy").setup({
 						system_prompt = require("gp.defaults").code_system_prompt,
 					},
 				},
+
+				hooks = {
+					CallTysumiAppendCmd = function(gp, params)
+						local agent = gp.get_command_agent("TysumiCmd")
+						local template = "TYSUMI_APPEND"
+							.. "__||__"
+							.. (vim.fn.getcwd():match("(.*/)[^/]+/?$") .. "{{filename}}")
+							.. "__||__"
+							.. table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+							.. "__||__"
+							.. params.line1
+							.. "__||__"
+							.. "{{command}}"
+
+						gp.Prompt(
+							params,
+							gp.Target.append,
+							agent,
+							template,
+							"🤖 [Tysumi]: ",
+							nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+						)
+					end,
+
+					CallTysumiRewriteCmd = function(gp, params)
+						local agent = gp.get_command_agent("TysumiCmd")
+						local template = "TYSUMI_REWRITE"
+							.. "__||__"
+							.. (vim.fn.getcwd():match("(.*/)[^/]+/?$") .. "{{filename}}")
+							.. "__||__"
+							.. table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n")
+							.. "__||__"
+							.. "{{selection}}"
+							.. "__||__"
+							.. "{{command}}"
+
+						gp.Prompt(
+							params,
+							gp.Target.rewrite,
+							agent,
+							template,
+							"🤖 [Tysumi]: ",
+							nil -- no predefined instructions (e.g. speech-to-text from Whisper)
+						)
+					end,
+				},
 			})
 
 			-- Keyboard shortcuts
@@ -223,12 +296,22 @@ require("lazy").setup({
 				}
 			end
 
+			-- Tysumi commands
+			vim.keymap.set({ "n", "i" }, "<C-g>s", "<cmd>GpCallTysumiAppendCmd<cr>", keymapOptions("Call TysumiCmd"))
+			vim.keymap.set(
+				"v",
+				"<C-g>s",
+				":<C-u>'<,'>GpCallTysumiRewriteCmd<cr>",
+				keymapOptions("Call TysumiCmd (Visual)")
+			)
+
 			-- Chat commands
 			vim.keymap.set({ "n", "i" }, "<C-g>t", "<cmd>GpChatToggle vsplit<cr>", keymapOptions("Open Chat"))
 			vim.keymap.set("v", "<C-g>t", ":<C-u>'<,'>GpChatPaste<cr>", keymapOptions("Visual New Chat"))
 			vim.keymap.set("n", "<C-g>c", "<cmd>GpChatNew<cr>", keymapOptions("New Chat"))
 			vim.keymap.set("n", "<C-g>d", "<cmd>GpChatDelete<cr>", keymapOptions("Delete Chat"))
-			vim.keymap.set("n", "<C-g>f", "<cmd>GpChatFinder<cr>", keymapOptions("Delete Chat"))
+			vim.keymap.set("n", "<C-g>f", "<cmd>GpChatFinder<cr>", keymapOptions("Find Chat"))
+			vim.keymap.set("n", "<C-g>n", "<cmd>GpNextAgent<cr>", keymapOptions("Cycle to next agent"))
 
 			-- Editing commands
 			vim.keymap.set({ "n", "i" }, "<C-g>i", "<cmd>GpRewrite<cr>", keymapOptions("Inline Rewrite"))
@@ -410,6 +493,9 @@ require("lazy").setup({
 			vim.keymap.set("n", "<c-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 			vim.keymap.set("n", "<c-f>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
 			vim.keymap.set("n", "<c-s>", "<cmd>lua require('fzf-lua').git_status()<CR>", { silent = true })
+			vim.keymap.set("i", "<c-f>", function()
+				require("fzf-lua").complete_path()
+			end, { silent = true, desc = "Fuzzy complete path" })
 		end,
 	},
 
@@ -532,8 +618,8 @@ require("lazy").setup({
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		config = function()
 			require("lsp_lines").setup({})
-			-- Disable virtual_text since it's redundant due to lsp_lines.
 			vim.diagnostic.config({
+				virtual_lines = false,
 				virtual_text = false,
 			})
 
@@ -641,6 +727,7 @@ require("lazy").setup({
 					typescript = { "prettier", "prettierd", stop_after_first = true },
 					typescriptreact = { "prettier", "prettierd", stop_after_first = true },
 					purescript = { "purs-tidy" },
+					xml = { "xmllint" },
 				},
 				format_on_save = {
 					timeout_ms = 500,
