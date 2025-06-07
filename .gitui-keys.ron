@@ -1,0 +1,14 @@
+// For list of all possible keys to override:
+// https://github.com/gitui-org/gitui/blob/master/src/keys/key_list.rs#L83
+(
+    move_left: Some(( code: Char('h'), modifiers: "CONTROL")),
+    move_right: Some(( code: Char('l'), modifiers: "CONTROL")),
+    move_up: Some(( code: Char('k'), modifiers: "")),
+    move_down: Some(( code: Char('j'), modifiers: "")),
+
+    page_down: Some(( code: Char('d'), modifiers: "CONTROL")),
+    page_up: Some(( code: Char('u'), modifiers: "CONTROL")),
+
+    diff_hunk_next: Some(( code: Char('n'), modifiers: "")),
+    diff_hunk_prev: Some(( code: Char('N'), modifiers: "SHIFT")),
+)

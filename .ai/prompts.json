@@ -1,0 +1,12 @@
+{
+  "Prompt - init.lua": {
+    "prefix": ["qi", "qn", "init"],
+    "description": "About Neovim config init.lua",
+    "body": ["In my Neovim config init.lua, $0"]
+  },
+  "snippet-2": {
+    "prefix": "s2",
+    "description": "Snippet with two placeholders and a tab stop",
+    "body": ["multi ${1:[VAR1]}", "line ${2:[VAR2]}", "snippet$0"]
+  }
+}

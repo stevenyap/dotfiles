@@ -1,0 +1,14 @@
+{
+  "name": "prompts",
+  "description": "This file is currently created to allow LuaSnip to load snippets.",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "markdown"
+        ],
+        "path": "./prompts.json"
+      }
+    ]
+  }
+}

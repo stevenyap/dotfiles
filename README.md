@@ -14,6 +14,8 @@ One should know how to use the dotfiles else don't use it.
 - https://rectangleapp.com/pro
 - https://alt-tab-macos.netlify.app/ 
 - https://www.alfredapp.com/
+- `brew install gitui && brew install git-delta`
+- `npm install -g @builder.io/ai-shell`
 
 ## Neovim:
 For python-provider, we need to:
@@ -32,12 +34,16 @@ Always start with:
 
 Soft links settings:
 - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
-- `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua
+- `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua`
 - `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
 - `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
 - `ln -s ~/Workspace/dotfiles/.tmuxinator ~/.tmuxinator`
 - `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
 - `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
 - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
+- `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
+- `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
+- `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
+  - Easy access to Desktop in dotfiles tmux session
 - `ln -s ~/Dropbox/Notes ~/Workspace/dotfiles/Notes`
   - This is for easy access to Notes in dotfiles tmux session

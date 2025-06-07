@@ -108,3 +108,10 @@ export PATH=/usr/local/mysql/bin:$PATH
 # brew install llvm
 # For compiling of elm-format using ghcup
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# For neovim lua and lua in general
+export LUA_PATH="$HOME/Workspace/dotfiles/nvim/lua/?.lua"
+
+if [ -f "$HOME/.zsh_secrets" ]; then
+  source "$HOME/.zsh_secrets"
+fi

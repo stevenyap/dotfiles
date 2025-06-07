@@ -88,11 +88,122 @@ vim.keymap.set("n", "<Leader>k", "i<CR><esc>")
 vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
 vim.keymap.set("n", "<Leader>l", ":vsp<CR>")
 vim.keymap.set("n", "<Leader>j", ":sp<CR>")
+vim.keymap.set("n", "<Leader>w", ":set wrap!<CR>")
 
 --------------------
 --- The plugins ----
 --------------------
 require("lazy").setup({
+	-- AI Plugin
+	-- GitHub Copilot plugin
+	{
+		"github/copilot.vim",
+		config = function()
+			vim.g.copilot_no_tab_map = true
+
+			vim.keymap.set("i", "<C-w>", "<Plug>(copilot-accept-word)")
+			vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
+				expr = true,
+				replace_keycodes = false,
+				desc = "Accept Copilot completion",
+			})
+			vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)")
+			vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)")
+		end,
+	},
+
+	-- Mini.nvim Plugin
+	-- https://github.com/echasnovski/mini.nvim
+	{
+		"echasnovski/mini.nvim",
+		version = false,
+	},
+	{
+		-- Display git diffs in Neovim
+		-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md
+		-- NOTE we can also use Neo-Tree to view git status (<Leader>z)
+		"echasnovski/mini.diff",
+		config = function()
+			require("mini.diff").setup({
+				view = {
+					style = "sign",
+					signs = { add = "+", change = "C", delete = "-" },
+					priority = 199,
+				},
+				mappings = {
+					-- Apply hunks inside a visual/operator region
+					apply = "zs",
+
+					-- Reset hunks inside a visual/operator region
+					reset = "zu",
+
+					-- Hunk range textobject to be used inside operator
+					-- Works also in Visual mode if mapping differs from apply and reset
+					textobject = "zo",
+
+					-- Go to hunk range in corresponding direction
+					goto_first = "zh",
+					goto_last = "zl",
+					goto_prev = "zk",
+					goto_next = "zj",
+				},
+			})
+
+			local colors = require("solarized.utils").get_colors()
+			vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { fg = colors.green, bg = colors.base02 })
+			vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { fg = colors.red, bg = colors.base01 })
+
+			-- Highlight for deleted line in a change line git diff
+			vim.api.nvim_set_hl(0, "MiniDiffOverContext", { fg = colors.red, bg = colors.base02 })
+			-- Highlight for changed characters in the new line in a change line git diff
+			vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03, bg = colors.base01 })
+
+			vim.keymap.set("n", "zg", function()
+				require("mini.diff").toggle_overlay(0)
+			end, { desc = "Toggle mini.diff overlay" })
+		end,
+	},
+
+	-- https://github.com/aspeddro/gitui.nvim
+	-- brew install gitui
+	{
+		"aspeddro/gitui.nvim",
+		config = function()
+			require("gitui").setup({
+				window = {
+					options = {
+						width = 100,
+						height = 100,
+						border = "single",
+					},
+				},
+			})
+			vim.keymap.set("n", "<leader>g", "<cmd>Gitui<CR>", { silent = true })
+		end,
+	},
+
+	-- https://github.com/FabijanZulj/blame.nvim
+	-- Now we can git blame
+	{
+		{
+			"FabijanZulj/blame.nvim",
+			lazy = false,
+			config = function()
+				require("blame").setup({})
+				vim.keymap.set("n", "zb", "<cmd>BlameToggle<CR>", { silent = true })
+			end,
+		},
+	},
+
+	-- Markdown rendering Plugin
+	-- https://github.com/MeanderingProgrammer/render-markdown.nvim
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+		ft = { "markdown" },
+		opts = {},
+	},
+
 	-- colorscheme
 	-- https://github.com/maxmx03/solarized.nvim
 	{
@@ -133,13 +244,15 @@ require("lazy").setup({
 			require("nvim-treesitter.configs").setup({
 				-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
 				ensure_installed = {
+					"bash",
+					"html",
 					"lua",
-					"vimdoc",
 					"markdown",
 					"markdown_inline",
-					"html",
-					"typescript",
 					"purescript",
+					"typescript",
+					"vimdoc",
+					"yaml",
 				},
 				sync_install = true,
 				highlight = {
@@ -184,7 +297,8 @@ require("lazy").setup({
 				},
 			})
 
-			vim.keymap.set("n", "<Leader>n", ":Neotree toggle<CR>")
+			vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>")
+			vim.keymap.set("n", "<Leader>z", ":Neotree source=git_status toggle<CR>")
 		end,
 	},
 
@@ -246,6 +360,7 @@ require("lazy").setup({
 		config = function()
 			-- calling `setup` is optional for customization
 			require("fzf-lua").setup({})
+			require("fzf-lua").register_ui_select()
 			vim.keymap.set("n", "<c-p>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
 			vim.keymap.set("n", "<c-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
 			vim.keymap.set("n", "<c-f>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
@@ -253,16 +368,6 @@ require("lazy").setup({
 			vim.keymap.set("i", "<c-f>", function()
 				require("fzf-lua").complete_path()
 			end, { silent = true, desc = "Fuzzy complete path" })
-		end,
-	},
-
-	-- Git Plugin
-	-- https://github.com/dinhhuy258/git.nvim
-	-- Now we can :GitBlame
-	{
-		"dinhhuy258/git.nvim",
-		config = function()
-			require("git").setup({})
 		end,
 	},
 
@@ -368,13 +473,25 @@ require("lazy").setup({
 
 	-- Snippet Plugin
 	-- https://github.com/L3MON4D3/luasnip
-	-- No snippets have been installed yet
+	-- Run :lua require("luasnip").log.open()
+	-- https://github.com/rafamadriz/friendly-snippets/blob/main/snippets/global.json
 	{
 		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-		-- install jsregexp (optional!).
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+		version = "v2.*",
 		build = "make install_jsregexp",
+		config = function()
+			-- Add working directory's .ai for AI prompting snippets
+			vim.opt.rtp:prepend(vim.fn.getcwd() .. "/.ai")
+			require("luasnip.loaders.from_vscode").load()
+
+			-- See other keymaps of LuaSnip in nvim-cmp
+			vim.keymap.set({ "i" }, "<C-h>", function()
+				require("luasnip").expand()
+			end, { silent = true })
+		end,
 	},
 
 	-- Autocomplete Plugin
@@ -385,22 +502,26 @@ require("lazy").setup({
 			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local luasnip = require("luasnip")
+
 			cmp.setup({
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
+					{ name = "luasnip" },
 				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
 					end,
 				},
-				mapping = cmp.mapping.preset.insert({
+				mapping = {
 					["<CR>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							if luasnip.expandable() then
@@ -436,7 +557,7 @@ require("lazy").setup({
 					end, { "i", "s" }),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-				}),
+				},
 				formatting = {
 					format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
 				},
@@ -461,6 +582,7 @@ require("lazy").setup({
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
+					json = { "prettier", "prettierd", stop_after_first = true },
 					javascript = { "prettier", "prettierd", stop_after_first = true },
 					javascriptreact = { "prettier", "prettierd", stop_after_first = true },
 					typescript = { "prettier", "prettierd", stop_after_first = true },
