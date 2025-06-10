@@ -121,6 +121,61 @@ require("lazy").setup({
 			end,
 		},
 
+		-- https://github.com/dlants/magenta.nvim/blob/main/lua/magenta/options.lua
+		-- Forked to https://github.com/haniker-dev/magenta.nvim
+		{
+			"haniker-dev/magenta.nvim",
+			dev = true, -- use the local version of the plugin at `~/Workspace/neovim`
+			lazy = false, -- you could also bind to <leader>mt
+			build = "npm install --frozen-lockfile",
+			config = function()
+				require("magenta").setup({
+					profiles = {
+						{
+							name = "gpt-4.1-mini",
+							provider = "openai",
+							model = "gpt-4.1-mini",
+							apiKeyEnvVar = "OPENAI_API_KEY",
+						},
+						{
+							name = "claude-sonnet-3.7",
+							provider = "anthropic",
+							model = "claude-3-7-sonnet-latest",
+							apiKeyEnvVar = "ANTHROPIC_API_KEY",
+						},
+					},
+					sidebarPosition = "right",
+					picker = "fzf-lua",
+					defaultKeymaps = true,
+					sidebarKeymaps = {
+						normal = {
+							["<CR>"] = ":Magenta send<CR>",
+						},
+					},
+					inlineKeymaps = {
+						normal = {
+							["<CR>"] = function(target_bufnr)
+								vim.cmd("Magenta submit-inline-edit " .. target_bufnr)
+							end,
+						},
+					},
+					autoContext = {
+						"README.md",
+						".ai/*.md",
+					},
+					commandAllowlist = {
+						"^ls( [^;&|()<>]*)?$",
+						"^pwd$",
+						"^echo( [^;&|()<>]*)?$",
+						"^git (status|log|diff|show|add|commit|push|reset|restore|branch|checkout|switch|fetch|pull|merge|rebase|tag|stash)( [^;&|()<>]*)?$",
+						"^ls [^;&()<>]* | grep [^;&|()<>]*$",
+						"^echo [^;&|()<>]* > [a-zA-Z0-9_\\-.]+$",
+						"^grep( -[A-Za-z]*)? [^;&|()<>]*$",
+					},
+				})
+			end,
+		},
+
 		-- Mini.nvim Plugin
 		-- https://github.com/echasnovski/mini.nvim
 		{
