@@ -14,9 +14,9 @@ source /opt/homebrew/share/antigen/antigen.zsh
 # Vim-like key binding
 antigen bundle jeffreytse/zsh-vi-mode
 
-# prompt theme
+# Prompt theme
+# Configuration at .spaceshiprc.zsh
 antigen theme denysdovhan/spaceship-prompt
-SPACESHIP_TIME_SHOW=true
 
 # Various auto-completions in zsh
 # Used for tmuxinator, nvm
