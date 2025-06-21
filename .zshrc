@@ -115,3 +115,9 @@ export LUA_PATH="$HOME/Workspace/dotfiles/nvim/lua/?.lua"
 if [ -f "$HOME/.zsh_secrets" ]; then
   source "$HOME/.zsh_secrets"
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/stevenyap/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/stevenyap/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/stevenyap/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/stevenyap/google-cloud-sdk/completion.zsh.inc'; fi

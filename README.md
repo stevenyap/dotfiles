@@ -31,6 +31,7 @@ Always start with:
 - `xcode-select --install`
 - Install Xcode App
 - `brew install ruby` -> needed for cocoapods and tmuxinator
+- Create `~/.zsh_secrets` with 1Password `dotfiles` personal secrets
 
 Soft links settings:
 - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`

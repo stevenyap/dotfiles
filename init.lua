@@ -314,6 +314,7 @@ require("lazy").setup({
 						"markdown",
 						"markdown_inline",
 						"purescript",
+						"terraform",
 						"typescript",
 						"vimdoc",
 						"yaml",
@@ -652,6 +653,7 @@ require("lazy").setup({
 						typescript = { "prettier", "prettierd", stop_after_first = true },
 						typescriptreact = { "prettier", "prettierd", stop_after_first = true },
 						purescript = { "purs-tidy" },
+						terraform = { "terraform_fmt" },
 						xml = { "xmllint" },
 					},
 					format_on_save = {
@@ -701,6 +703,13 @@ require("lazy").setup({
 							},
 						},
 					},
+				})
+
+				-- Terraform LSP
+				-- brew install hashicorp/tap/terraform-ls
+				lspconfig.terraformls.setup({
+					capabilities = capabilities,
+					filetypes = { "terraform", "terraform-vars", "tf" },
 				})
 			end,
 		},
