@@ -90,9 +90,8 @@ vim.keymap.set("n", "<Leader>s", ":w<CR>")
 vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
 vim.keymap.set("n", "<Leader>k", "i<CR><esc>")
 vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
-vim.keymap.set("n", "<Leader>l", ":vsp<CR>")
-vim.keymap.set("n", "<Leader>j", ":sp<CR>")
 vim.keymap.set("n", "<Leader>w", ":set wrap!<CR>")
+vim.keymap.set("n", "<Leader>l", "<cmd>messages<CR>")
 
 --------------------
 --- The plugins ----
@@ -103,6 +102,24 @@ require("lazy").setup({
 	},
 
 	spec = {
+		{
+			"haniker-dev/airon.nvim",
+			dependencies = { "ibhagwan/fzf-lua" },
+			dev = true,
+			lazy = false,
+			config = function()
+				require("airon").setup({
+					keymaps = {},
+				})
+				vim.keymap.set("n", "<Leader>r", "<cmd>lua require('airon').reload()<CR>")
+			end,
+		},
+		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {},
+		},
+
 		-- AI Plugin
 		-- GitHub Copilot plugin
 		{
@@ -265,7 +282,12 @@ require("lazy").setup({
 			"MeanderingProgrammer/render-markdown.nvim",
 			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 			ft = { "markdown" },
-			opts = {},
+			opts = {
+				anti_conceal = {
+					-- Disabled for Airon chat buffer
+					enabled = false,
+				},
+			},
 		},
 
 		-- colorscheme
@@ -570,6 +592,13 @@ require("lazy").setup({
 				"L3MON4D3/LuaSnip",
 				"saadparwaiz1/cmp_luasnip",
 			},
+			opts = function(_, opts)
+				opts.sources = opts.sources or {}
+				table.insert(opts.sources, {
+					name = "lazydev",
+					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+				})
+			end,
 			config = function()
 				local cmp = require("cmp")
 				local lspkind = require("lspkind")

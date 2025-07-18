@@ -1,0 +1,11 @@
+name: airon
+root: ~/Workspace/neovim/airon.nvim
+
+pre_window: nvm use
+
+windows:
+  - editor: nvim
+  - bash: git fetch --all && git status
+  - tsc: npm run tsc:watch
+  - ai-logs: npm run start:agent:openai
+  - plugin-logs: tail -f ./airon.log
