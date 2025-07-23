@@ -7,7 +7,7 @@
         "language": [
           "markdown"
         ],
-        "path": "./prompts.json"
+        "path": "./snippets/prompts.json"
       }
     ]
   }

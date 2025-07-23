@@ -1,0 +1,7 @@
+{
+  "Prompt - init.lua": {
+    "prefix": ["sampleSnippetVSCodeTrigger"],
+    "description": "About Neovim config init.lua",
+    "body": ["In my Neovim config init.lua, $0"]
+  }
+}
