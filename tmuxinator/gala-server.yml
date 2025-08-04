@@ -1,9 +1,0 @@
-name: gala-server
-root: ~/Workspace/gala/server/
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - lint: print -S "cargo watch -x check -s clear"
-  - test: print -S "cargo watch -x test"
-  - api: print -S "cargo watch -x 'run --bin server -- run api'"

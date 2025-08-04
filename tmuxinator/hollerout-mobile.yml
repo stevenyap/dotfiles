@@ -1,9 +1,0 @@
-name: hollerout-mobile
-root: ~/Workspace/hollerout/mobile
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - ios: print -S "react-native run-ios && react-native log-ios"
-  - android: print -S "react-native run-android && react-native log-android"
-  - server: print -S npm start

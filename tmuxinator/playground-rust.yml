@@ -1,9 +1,0 @@
-name: playground-rust
-root: ~/Workspace/playground/rust
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - lint: print -S "cargo check"
-  - test: print -S "cargo test"
-  - runner: print -S "cargo run"

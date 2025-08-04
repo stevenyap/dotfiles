@@ -1,9 +1,0 @@
-name: agilelab-mbsoft-weekly-report
-root: ~/Workspace/agilelab/mbsoft/weekly-report
-
-pre_window: nvm use
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - test: print -S "runner test"

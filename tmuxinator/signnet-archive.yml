@@ -1,9 +1,0 @@
-name: signnet-archive
-root: ~/Workspace/signnet/archive
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - test: print -S "npm test"
-  - api: print -S "(cd functions && npm start)"
-  - web: print -S "npm start"

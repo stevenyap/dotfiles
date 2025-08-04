@@ -1,7 +1,0 @@
-name: exercism-haskell
-root: ~/Exercism/haskell
-
-windows:
-  - editor: nvim
-  - bash: print -S "exercism version"
-  - test: print -S "echo do something"

@@ -1,9 +1,0 @@
-name: gala-haskell-checker
-root: ~/Workspace/gala/haskell-checker/
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - lint: print -S "npm run lint:watch"
-  - test: print -S "npm run test:watch"
-  - api: print -S "npm start"

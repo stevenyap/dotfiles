@@ -1,8 +1,0 @@
-name: chanceupon-web
-root: ~/Workspace/chanceupon/web
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - ngrok: print -S "/Applications/ngrok http 5000"
-  - server: print -S "npm start"

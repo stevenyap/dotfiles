@@ -1,8 +1,0 @@
-name: happymatches-android
-root: ~/Workspace/happymatches/android
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - test: print -S "npm test"
-  - server: print -S "npm start"

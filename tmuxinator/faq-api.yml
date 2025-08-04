@@ -1,9 +1,0 @@
-name: faq-api
-root: ~/Workspace/faq/api/
-
-windows:
-  - editor: nvim
-  - bash: git fetch --all && git status
-  - lint: print -S "make lint-watch"
-  - test: print -S "make test-watch"
-  - api: print -S "make server"
