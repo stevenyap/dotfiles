@@ -78,8 +78,8 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "*.txt", "*.md" },
-	command = "setlocal wrap tabstop=2 shiftwidth=2 expandtab",
+	pattern = { "*.txt", "*.md", "*.snippets" },
+	command = "setlocal wrap tabstop=2 shiftwidth=2 expandtab nofoldenable",
 	group = "FileTypeOverrides",
 })
 
@@ -118,6 +118,22 @@ require("lazy").setup({
 			"folke/lazydev.nvim",
 			ft = "lua",
 			opts = {},
+		},
+		{
+			"ravitemer/mcphub.nvim",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+			},
+			build = "npm install -g mcp-hub@latest",
+			config = function()
+				local mcphub = require("mcphub")
+				mcphub.setup({
+					config = vim.fn.expand("~/.config/mcphub/servers.json"),
+					port = 37373, -- The port `mcp-hub` server listens to
+					auto_approve = false, -- Auto approve mcp tool calls
+					auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
+				})
+			end,
 		},
 
 		-- AI Plugin
@@ -388,6 +404,18 @@ require("lazy").setup({
 				vim.keymap.set("n", "<Leader>z", ":Neotree source=git_status toggle<CR>")
 			end,
 		},
+		-- Calls LSP when NeoTree is renaming/moving files/folders
+		-- https://github.com/antosha417/nvim-lsp-file-operations
+		{
+			"antosha417/nvim-lsp-file-operations",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-neo-tree/neo-tree.nvim",
+			},
+			config = function()
+				require("lsp-file-operations").setup({})
+			end,
+		},
 
 		-- Status line Plugin
 		-- https://github.com/nvim-lualine/lualine.nvim
@@ -400,6 +428,11 @@ require("lazy").setup({
 			config = function()
 				require("lualine").setup({
 					options = { theme = "codedark" },
+					sections = {
+						lualine_x = {
+							{ require("mcphub.extensions.lualine") },
+						},
+					},
 				})
 			end,
 		},
@@ -560,7 +593,6 @@ require("lazy").setup({
 
 		-- Snippet Plugin
 		-- https://github.com/L3MON4D3/luasnip
-		-- Run :lua require("luasnip").log.open()
 		-- https://github.com/rafamadriz/friendly-snippets/blob/main/snippets/global.json
 		{
 			"L3MON4D3/LuaSnip",
@@ -570,9 +602,13 @@ require("lazy").setup({
 			version = "v2.*",
 			build = "make install_jsregexp",
 			config = function()
+				-- require("luasnip").log.set_loglevel("debug")
+				-- Run :lua require("luasnip").log.open()
 				-- Add working directory's .ai for AI prompting snippets
 				vim.opt.rtp:prepend(vim.fn.getcwd() .. "/.ai")
+				vim.opt.rtp:prepend(vim.fn.getcwd() .. "/.editor")
 				require("luasnip.loaders.from_vscode").load()
+				require("luasnip.loaders.from_snipmate").load()
 
 				-- See other keymaps of LuaSnip in nvim-cmp
 				vim.keymap.set({ "i" }, "<C-h>", function()
@@ -697,20 +733,36 @@ require("lazy").setup({
 		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 		{
 			"neovim/nvim-lspconfig",
+			dependencies = {
+				"antosha417/nvim-lsp-file-operations",
+			},
 			config = function()
 				local lspconfig = require("lspconfig")
-				local capabilities = require("cmp_nvim_lsp").default_capabilities()
+				local capabilities = vim.tbl_deep_extend(
+					"force",
+					vim.lsp.protocol.make_client_capabilities(),
+					require("lsp-file-operations").default_capabilities(),
+					require("cmp_nvim_lsp").default_capabilities()
+				)
+
+				-- Set global defaults for all servers
+				lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+					capabilities = capabilities,
+				})
 
 				-- TypeScript LSP
 				-- We are using pmizio/typescript-tools.nvim plugin
 				-- which installs itself directly so we don't configure it here
+
+				-- Eslint LSP
+				-- npm i -g vscode-langservers-extracted
+				lspconfig.eslint.setup({})
 
 				-- Purescript LSP
 				-- npm i -g purescript-language-server purs-tidy
 				lspconfig.purescriptls.setup({
 					-- https://github.com/nwolverson/purescript-language-server?tab=readme-ov-file#neovims-built-in-language-server--nvim-lspconfig
 					settings = {
-						capabilities = capabilities,
 						purescript = {
 							addSpagoSources = true, -- e.g. any purescript language-server config here
 							formatter = "purs-tidy",
@@ -724,7 +776,6 @@ require("lazy").setup({
 				-- Lua LSP
 				-- brew install lua-language-server
 				lspconfig.lua_ls.setup({
-					capabilities = capabilities,
 					settings = {
 						Lua = {
 							diagnostics = {
@@ -737,7 +788,6 @@ require("lazy").setup({
 				-- Terraform LSP
 				-- brew install hashicorp/tap/terraform-ls
 				lspconfig.terraformls.setup({
-					capabilities = capabilities,
 					filetypes = { "terraform", "terraform-vars", "tf" },
 				})
 			end,
@@ -749,13 +799,22 @@ require("lazy").setup({
 		-- Note that this doesn't support eslint
 		{
 			"pmizio/typescript-tools.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"neovim/nvim-lspconfig",
+				"antosha417/nvim-lsp-file-operations",
+			},
 			opts = {
 				code_lens = "all", -- "off" | "all" | "implementations_only" | "references_only"
 			},
 			config = function()
 				require("typescript-tools").setup({
-					capabilities = require("cmp_nvim_lsp").default_capabilities(),
+					capabilities = vim.tbl_deep_extend(
+						"force",
+						vim.lsp.protocol.make_client_capabilities(),
+						require("lsp-file-operations").default_capabilities(),
+						require("cmp_nvim_lsp").default_capabilities()
+					),
 					on_attach = function(client)
 						-- Disable formatting from the language server
 						-- We use stevearc/conform.nvim

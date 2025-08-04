@@ -4,6 +4,6 @@ root: ~/Workspace/dotfiles
 windows:
   - editor: nvim init.lua
   - shell: git fetch --all && git status && print -S "runner start:work"
-  - magenta: cd ../neovim/magenta.nvim && nvim
+  - magenta: cd ../neovim/magenta.nvim 
   - magenta-log: print -S "tail -f /private/tmp/magenta.log"
   - ollama: print -S "ollama run taozhiyuai/llama-3-8b-lexi-uncensored:f16"
