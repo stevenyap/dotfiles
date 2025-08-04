@@ -38,12 +38,13 @@ Soft links settings:
 - `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua`
 - `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
 - `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
-- `ln -s ~/Workspace/dotfiles/.tmuxinator ~/.tmuxinator`
 - `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
 - `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
 - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
 - `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
 - `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
+- `ln -s ~/Dropbox/tmuxinator ~/.tmuxinator`
+- `ln -s ~/Dropbox/tmuxinator ~/Workspace/dotfiles/tmuxinator`
 - `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
   - Easy access to Desktop in dotfiles tmux session
 - `ln -s ~/Dropbox/Notes ~/Workspace/dotfiles/Notes`
