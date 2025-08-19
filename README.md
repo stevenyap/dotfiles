@@ -16,6 +16,7 @@ One should know how to use the dotfiles else don't use it.
 - https://www.alfredapp.com/
 - `brew install gitui && brew install git-delta`
 - `npm install -g @builder.io/ai-shell`
+- `npm install -g tree-sitter-cli`
 
 ## Neovim:
 For python-provider, we need to:

@@ -101,6 +101,8 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 # MySQL
 export PATH=/usr/local/mysql/bin:$PATH
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Postgres
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # ghcup-env
 [ -f "/Users/stevenyap/.ghcup/env" ] && source "/Users/stevenyap/.ghcup/env" 

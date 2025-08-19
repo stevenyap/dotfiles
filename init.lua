@@ -119,22 +119,6 @@ require("lazy").setup({
 			ft = "lua",
 			opts = {},
 		},
-		{
-			"ravitemer/mcphub.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-			},
-			build = "npm install -g mcp-hub@latest",
-			config = function()
-				local mcphub = require("mcphub")
-				mcphub.setup({
-					config = vim.fn.expand("~/.config/mcphub/servers.json"),
-					port = 37373, -- The port `mcp-hub` server listens to
-					auto_approve = false, -- Auto approve mcp tool calls
-					auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
-				})
-			end,
-		},
 
 		-- AI Plugin
 		-- GitHub Copilot plugin
@@ -155,26 +139,25 @@ require("lazy").setup({
 		},
 
 		-- https://github.com/dlants/magenta.nvim/blob/main/lua/magenta/options.lua
-		-- Forked to https://github.com/haniker-dev/magenta.nvim
 		{
-			"haniker-dev/magenta.nvim",
-			dev = true, -- use the local version of the plugin at `~/Workspace/neovim`
+			"dlants/magenta.nvim",
+			dev = true,
 			lazy = false, -- you could also bind to <leader>mt
 			build = "npm install --frozen-lockfile",
 			config = function()
 				require("magenta").setup({
 					profiles = {
 						{
+							name = "claude-sonnet-4",
+							provider = "anthropic",
+							model = "claude-sonnet-4-20250514",
+							apiKeyEnvVar = "ANTHROPIC_API_KEY",
+						},
+						{
 							name = "gpt-4.1-mini",
 							provider = "openai",
 							model = "gpt-4.1-mini",
-							apiKeyEnvVar = "OPENAI_API_KEY",
-						},
-						{
-							name = "claude-sonnet-3.7",
-							provider = "anthropic",
-							model = "claude-3-7-sonnet-latest",
-							apiKeyEnvVar = "ANTHROPIC_API_KEY",
+							apikeyenvvar = "openai_api_key",
 						},
 					},
 					sidebarPosition = "right",
@@ -428,11 +411,6 @@ require("lazy").setup({
 			config = function()
 				require("lualine").setup({
 					options = { theme = "codedark" },
-					sections = {
-						lualine_x = {
-							{ require("mcphub.extensions.lualine") },
-						},
-					},
 				})
 			end,
 		},
