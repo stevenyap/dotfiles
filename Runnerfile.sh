@@ -6,17 +6,8 @@ task_default() {
   runner --list-tasks
 }
 
-task_start:work() {
+task_start:papa() {
   projects=("papa-core" "papa-media" "papa-api" "papa-admin" "papa-mobile")
-
-  for project in "${projects[@]}"; do
-    echo "Starting tmux session for $project..."
-    tmuxinator start "$project" --no-attach
-  done
-}
-
-task_start:bedrock() {
-projects=("bedrock-ts-core" "bedrock-ts-api" "bedrock-ts-web")
 
   for project in "${projects[@]}"; do
     echo "Starting tmux session for $project..."
