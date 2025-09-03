@@ -122,19 +122,67 @@ require("lazy").setup({
 
 		-- AI Plugin
 		-- GitHub Copilot plugin
-		{
-			"github/copilot.vim",
-			config = function()
-				vim.g.copilot_no_tab_map = true
+		-- {
+		-- 	"github/copilot.vim",
+		-- 	config = function()
+		-- 		vim.g.copilot_no_tab_map = true
+		-- 		-- vim.g.copilot_workspace_folders = { "~/Projects/myproject" }
+		--
+		-- 		vim.keymap.set("n", "<Leader>p", "<cmd>Copilot panel<CR>")
+		-- 		vim.keymap.set("i", "<C-w>", "<Plug>(copilot-accept-word)")
+		-- 		vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
+		-- 			expr = true,
+		-- 			replace_keycodes = false,
+		-- 			desc = "Accept Copilot completion",
+		-- 		})
+		-- 		vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)")
+		-- 		vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)")
+		-- 	end,
+		-- },
 
-				vim.keymap.set("i", "<C-w>", "<Plug>(copilot-accept-word)")
-				vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
-					expr = true,
-					replace_keycodes = false,
-					desc = "Accept Copilot completion",
+		-- Better GitHub Copilot plugin
+		-- https://github.com/zbirenbaum/copilot.lua
+		-- Run `:Copilot auth` to authenticate
+		{
+			"zbirenbaum/copilot.lua",
+			config = function()
+				require("copilot").setup({
+					filetypes = {
+						["*"] = true,
+					},
+					suggestion = {
+						enabled = true,
+						auto_trigger = true,
+						hide_during_completion = false,
+						debounce = 75,
+						trigger_on_accept = true,
+						keymap = {
+							accept = "<C-l>",
+							accept_word = "<C-w>",
+							accept_line = nil,
+							next = "<C-g>j",
+							prev = "<C-g>k",
+							dismiss = "<C-q>",
+						},
+					},
+					panel = {
+						enabled = true,
+						auto_refresh = true,
+						keymap = {
+							jump_next = "<C-j>",
+							jump_prev = "<C-k>",
+							accept = "<CR>",
+							refresh = "gr",
+							open = nil,
+						},
+						layout = {
+							position = "right", -- | top | left | right | bottom |
+							ratio = 0.3,
+						},
+					},
 				})
-				vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)")
-				vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)")
+
+				vim.keymap.set("n", "<Leader>p", "<cmd>lua require('copilot.panel').toggle()<CR>")
 			end,
 		},
 
@@ -606,13 +654,6 @@ require("lazy").setup({
 				"L3MON4D3/LuaSnip",
 				"saadparwaiz1/cmp_luasnip",
 			},
-			opts = function(_, opts)
-				opts.sources = opts.sources or {}
-				table.insert(opts.sources, {
-					name = "lazydev",
-					group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-				})
-			end,
 			config = function()
 				local cmp = require("cmp")
 				local lspkind = require("lspkind")
@@ -620,6 +661,11 @@ require("lazy").setup({
 
 				cmp.setup({
 					sources = {
+						{
+							name = "lazydev",
+							group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+						},
+						{ name = "copilot" },
 						{ name = "nvim_lsp" },
 						{ name = "buffer" },
 						{ name = "luasnip" },
