@@ -143,53 +143,106 @@ require("lazy").setup({
 		-- Better GitHub Copilot plugin
 		-- https://github.com/zbirenbaum/copilot.lua
 		-- Run `:Copilot auth` to authenticate
-		{
-			"zbirenbaum/copilot.lua",
-			config = function()
-				require("copilot").setup({
-					filetypes = {
-						["*"] = true,
-					},
-					suggestion = {
-						enabled = true,
-						auto_trigger = true,
-						hide_during_completion = false,
-						debounce = 75,
-						trigger_on_accept = true,
-						keymap = {
-							accept = "<C-l>",
-							accept_word = "<C-w>",
-							accept_line = nil,
-							next = "<C-g>j",
-							prev = "<C-g>k",
-							dismiss = "<C-q>",
-						},
-					},
-					panel = {
-						enabled = true,
-						auto_refresh = true,
-						keymap = {
-							jump_next = "<C-j>",
-							jump_prev = "<C-k>",
-							accept = "<CR>",
-							refresh = "gr",
-							open = nil,
-						},
-						layout = {
-							position = "right", -- | top | left | right | bottom |
-							ratio = 0.3,
-						},
-					},
-				})
+		-- {
+		-- 	"zbirenbaum/copilot.lua",
+		-- 	config = function()
+		-- 		require("copilot").setup({
+		-- 			filetypes = {
+		-- 				["*"] = true,
+		-- 			},
+		-- 			suggestion = {
+		-- 				enabled = true,
+		-- 				auto_trigger = true,
+		-- 				hide_during_completion = false,
+		-- 				debounce = 75,
+		-- 				trigger_on_accept = true,
+		-- 				keymap = {
+		-- 					accept = "<C-l>",
+		-- 					accept_word = "<C-w>",
+		-- 					accept_line = nil,
+		-- 					next = "<C-g>j",
+		-- 					prev = "<C-g>k",
+		-- 					dismiss = "<C-q>",
+		-- 				},
+		-- 			},
+		-- 			panel = {
+		-- 				enabled = true,
+		-- 				auto_refresh = true,
+		-- 				keymap = {
+		-- 					jump_next = "<C-j>",
+		-- 					jump_prev = "<C-k>",
+		-- 					accept = "<CR>",
+		-- 					refresh = "gr",
+		-- 					open = nil,
+		-- 				},
+		-- 				layout = {
+		-- 					position = "right", -- | top | left | right | bottom |
+		-- 					ratio = 0.3,
+		-- 				},
+		-- 			},
+		-- 		})
+		--
+		-- 		vim.keymap.set("n", "<Leader>p", "<cmd>lua require('copilot.panel').toggle()<CR>")
+		-- 	end,
+		-- },
 
-				vim.keymap.set("n", "<Leader>p", "<cmd>lua require('copilot.panel').toggle()<CR>")
+		-- https://github.com/monkoose/neocodeium
+		-- Run `:NeoCodeium auth` to authenticate
+		-- Register an account at https://windsurf.com/
+		{
+			"monkoose/neocodeium",
+			event = "VeryLazy",
+			config = function()
+				local neocodeium = require("neocodeium")
+				neocodeium.setup({
+					-- If `false`, then would not start windsurf server (disabled state)
+					-- You can manually enable it at runtime with `:NeoCodeium enable`
+					enabled = true,
+					-- Set to `false` to disable showing the number of suggestions label in the line number column
+					show_label = true,
+					-- Set to `true` to enable suggestions debounce
+					debounce = false,
+					-- Maximum number of lines parsed from loaded buffers (current buffer always fully parsed)
+					-- Set to `0` to disable parsing non-current buffers (may lower suggestion quality)
+					-- Set it to `-1` to parse all lines
+					max_lines = 10000,
+					-- Set to `true` to disable some non-important messages, like "NeoCodeium: server started..."
+					silent = false,
+					-- Set to `false` to enable suggestions in special buftypes, like `nofile` etc.
+					disable_in_special_buftypes = true,
+					-- Set `enabled` to `true` to enable single line mode.
+					-- In this mode, multi-line suggestions would collapse into a single line and only
+					-- shows full lines when on the end of the suggested (accepted) line.
+					-- So it is less distracting and works better with other completion plugins.
+					single_line = {
+						enabled = false,
+						label = "...", -- Label indicating that there is multi-line suggestion.
+					},
+					-- Set to `false` to disable suggestions in buffers with specific filetypes
+					-- You can still enable disabled by this option buffer with `:NeoCodeium enable_buffer`
+					filetypes = {
+						help = false,
+						gitcommit = false,
+						gitrebase = false,
+						["."] = false,
+					},
+					-- List of directories and files to detect workspace root directory for Windsurf Chat
+					root_dir = { ".git", "package.json" },
+				})
+				vim.keymap.set("i", "<C-l>", neocodeium.accept)
+				vim.keymap.set("i", "<C-w>", neocodeium.accept_word)
+				vim.keymap.set("i", "<C-g>j", function()
+					neocodeium.cycle(1)
+				end)
+				vim.keymap.set("i", "<C-g>k", function()
+					neocodeium.cycle(-1)
+				end)
 			end,
 		},
 
 		-- https://github.com/dlants/magenta.nvim/blob/main/lua/magenta/options.lua
 		{
 			"dlants/magenta.nvim",
-			dev = true,
 			lazy = false, -- you could also bind to <leader>mt
 			build = "npm install --frozen-lockfile",
 			config = function()
