@@ -253,6 +253,10 @@ require("lazy").setup({
 							provider = "anthropic",
 							model = "claude-sonnet-4-20250514",
 							apiKeyEnvVar = "ANTHROPIC_API_KEY",
+							thinking = {
+								enabled = true,
+								budgetTokens = 8192,
+							},
 						},
 						{
 							name = "gpt-4.1-mini",
@@ -290,6 +294,15 @@ require("lazy").setup({
 						"^grep( -[A-Za-z]*)? [^;&|()<>]*$",
 					},
 				})
+
+				-- Read all keymaps here:
+				-- https://github.com/dlants/magenta.nvim/blob/main/lua/magenta/keymaps.lua
+				vim.keymap.set(
+					"n",
+					"<Leader>p",
+					"<Cmd>Magenta predict-edit<CR>",
+					{ silent = true, noremap = true, desc = "Predict/accept edit" }
+				)
 			end,
 		},
 
