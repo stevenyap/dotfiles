@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 -- Leader Mappings
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-vim.keymap.set("n", "<Leader>s", ":w<CR>")
+vim.keymap.set("n", "<Leader>s", ":wa<CR>")
 vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
 vim.keymap.set("n", "<Leader>k", "i<CR><esc>")
 vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
