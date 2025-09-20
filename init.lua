@@ -1,7 +1,10 @@
+-- TODO Good way to restructure this file: https://gist.github.com/carderne/0dc6eb6ecc48a25192687ab533f71cc7
+
 -- Using lazy.nvim to manage our plugins
 -- https://github.com/folke/lazy.nvim
 -- :Lazy home
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+---@diagnostic disable-next-line: undefined-field (This is default code instruction from Lazy)
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -121,72 +124,7 @@ require("lazy").setup({
 		},
 
 		-- AI Plugin
-		-- GitHub Copilot plugin
-		-- {
-		-- 	"github/copilot.vim",
-		-- 	config = function()
-		-- 		vim.g.copilot_no_tab_map = true
-		-- 		-- vim.g.copilot_workspace_folders = { "~/Projects/myproject" }
-		--
-		-- 		vim.keymap.set("n", "<Leader>p", "<cmd>Copilot panel<CR>")
-		-- 		vim.keymap.set("i", "<C-w>", "<Plug>(copilot-accept-word)")
-		-- 		vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', {
-		-- 			expr = true,
-		-- 			replace_keycodes = false,
-		-- 			desc = "Accept Copilot completion",
-		-- 		})
-		-- 		vim.keymap.set("i", "<C-g>j", "<Plug>(copilot-previous)")
-		-- 		vim.keymap.set("i", "<C-g>k", "<Plug>(copilot-next)")
-		-- 	end,
-		-- },
-
-		-- Better GitHub Copilot plugin
-		-- https://github.com/zbirenbaum/copilot.lua
-		-- Run `:Copilot auth` to authenticate
-		-- {
-		-- 	"zbirenbaum/copilot.lua",
-		-- 	config = function()
-		-- 		require("copilot").setup({
-		-- 			filetypes = {
-		-- 				["*"] = true,
-		-- 			},
-		-- 			suggestion = {
-		-- 				enabled = true,
-		-- 				auto_trigger = true,
-		-- 				hide_during_completion = false,
-		-- 				debounce = 75,
-		-- 				trigger_on_accept = true,
-		-- 				keymap = {
-		-- 					accept = "<C-l>",
-		-- 					accept_word = "<C-w>",
-		-- 					accept_line = nil,
-		-- 					next = "<C-g>j",
-		-- 					prev = "<C-g>k",
-		-- 					dismiss = "<C-q>",
-		-- 				},
-		-- 			},
-		-- 			panel = {
-		-- 				enabled = true,
-		-- 				auto_refresh = true,
-		-- 				keymap = {
-		-- 					jump_next = "<C-j>",
-		-- 					jump_prev = "<C-k>",
-		-- 					accept = "<CR>",
-		-- 					refresh = "gr",
-		-- 					open = nil,
-		-- 				},
-		-- 				layout = {
-		-- 					position = "right", -- | top | left | right | bottom |
-		-- 					ratio = 0.3,
-		-- 				},
-		-- 			},
-		-- 		})
-		--
-		-- 		vim.keymap.set("n", "<Leader>p", "<cmd>lua require('copilot.panel').toggle()<CR>")
-		-- 	end,
-		-- },
-
-		-- https://github.com/monkoose/neocodeium
+		-- Predictive AI Completion Plugin: https://github.com/monkoose/neocodeium
 		-- Run `:NeoCodeium auth` to authenticate
 		-- Register an account at https://windsurf.com/
 		{
@@ -383,7 +321,7 @@ require("lazy").setup({
 				"FabijanZulj/blame.nvim",
 				lazy = false,
 				config = function()
-					require("blame").setup({})
+					-- require("blame").setup({})
 					vim.keymap.set("n", "zb", "<cmd>BlameToggle<CR>", { silent = true })
 				end,
 			},
@@ -436,12 +374,16 @@ require("lazy").setup({
 		-- Syntax Highlight
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		-- brew install tree-sitter
+		-- brew install tree-sitter-cli
 		{
 			"nvim-treesitter/nvim-treesitter",
+			branch = "master",
+			lazy = false,
 			build = ":TSUpdate",
 			config = function()
 				require("nvim-treesitter.configs").setup({
 					-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
+					modules = {},
 					ensure_installed = {
 						"bash",
 						"html",
@@ -455,6 +397,8 @@ require("lazy").setup({
 						"yaml",
 					},
 					sync_install = true,
+					auto_install = true,
+					ignore_install = { "all" },
 					highlight = {
 						enable = true,
 						additional_vim_regex_highlighting = false,
@@ -479,13 +423,6 @@ require("lazy").setup({
 						width = 40,
 						mappings = {
 							["o"] = "open",
-							["oc"] = false,
-							["od"] = false,
-							["og"] = false,
-							["om"] = false,
-							["on"] = false,
-							["os"] = false,
-							["ot"] = false,
 						},
 					},
 					filesystem = {
@@ -616,6 +553,7 @@ require("lazy").setup({
 
 		-- UI to LSP Plugin
 		-- https://nvimdev.github.io/lspsaga/
+		-- TODO Change this to telescope? neovim default?
 		{
 			"nvimdev/lspsaga.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -704,7 +642,7 @@ require("lazy").setup({
 
 				-- See other keymaps of LuaSnip in nvim-cmp
 				vim.keymap.set({ "i" }, "<C-h>", function()
-					require("luasnip").expand()
+					require("luasnip").expand({})
 				end, { silent = true })
 			end,
 		},
@@ -745,7 +683,7 @@ require("lazy").setup({
 						["<CR>"] = cmp.mapping(function(fallback)
 							if cmp.visible() then
 								if luasnip.expandable() then
-									luasnip.expand()
+									luasnip.expand({})
 								else
 									cmp.confirm({
 										select = true,
@@ -819,15 +757,42 @@ require("lazy").setup({
 			end,
 		},
 
+		-- Allows renaming of files to trigger LSP
+		-- https://github.com/antosha417/nvim-lsp-file-operations
+		{
+			"antosha417/nvim-lsp-file-operations",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-neo-tree/neo-tree.nvim", -- neo-tree must load before this plugin
+			},
+			config = function()
+				require("lsp-file-operations").setup({
+					-- used to see debug logs in file `vim.fn.stdpath("cache") .. lsp-file-operations.log`
+					debug = false,
+					-- select which file operations to enable
+					operations = {
+						willRenameFiles = true,
+						didRenameFiles = true,
+						willCreateFiles = true,
+						didCreateFiles = true,
+						willDeleteFiles = true,
+						didDeleteFiles = true,
+					},
+					-- how long to wait (in milliseconds) for file rename information before cancelling
+					timeout_ms = 10000,
+				})
+			end,
+		},
+
 		-- LSP Config Plugin
 		-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 		{
 			"neovim/nvim-lspconfig",
 			dependencies = {
 				"antosha417/nvim-lsp-file-operations",
+				"hrsh7th/cmp-nvim-lsp",
 			},
 			config = function()
-				local lspconfig = require("lspconfig")
 				local capabilities = vim.tbl_deep_extend(
 					"force",
 					vim.lsp.protocol.make_client_capabilities(),
@@ -835,23 +800,26 @@ require("lazy").setup({
 					require("cmp_nvim_lsp").default_capabilities()
 				)
 
-				-- Set global defaults for all servers
-				lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-					capabilities = capabilities,
-				})
-
 				-- TypeScript LSP
 				-- We are using pmizio/typescript-tools.nvim plugin
 				-- which installs itself directly so we don't configure it here
 
 				-- Eslint LSP
 				-- npm i -g vscode-langservers-extracted
-				lspconfig.eslint.setup({})
+				vim.lsp.config("eslint", {
+					root_dir = function(_, on_dir)
+						-- A hack to workaround the root_dir issue where the plugin cannot detect the root directory correctly
+						-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua#L89
+						on_dir(vim.fn.getcwd())
+					end,
+				})
+				vim.lsp.enable("eslint")
 
 				-- Purescript LSP
 				-- npm i -g purescript-language-server purs-tidy
-				lspconfig.purescriptls.setup({
+				vim.lsp.config("purescriptls", {
 					-- https://github.com/nwolverson/purescript-language-server?tab=readme-ov-file#neovims-built-in-language-server--nvim-lspconfig
+					capabilities = capabilities,
 					settings = {
 						purescript = {
 							addSpagoSources = true, -- e.g. any purescript language-server config here
@@ -862,10 +830,12 @@ require("lazy").setup({
 						debounce_text_changes = 150,
 					},
 				})
+				vim.lsp.enable("purescriptls")
 
 				-- Lua LSP
 				-- brew install lua-language-server
-				lspconfig.lua_ls.setup({
+				vim.lsp.config("lua_ls", {
+					capabilities = capabilities,
 					settings = {
 						Lua = {
 							diagnostics = {
@@ -874,12 +844,15 @@ require("lazy").setup({
 						},
 					},
 				})
+				vim.lsp.enable("lua_ls")
 
 				-- Terraform LSP
 				-- brew install hashicorp/tap/terraform-ls
-				lspconfig.terraformls.setup({
+				vim.lsp.config("terraformls", {
+					capabilities = capabilities,
 					filetypes = { "terraform", "terraform-vars", "tf" },
 				})
+				vim.lsp.enable("terraformls")
 			end,
 		},
 

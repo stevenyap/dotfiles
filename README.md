@@ -35,18 +35,20 @@ Always start with:
 - Create `~/.zsh_secrets` with 1Password `dotfiles` personal secrets
 
 Soft links settings:
-- `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
-- `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua`
-- `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
-- `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
-- `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
-- `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
-- `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
-- `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
-- `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
-- `ln -s ~/Dropbox/tmuxinator ~/.tmuxinator`
-- `ln -s ~/Dropbox/tmuxinator ~/Workspace/dotfiles/tmuxinator`
-- `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
-  - Easy access to Desktop in dotfiles tmux session
-- `ln -s ~/Dropbox/Notes ~/Workspace/dotfiles/Notes`
-  - This is for easy access to Notes in dotfiles tmux session
+- Local bash soft linking:
+  - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
+  - `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua`
+  - `ln -s ~/Workspace/dotfiles/.spaceshiprc.zh ~/.spaceshiprc.zh`
+  - `ln -s ~/Workspace/dotfiles/.zshrc ~/.zshrc`
+  - `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
+  - `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
+  - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
+  - `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
+  - `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
+- Access other folders in dotfile tmux:
+  - `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
+  - `ln -s ~/Documents/Notes ~/Workspace/dotfiles/Notes`
+- Soft link to tmuxinator:
+  - tmuxinator projects are saved in a Cloud drive which is not commited in this repo
+  - `ln -s ~/Documents/tmuxinator ~/.tmuxinator`
+  - `ln -s ~/Documents/tmuxinator ~/Workspace/dotfiles/tmuxinator`
