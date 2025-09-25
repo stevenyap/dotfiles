@@ -423,6 +423,14 @@ require("lazy").setup({
 						width = 40,
 						mappings = {
 							["o"] = "open",
+							-- Unset these so "o" is faster
+							["oc"] = "",
+							["od"] = "",
+							["og"] = "",
+							["om"] = "",
+							["on"] = "",
+							["os"] = "",
+							["ot"] = "",
 						},
 					},
 					filesystem = {
