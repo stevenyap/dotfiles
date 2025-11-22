@@ -288,7 +288,8 @@ require("lazy").setup({
 				-- Highlight for deleted line in a change line git diff
 				vim.api.nvim_set_hl(0, "MiniDiffOverContext", { fg = colors.red, bg = colors.base02 })
 				-- Highlight for changed characters in the new line in a change line git diff
-				vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03, bg = colors.base01 })
+				-- vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03, bg = colors.base01 })
+				-- vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03 })
 
 				vim.keymap.set("n", "zg", function()
 					require("mini.diff").toggle_overlay(0)
@@ -321,7 +322,7 @@ require("lazy").setup({
 				"FabijanZulj/blame.nvim",
 				lazy = false,
 				config = function()
-					-- require("blame").setup({})
+					require("blame").setup({})
 					vim.keymap.set("n", "zb", "<cmd>BlameToggle<CR>", { silent = true })
 				end,
 			},
@@ -332,7 +333,7 @@ require("lazy").setup({
 		{
 			"MeanderingProgrammer/render-markdown.nvim",
 			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-			ft = { "markdown" },
+			ft = { "markdown", "text" },
 			opts = {
 				anti_conceal = {
 					-- Disabled for Airon chat buffer
