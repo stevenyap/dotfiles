@@ -322,7 +322,7 @@ require("lazy").setup({
 				"FabijanZulj/blame.nvim",
 				lazy = false,
 				config = function()
-					require("blame").setup({})
+					require("blame").setup()
 					vim.keymap.set("n", "zb", "<cmd>BlameToggle<CR>", { silent = true })
 				end,
 			},
