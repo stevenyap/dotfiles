@@ -44,6 +44,7 @@ vim.opt.wrap = false -- Disables text wrapping
 vim.opt.clipboard = "unnamed" -- System clipboard integration
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undo" -- Save all undo
 vim.opt.undofile = true
+vim.opt.swapfile = false
 vim.opt.history = 500
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
