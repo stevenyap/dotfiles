@@ -115,7 +115,7 @@ require("lazy").setup({
 				require("airon").setup({
 					keymaps = {},
 				})
-				vim.keymap.set("n", "<Leader>r", "<cmd>lua require('airon').reload()<CR>")
+				vim.keymap.set("n", "<Leader>ra", "<cmd>lua require('airon').reload()<CR>")
 			end,
 		},
 		{
@@ -236,12 +236,6 @@ require("lazy").setup({
 
 				-- Read all keymaps here:
 				-- https://github.com/dlants/magenta.nvim/blob/main/lua/magenta/keymaps.lua
-				vim.keymap.set(
-					"n",
-					"<Leader>p",
-					"<Cmd>Magenta predict-edit<CR>",
-					{ silent = true, noremap = true, desc = "Predict/accept edit" }
-				)
 			end,
 		},
 
@@ -808,6 +802,13 @@ require("lazy").setup({
 					vim.lsp.protocol.make_client_capabilities(),
 					require("lsp-file-operations").default_capabilities(),
 					require("cmp_nvim_lsp").default_capabilities()
+				)
+
+				vim.keymap.set(
+					"n",
+					"<Leader>rl",
+					"<Cmd>LspRestart<CR>",
+					{ silent = true, noremap = true, desc = "Restart the LSP when it hangs" }
 				)
 
 				-- TypeScript LSP
