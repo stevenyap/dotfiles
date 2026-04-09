@@ -7,6 +7,7 @@ export LANG='en_US.UTF-8'
 export EDITOR='nvim'
 alias ll='ls -al'
 alias ls='ls -GFh'
+alias mux-join='f() { tmux new-session -t "$1" }; f'
 
 # zsh plugins using antigen installed using homebrew
 source /opt/homebrew/share/antigen/antigen.zsh

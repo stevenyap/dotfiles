@@ -6,8 +6,8 @@ task_default() {
   runner --list-tasks
 }
 
-task_start:papa() {
-  projects=("papa-core" "papa-media" "papa-api" "papa-admin" "papa-mobile")
+task_start:toppan() {
+  projects=("toppan-dashboard" "toppan-media" "agilelab-devops")
 
   for project in "${projects[@]}"; do
     echo "Starting tmux session for $project..."

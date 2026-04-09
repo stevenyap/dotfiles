@@ -88,6 +88,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Leader Mappings
+-- Conventions:
+-- <Leader>r? = refresh
+-- <Leader>t? = toggle
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.keymap.set("n", "<Leader>s", ":wa<CR>")
@@ -336,6 +339,14 @@ require("lazy").setup({
 				},
 			},
 		},
+		{
+			"MeanderingProgrammer/render-markdown.nvim",
+			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+			config = function()
+				require("render-markdown").setup()
+				vim.keymap.set("n", "<leader>tm", "<cmd>RenderMarkdown buf_toggle<CR>", { silent = true })
+			end,
+		},
 
 		-- colorscheme
 		-- https://github.com/maxmx03/solarized.nvim
@@ -386,6 +397,7 @@ require("lazy").setup({
 						"lua",
 						"markdown",
 						"markdown_inline",
+						"rust",
 						"purescript",
 						"terraform",
 						"typescript",
@@ -749,6 +761,7 @@ require("lazy").setup({
 						javascriptreact = { "prettier", "prettierd", stop_after_first = true },
 						typescript = { "prettier", "prettierd", stop_after_first = true },
 						typescriptreact = { "prettier", "prettierd", stop_after_first = true },
+						rust = { "rustfmt" },
 						purescript = { "purs-tidy" },
 						terraform = { "terraform_fmt" },
 						xml = { "xmllint" },
@@ -856,6 +869,23 @@ require("lazy").setup({
 					},
 				})
 				vim.lsp.enable("lua_ls")
+
+				-- Rust LSP
+				-- Install rust-analyzer: rustup component add rust-analyzer
+				vim.lsp.config("rust_analyzer", {
+					capabilities = capabilities,
+					settings = {
+						["rust-analyzer"] = {
+							cargo = {
+								allFeatures = true,
+							},
+							check = {
+								command = "clippy",
+							},
+						},
+					},
+				})
+				vim.lsp.enable("rust_analyzer")
 
 				-- Terraform LSP
 				-- brew install hashicorp/tap/terraform-ls
