@@ -6,6 +6,11 @@
 	excludesfile = /Users/stevenyap/.gitignore_global
   ignorecase = false
 	autocrlf = input
+[remote "origin"]
+  fetch = +refs/tags/*:refs/tags/* # force remote tag to overwrite local tags
+  tagOpt = --tags
+  prune = true
+  pruneTags = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
