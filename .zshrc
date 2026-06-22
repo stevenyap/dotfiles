@@ -74,6 +74,9 @@ export PATH=$PATH:$HOME/Workspace/dotfiles/bin
 # Use Homebrew git over mac git
 export PATH="/opt/homebrew/bin/git:${PATH}"
 
+# For Claude
+export PATH="$HOME/.local/bin:$PATH"
+
 # NodeJS
 # NVM
 export NVM_DIR="$HOME/.nvm"
