@@ -45,6 +45,7 @@ Soft links settings:
   - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
   - `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
   - `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
+  - `ln -s ~/Workspace/dotfiles/.claude/settings.json $HOME/.claude/settings.json`
 - Access other folders in dotfile tmux:
   - `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
   - `ln -s ~/Documents/Notes ~/Workspace/dotfiles/Notes`

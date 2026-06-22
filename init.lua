@@ -186,28 +186,20 @@ require("lazy").setup({
 		{
 			"dlants/magenta.nvim",
 			lazy = false, -- you could also bind to <leader>mt
-			build = "npm install --frozen-lockfile",
+			build = "npm run build",
 			config = function()
 				require("magenta").setup({
 					profiles = {
 						{
-							name = "claude-sonnet-4",
+							name = "claude-opus",
 							provider = "anthropic",
-							model = "claude-sonnet-4-20250514",
+							model = "claude-opus-4-8",
+							fastModel = "claude-haiku-4-5",
 							apiKeyEnvVar = "ANTHROPIC_API_KEY",
-							thinking = {
-								enabled = true,
-								budgetTokens = 8192,
-							},
-						},
-						{
-							name = "gpt-4.1-mini",
-							provider = "openai",
-							model = "gpt-4.1-mini",
-							apikeyenvvar = "openai_api_key",
 						},
 					},
 					sidebarPosition = "right",
+					maxConcurrentSubagents = 5,
 					picker = "fzf-lua",
 					defaultKeymaps = true,
 					sidebarKeymaps = {
@@ -225,15 +217,6 @@ require("lazy").setup({
 					autoContext = {
 						"README.md",
 						".ai/*.md",
-					},
-					commandAllowlist = {
-						"^ls( [^;&|()<>]*)?$",
-						"^pwd$",
-						"^echo( [^;&|()<>]*)?$",
-						"^git (status|log|diff|show|add|commit|push|reset|restore|branch|checkout|switch|fetch|pull|merge|rebase|tag|stash)( [^;&|()<>]*)?$",
-						"^ls [^;&()<>]* | grep [^;&|()<>]*$",
-						"^echo [^;&|()<>]* > [a-zA-Z0-9_\\-.]+$",
-						"^grep( -[A-Za-z]*)? [^;&|()<>]*$",
 					},
 				})
 
@@ -338,10 +321,6 @@ require("lazy").setup({
 					enabled = false,
 				},
 			},
-		},
-		{
-			"MeanderingProgrammer/render-markdown.nvim",
-			dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 			config = function()
 				require("render-markdown").setup()
 				vim.keymap.set("n", "<leader>tm", "<cmd>RenderMarkdown buf_toggle<CR>", { silent = true })
