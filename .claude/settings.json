@@ -1,9 +1,4 @@
 {
-  "enableWorkflows": true,
-  "effortLevel": "medium",
-  "theme": "dark",
-  "switchModelsOnFlag": false,
-  "model": "opus",
   "permissions": {
     "allow": [
       "Read(~/Workspace/**)",
@@ -49,10 +44,18 @@
       "Bash(git blame:*)",
       "Bash(git config --get:*)",
       "Bash(git ls-files:*)",
+      "Bash(npm run:*)",
       "Bash(brew list:*)",
       "Bash(brew info:*)",
       "Bash(readlink:*)",
       "Bash(python3 -m json.tool:*)"
     ]
-  }
+  },
+  "model": "opus",
+  "enableWorkflows": true,
+  "effortLevel": "medium",
+  "theme": "dark",
+  "switchModelsOnFlag": false,
+  "agentPushNotifEnabled": true,
+  "inputNeededNotifEnabled": true
 }

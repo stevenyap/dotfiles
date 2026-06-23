@@ -104,6 +104,8 @@ vim.keymap.set("n", "<Leader>l", "<cmd>messages<CR>")
 --- The plugins ----
 --------------------
 require("lazy").setup({
+	-- LuaLS incorrectly inferred `dev` as boolean from lazydev plugin instead of lazy plugin
+	---@diagnostic disable-next-line: assign-type-mismatch
 	dev = {
 		path = "~/Workspace/neovim",
 	},
@@ -317,8 +319,7 @@ require("lazy").setup({
 			ft = { "markdown", "text" },
 			opts = {
 				anti_conceal = {
-					-- Disabled for Airon chat buffer
-					enabled = false,
+					enabled = true, -- to disable for Airon chat buffer
 				},
 			},
 			config = function()
@@ -363,33 +364,29 @@ require("lazy").setup({
 		-- brew install tree-sitter-cli
 		{
 			"nvim-treesitter/nvim-treesitter",
-			branch = "master",
+			branch = "main",
 			lazy = false,
 			build = ":TSUpdate",
 			config = function()
-				require("nvim-treesitter.configs").setup({
-					-- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-					modules = {},
-					ensure_installed = {
-						"bash",
-						"html",
-						"lua",
-						"markdown",
-						"markdown_inline",
-						"rust",
-						"purescript",
-						"terraform",
-						"typescript",
-						"vimdoc",
-						"yaml",
-					},
-					sync_install = true,
-					auto_install = true,
-					ignore_install = { "all" },
-					highlight = {
-						enable = true,
-						additional_vim_regex_highlighting = false,
-					},
+				require("nvim-treesitter").install({
+					"bash",
+					"html",
+					"lua",
+					"markdown",
+					"markdown_inline",
+					"rust",
+					"purescript",
+					"terraform",
+					"typescript",
+					"vimdoc",
+					"yaml",
+				})
+
+				vim.api.nvim_create_autocmd("FileType", {
+					group = vim.api.nvim_create_augroup("TreesitterStart", { clear = true }),
+					callback = function(args)
+						pcall(vim.treesitter.start, args.buf)
+					end,
 				})
 			end,
 		},
