@@ -201,6 +201,7 @@ require("lazy").setup({
 						},
 					},
 					sidebarPosition = "right",
+					bellOnNotify = false,
 					maxConcurrentSubagents = 5,
 					picker = "fzf-lua",
 					defaultKeymaps = true,

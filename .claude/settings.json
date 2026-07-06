@@ -57,5 +57,6 @@
   "theme": "dark",
   "switchModelsOnFlag": false,
   "agentPushNotifEnabled": true,
-  "inputNeededNotifEnabled": true
+  "inputNeededNotifEnabled": true,
+  "skipWorkflowUsageWarning": true
 }
