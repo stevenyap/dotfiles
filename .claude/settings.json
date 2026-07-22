@@ -53,10 +53,11 @@
   },
   "model": "opus",
   "enableWorkflows": true,
-  "effortLevel": "medium",
+  "effortLevel": "xhigh",
+  "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "switchModelsOnFlag": false,
-  "agentPushNotifEnabled": true,
   "inputNeededNotifEnabled": true,
-  "skipWorkflowUsageWarning": true
+  "agentPushNotifEnabled": true,
+  "remoteControlAtStartup": true
 }

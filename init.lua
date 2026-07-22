@@ -111,24 +111,6 @@ require("lazy").setup({
 	},
 
 	spec = {
-		{
-			"haniker-dev/airon.nvim",
-			dependencies = { "ibhagwan/fzf-lua" },
-			dev = true,
-			lazy = false,
-			config = function()
-				require("airon").setup({
-					keymaps = {},
-				})
-				vim.keymap.set("n", "<Leader>ra", "<cmd>lua require('airon').reload()<CR>")
-			end,
-		},
-		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {},
-		},
-
 		-- AI Plugin
 		-- Predictive AI Completion Plugin: https://github.com/monkoose/neocodeium
 		-- Run `:NeoCodeium auth` to authenticate
@@ -324,7 +306,9 @@ require("lazy").setup({
 				},
 			},
 			config = function()
-				require("render-markdown").setup()
+				require("render-markdown").setup({
+					latex = { enabled = false },
+				})
 				vim.keymap.set("n", "<leader>tm", "<cmd>RenderMarkdown buf_toggle<CR>", { silent = true })
 			end,
 		},
@@ -915,7 +899,7 @@ require("lazy").setup({
 -- Neovide MacOS GUI app settings
 -- https://neovide.dev/configuration.html
 if vim.g.neovide then
-	vim.g.neovide_scale_factor = 1.5
+	vim.opt.guifont = { "FiraCode Nerd Font Mono", ":h18" }
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_input_use_logo = true
 	vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
