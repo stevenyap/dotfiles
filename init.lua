@@ -28,7 +28,7 @@ local dotfiles_dir = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.stdpath("config") 
 package.path = dotfiles_dir .. "/nvim/?.lua;" .. package.path
 
 -- NeoVim Settings
-vim.g.python3_host_prog = "./pyenv/bin/python"
+vim.g.python3_host_prog = dotfiles_dir .. "/pyenv/bin/python"
 vim.g.loaded_perl_provider = 0
 vim.o.syntax = "on"
 vim.cmd("filetype plugin indent on")
@@ -110,6 +110,10 @@ vim.keymap.set("n", "<Leader>tn", ":set relativenumber!<CR>", { desc = "Toggle: 
 --- The plugins ----
 --------------------
 require("lazy").setup({
+	-- Default is stdpath("config"), i.e. ~/.config/nvim, where only init.lua is
+	-- symlinked -- the lockfile would never be committable. Keep it in the repo.
+	lockfile = dotfiles_dir .. "/lazy-lock.json",
+
 	-- LuaLS incorrectly inferred `dev` as boolean from lazydev plugin instead of lazy plugin
 	---@diagnostic disable-next-line: assign-type-mismatch
 	dev = {
@@ -434,18 +438,6 @@ require("lazy").setup({
 						vim.cmd("Neotree source=git_status git_base=HEAD toggle")
 					end
 				end, { desc = "Git: changed-file tree" })
-			end,
-		},
-		-- Calls LSP when NeoTree is renaming/moving files/folders
-		-- https://github.com/antosha417/nvim-lsp-file-operations
-		{
-			"antosha417/nvim-lsp-file-operations",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"nvim-neo-tree/neo-tree.nvim",
-			},
-			config = function()
-				require("lsp-file-operations").setup({})
 			end,
 		},
 
