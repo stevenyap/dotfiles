@@ -16,7 +16,8 @@ Personal dotfiles for macOS — Neovim, tmux, zsh, WezTerm, and git tooling. Fil
 
 | File | Purpose |
 |------|---------|
-| `init.lua` | Single-file Neovim config — lazy.nvim bootstrap + all plugin specs and keymaps |
+| `init.lua` | Neovim config — lazy.nvim bootstrap + all plugin specs and keymaps |
+| `nvim/*.lua` | Lua extracted out of `init.lua`, reached via `package.path` (NOT the runtimepath — lazy.nvim resets that in `setup()`) |
 | `.zshrc` | zsh config — antigen plugins, PATH setup, aliases |
 | `.tmux.conf` | tmux config — prefix is `C-a` |
 | `.wezterm.lua` | WezTerm terminal config |
@@ -33,15 +34,18 @@ All config is in one file. Structure:
 2. **Core settings** — editor options, keymaps, leader key (`<Space>`)
 3. **Plugin specs** — each plugin is a lazy.nvim spec block with inline `config = function()`
 
-Leader key conventions (defined in comments near top):
-- `<Leader>r?` = refresh/reload
-- `<Leader>t?` = toggle
+Keymap rule (stated in comments near the top of `init.lua`): nothing shadows a
+native Vim command; anything Vim does not ship lives under `<Leader>`, grouped
+by its second key — `l?` LSP and logs, `g?` git, `t?` toggle, `y?` yank,
+`m?` AI. Grammar is the exception, since motions, text objects and operators
+cannot work behind a leader: those sit in Vim's own namespaces but only in
+slots Vim leaves empty (`[h ]h [H ]H`, `ih`). The full list is in README.md,
+and `<Leader>?` searches it live.
 
 Key plugin dependencies that must be installed via Homebrew:
 - `fzf`, `fd`, `bat`, `ripgrep`, `git-delta` — for fzf-lua
-- `stylua` — Lua formatter
+- `stylua` — Lua formatter; `init.lua` and `nvim/*.lua` are kept stylua-clean
 - `tree-sitter-cli` — Treesitter
-- `gitui` — git TUI (opened with `<Leader>g`)
 
 LSP servers are installed via npm (`vscode-langservers-extracted`, `purescript-language-server`, `purs-tidy`). TypeScript uses `pmizio/typescript-tools.nvim`.
 

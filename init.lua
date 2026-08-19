@@ -20,6 +20,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Lua extracted out of this file lives in nvim/ next to it.
+-- stdpath("config") is the ~/.config symlink, so resolve it to the repo path;
+-- $MYVIMRC is not set yet while this file is being sourced.
+-- package.path rather than rtp: lazy.nvim resets the runtimepath in setup().
+local dotfiles_dir = vim.fn.fnamemodify(vim.fn.resolve(vim.fn.stdpath("config") .. "/init.lua"), ":h")
+package.path = dotfiles_dir .. "/nvim/?.lua;" .. package.path
+
 -- NeoVim Settings
 vim.g.python3_host_prog = "./pyenv/bin/python"
 vim.g.loaded_perl_provider = 0
@@ -51,27 +58,19 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 -- Move around Windows
-vim.keymap.set("n", "<c-h>", "<c-w>h")
-vim.keymap.set("n", "<c-l>", "<c-w>l")
-vim.keymap.set("n", "<c-j>", "<c-w>j")
-vim.keymap.set("n", "<c-k>", "<c-w>k")
-
--- Insert a line break above
-vim.keymap.set("n", "K", "0i<cr><esc>")
+vim.keymap.set("n", "<c-h>", "<c-w>h", { desc = "Window left" })
+vim.keymap.set("n", "<c-l>", "<c-w>l", { desc = "Window right" })
+vim.keymap.set("n", "<c-j>", "<c-w>j", { desc = "Window down" })
+vim.keymap.set("n", "<c-k>", "<c-w>k", { desc = "Window up" })
 
 -- Shift + Enter = Esc
-vim.api.nvim_set_keymap("i", "<S-CR>", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<S-CR>", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<S-CR>", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<S-CR>", "<Esc>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<S-CR>", "<Esc>", { noremap = true, silent = true })
+vim.keymap.set({ "i", "n", "v", "c", "t" }, "<S-CR>", "<Esc>", { silent = true, desc = "Escape" })
 
 -- Switch between relative and absolute line numbers
 vim.opt.relativenumber = true -- Show relative numbers by default
 vim.opt.signcolumn = "yes" -- Always display the sign column, prevents text shifting when signs are displayed
 vim.opt.number = true -- Enables line numbers on the left side of the window
 vim.opt.cursorline = true -- Highlights the line under the cursor
-vim.keymap.set("n", "<c-n>", ":set norelativenumber!<CR>")
 
 -- File type overrides
 vim.api.nvim_create_augroup("FileTypeOverrides", { clear = true })
@@ -87,18 +86,25 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	group = "FileTypeOverrides",
 })
 
--- Leader Mappings
--- Conventions:
--- <Leader>r? = refresh
--- <Leader>t? = toggle
+-- Mappings
+-- Rule: nothing shadows a native Vim command. Anything Vim does not ship lives
+-- under <Leader>, grouped by its second key:
+--   l? = LSP + logs   g? = git (incl. hunks)   t? = toggle   y? = yank   m? = AI
+-- The exception is GRAMMAR, which cannot work behind a leader: hunk motions
+-- ([h ]h [H ]H) and the hunk text object (ih) sit in Vim's own motion and
+-- text-object namespaces, in slots Vim leaves empty.
+-- Neovim's own gr*/]d/[d and every Vim g?/z? command are left untouched.
+-- <Leader>? lists everything.
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-vim.keymap.set("n", "<Leader>s", ":wa<CR>")
-vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>")
-vim.keymap.set("n", "<Leader>k", "i<CR><esc>")
-vim.keymap.set("n", "<Leader>y", "mcggVGy`c")
-vim.keymap.set("n", "<Leader>w", ":set wrap!<CR>")
-vim.keymap.set("n", "<Leader>l", "<cmd>messages<CR>")
+vim.keymap.set("n", "<Leader>s", ":wa<CR>", { desc = "Save all buffers" })
+vim.keymap.set("n", "<Leader>/", ":nohlsearch<CR>", { desc = "Clear search highlight" })
+vim.keymap.set("n", "<Leader>k", "i<CR><esc>", { desc = "Split line at cursor" })
+vim.keymap.set("n", "<Leader>K", "0i<CR><esc>", { desc = "Split line at column 0" })
+vim.keymap.set("n", "<Leader>lm", "<cmd>messages<CR>", { desc = "LSP/log: messages" })
+vim.keymap.set("n", "<Leader>ya", "mcggVGy`c", { desc = "Yank: whole file" })
+vim.keymap.set("n", "<Leader>tw", ":set wrap!<CR>", { desc = "Toggle: wrap" })
+vim.keymap.set("n", "<Leader>tn", ":set relativenumber!<CR>", { desc = "Toggle: relative line numbers" })
 
 --------------------
 --- The plugins ----
@@ -155,14 +161,14 @@ require("lazy").setup({
 					-- List of directories and files to detect workspace root directory for Windsurf Chat
 					root_dir = { ".git", "package.json" },
 				})
-				vim.keymap.set("i", "<C-l>", neocodeium.accept)
-				vim.keymap.set("i", "<C-w>", neocodeium.accept_word)
+				vim.keymap.set("i", "<C-l>", neocodeium.accept, { desc = "AI: accept suggestion" })
+				vim.keymap.set("i", "<C-g>l", neocodeium.accept_word, { desc = "AI: accept one word" })
 				vim.keymap.set("i", "<C-g>j", function()
 					neocodeium.cycle(1)
-				end)
+				end, { desc = "AI: next suggestion" })
 				vim.keymap.set("i", "<C-g>k", function()
 					neocodeium.cycle(-1)
-				end)
+				end, { desc = "AI: previous suggestion" })
 			end,
 		},
 
@@ -219,61 +225,19 @@ require("lazy").setup({
 		{
 			-- Display git diffs in Neovim
 			-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md
-			-- NOTE we can also use Neo-Tree to view git status (<Leader>z)
+			-- NOTE Neo-Tree lists the changed files instead (<Leader>gn)
 			-- :ReviewBase origin/development -> hunks are the branch's changes
 			-- :ReviewBase                    -> hunks are my own uncommitted edits
 			"echasnovski/mini.diff",
 			config = function()
 				local diff = require("mini.diff")
+				local review_base = require("review_base")
 
-				local function set_ref_text_from_rev(buf, rev)
-					local file = vim.api.nvim_buf_get_name(buf)
-					if file == "" then
-						return diff.fail_attach(buf)
-					end
-					local dir = vim.fn.fnamemodify(file, ":h")
-					vim.fn.systemlist({ "git", "-C", dir, "rev-parse", "--verify", "--quiet", rev .. "^{commit}" })
-					if vim.v.shell_error ~= 0 then
-						return diff.fail_attach(buf)
-					end
-					local text_at_rev =
-						vim.fn.systemlist({ "git", "-C", dir, "show", rev .. ":./" .. vim.fn.fnamemodify(file, ":t") })
-					local file_is_new_on_branch = vim.v.shell_error ~= 0
-					diff.set_ref_text(buf, file_is_new_on_branch and {} or text_at_rev)
-				end
-
-				local review_base_source = {
-					name = "review-base",
-					attach = function(buf)
-						-- Failing here hands the buffer down to the git source
-						if vim.g.review_base_rev == nil then
-							return false
-						end
-						vim.schedule(function()
-							set_ref_text_from_rev(buf, vim.g.review_base_rev)
-						end)
-					end,
-				}
-
-				local function restart_diff_in_all_buffers()
-					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-						if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == "" then
-							pcall(diff.disable, buf)
-							pcall(diff.enable, buf)
-						end
-					end
-				end
-
-				vim.api.nvim_create_user_command("ReviewBase", function(opts)
-					vim.g.review_base_rev = opts.args ~= "" and opts.args or nil
-					restart_diff_in_all_buffers()
-					vim.notify("mini.diff ref: " .. (vim.g.review_base_rev or "git index"))
-				end, { nargs = "?", desc = "Diff every buffer against a base revision" })
-
-				vim.keymap.set("n", "<Leader>zd", ":ReviewBase origin/")
+				review_base.setup()
+				vim.keymap.set("n", "<Leader>gr", ":ReviewBase origin/", { desc = "Git: set review base" })
 
 				diff.setup({
-					source = { review_base_source, diff.gen_source.git() },
+					source = { review_base.source, diff.gen_source.git() },
 					view = {
 						style = "sign",
 						signs = { add = "+", change = "C", delete = "-" },
@@ -281,54 +245,42 @@ require("lazy").setup({
 					},
 					mappings = {
 						-- Apply hunks inside a visual/operator region
-						apply = "zs",
+						apply = "<Leader>ga",
 
 						-- Reset hunks inside a visual/operator region
-						reset = "zu",
+						reset = "<Leader>gu",
 
 						-- Hunk range textobject to be used inside operator
-						-- Works also in Visual mode if mapping differs from apply and reset
-						textobject = "zo",
+						-- Differs from apply/reset so it works in Visual mode too
+						textobject = "ih",
 
 						-- Go to hunk range in corresponding direction
-						goto_first = "zh",
-						goto_last = "zl",
-						goto_prev = "zk",
-						goto_next = "zj",
+						goto_first = "[H",
+						goto_last = "]H",
+						goto_prev = "[h",
+						goto_next = "]h",
 					},
 				})
 
-				local colors = require("solarized.utils").get_colors()
-				vim.api.nvim_set_hl(0, "MiniDiffOverAdd", { fg = colors.green, bg = colors.base02 })
-				vim.api.nvim_set_hl(0, "MiniDiffOverDelete", { fg = colors.red, bg = colors.base01 })
+				-- SourceTree diff palette: one flat tint per line, red for the
+				-- reference text and green for the buffer text. No word-level tint --
+				-- SourceTree does not draw one, and it fights the line colour.
+				local function hl(group, opts)
+					vim.api.nvim_set_hl(0, group, opts)
+				end
+				hl("MiniDiffSignAdd", { fg = "#1a7f37" })
+				hl("MiniDiffSignChange", { fg = "#9a6700" })
+				hl("MiniDiffSignDelete", { fg = "#cf222e" })
+				hl("MiniDiffOverAdd", { fg = "#1a7f37", bg = "#cdeed5" })
+				hl("MiniDiffOverContextBuf", { bg = "#cdeed5" })
+				hl("MiniDiffOverChangeBuf", { fg = "#1a7f37", bg = "#cdeed5" })
+				hl("MiniDiffOverDelete", { fg = "#cf222e", bg = "#fbd8d3" })
+				hl("MiniDiffOverContext", { bg = "#fbd8d3" })
+				hl("MiniDiffOverChange", { fg = "#cf222e", bg = "#fbd8d3" })
 
-				-- Highlight for deleted line in a change line git diff
-				vim.api.nvim_set_hl(0, "MiniDiffOverContext", { fg = colors.red, bg = colors.base02 })
-				-- Highlight for changed characters in the new line in a change line git diff
-				-- vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03, bg = colors.base01 })
-				-- vim.api.nvim_set_hl(0, "MiniDiffOverChange", { fg = colors.base03 })
-
-				vim.keymap.set("n", "zg", function()
-					require("mini.diff").toggle_overlay(0)
-				end, { desc = "Toggle mini.diff overlay" })
-			end,
-		},
-
-		-- https://github.com/aspeddro/gitui.nvim
-		-- brew install gitui
-		{
-			"aspeddro/gitui.nvim",
-			config = function()
-				require("gitui").setup({
-					window = {
-						options = {
-							width = 100,
-							height = 100,
-							border = "single",
-						},
-					},
-				})
-				vim.keymap.set("n", "<leader>g", "<cmd>Gitui<CR>", { silent = true })
+				vim.keymap.set("n", "<Leader>th", function()
+					diff.toggle_overlay(0)
+				end, { desc = "Toggle: diff overlay (hunks)" })
 			end,
 		},
 
@@ -347,7 +299,7 @@ require("lazy").setup({
 				lazy = false,
 				config = function()
 					require("blame").setup()
-					vim.keymap.set("n", "zb", "<cmd>BlameToggle<CR>", { silent = true })
+					vim.keymap.set("n", "<Leader>gb", "<cmd>BlameToggle<CR>", { silent = true, desc = "Git: blame" })
 				end,
 			},
 		},
@@ -367,7 +319,12 @@ require("lazy").setup({
 				require("render-markdown").setup({
 					latex = { enabled = false },
 				})
-				vim.keymap.set("n", "<leader>tm", "<cmd>RenderMarkdown buf_toggle<CR>", { silent = true })
+				vim.keymap.set(
+					"n",
+					"<Leader>tm",
+					"<cmd>RenderMarkdown buf_toggle<CR>",
+					{ silent = true, desc = "Toggle: markdown render" }
+				)
 			end,
 		},
 
@@ -396,7 +353,7 @@ require("lazy").setup({
 					end,
 				})
 				vim.o.termguicolors = true
-				vim.o.background = "dark" -- or 'light'
+				vim.o.background = "light" -- or 'dark'
 				vim.cmd.colorscheme("solarized")
 			end,
 		},
@@ -469,14 +426,14 @@ require("lazy").setup({
 					},
 				})
 
-				vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>")
-				vim.keymap.set("n", "<Leader>z", function()
+				vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>", { desc = "File tree" })
+				vim.keymap.set("n", "<Leader>gn", function()
 					if vim.g.review_base_rev then
 						vim.cmd("Neotree source=git_status git_base=" .. vim.g.review_base_rev)
 					else
 						vim.cmd("Neotree source=git_status git_base=HEAD toggle")
 					end
-				end)
+				end, { desc = "Git: changed-file tree" })
 			end,
 		},
 		-- Calls LSP when NeoTree is renaming/moving files/folders
@@ -502,7 +459,7 @@ require("lazy").setup({
 			},
 			config = function()
 				require("lualine").setup({
-					options = { theme = "codedark" },
+					options = { theme = "auto" },
 				})
 			end,
 		},
@@ -518,7 +475,7 @@ require("lazy").setup({
 						chars = { "·", "¦" }, -- more code can be found in https://unicodeplus.com/
 
 						style = {
-							"#002b36", -- base03
+							"#eee8d5", -- base2, faint on a light background
 						},
 					},
 					chunk = {
@@ -551,10 +508,13 @@ require("lazy").setup({
 				-- calling `setup` is optional for customization
 				require("fzf-lua").setup({})
 				require("fzf-lua").register_ui_select()
-				vim.keymap.set("n", "<c-p>", "<cmd>lua require('fzf-lua').files()<CR>", { silent = true })
-				vim.keymap.set("n", "<c-b>", "<cmd>lua require('fzf-lua').buffers()<CR>", { silent = true })
-				vim.keymap.set("n", "<c-f>", "<cmd>lua require('fzf-lua').live_grep()<CR>", { silent = true })
-				vim.keymap.set("n", "<c-s>", "<cmd>lua require('fzf-lua').git_status()<CR>", { silent = true })
+				local fzf = require("fzf-lua")
+				vim.keymap.set("n", "<c-p>", fzf.files, { silent = true, desc = "Find: files" })
+				vim.keymap.set("n", "<c-b>", fzf.buffers, { silent = true, desc = "Find: buffers" })
+				vim.keymap.set("n", "<c-f>", fzf.live_grep, { silent = true, desc = "Find: grep" })
+				vim.keymap.set("n", "<c-s>", fzf.git_status, { silent = true, desc = "Find: changed files" })
+				vim.keymap.set("n", "<Leader>gc", fzf.git_commits, { silent = true, desc = "Git: commits" })
+				vim.keymap.set("n", "<Leader>?", fzf.keymaps, { silent = true, desc = "Search all keymaps" })
 				vim.keymap.set("i", "<c-f>", function()
 					require("fzf-lua").complete_path()
 				end, { silent = true, desc = "Fuzzy complete path" })
@@ -614,14 +574,23 @@ require("lazy").setup({
 						},
 					},
 				})
-				vim.keymap.set("n", "gj", "<Cmd>Lspsaga diagnostic_jump_next<CR>", noremapsilent)
-				vim.keymap.set("n", "gk", "<Cmd>Lspsaga diagnostic_jump_prev<CR>", noremapsilent)
-				vim.keymap.set("n", "gh", "<Cmd>Lspsaga hover_doc<CR>", noremapsilent)
-				vim.keymap.set("n", "gd", "<Cmd>Lspsaga goto_definition<CR>", noremapsilent)
-				vim.keymap.set("n", "gr", "<Cmd>Lspsaga finder ref<CR>", noremapsilent)
-				vim.keymap.set("n", "gn", "<Cmd>Lspsaga rename<CR>", noremapsilent)
-				vim.keymap.set("n", "ga", "<Cmd>Lspsaga code_action<CR>", noremapsilent)
-				vim.keymap.set("n", "gl", "<Cmd>Lspsaga preview_definition<CR>", noremapsilent)
+				-- <Leader>l? = LSP. Vim's g?/z? and Neovim's gr*/]d/[d are all
+				-- left as they ship, so nothing here changes what a stock editor does.
+				local function saga(lhs, subcommand, desc, modes)
+					vim.keymap.set(modes or "n", "<Leader>" .. lhs, "<Cmd>Lspsaga " .. subcommand .. "<CR>", {
+						noremap = true,
+						silent = true,
+						desc = desc,
+					})
+				end
+
+				saga("ld", "goto_definition", "LSP: definition")
+				saga("lh", "hover_doc", "LSP: hover docs")
+				saga("lp", "peek_definition", "LSP: peek definition")
+				saga("lr", "finder ref", "LSP: references")
+				saga("ln", "rename", "LSP: rename")
+				saga("la", "code_action", "LSP: code action", { "n", "x" })
+				saga("le", "show_line_diagnostics", "LSP: errors on this line")
 			end,
 		},
 
@@ -658,7 +627,7 @@ require("lazy").setup({
 					virtual_text = false,
 				})
 
-				vim.keymap.set("", "<Leader>e", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+				vim.keymap.set("n", "<Leader>te", require("lsp_lines").toggle, { desc = "Toggle: inline diagnostics" })
 			end,
 		},
 
@@ -684,7 +653,7 @@ require("lazy").setup({
 				-- See other keymaps of LuaSnip in nvim-cmp
 				vim.keymap.set({ "i" }, "<C-h>", function()
 					require("luasnip").expand({})
-				end, { silent = true })
+				end, { silent = true, desc = "Expand snippet" })
 			end,
 		},
 
@@ -844,9 +813,9 @@ require("lazy").setup({
 
 				vim.keymap.set(
 					"n",
-					"<Leader>rl",
+					"<Leader>lS",
 					"<Cmd>LspRestart<CR>",
-					{ silent = true, noremap = true, desc = "Restart the LSP when it hangs" }
+					{ silent = true, noremap = true, desc = "LSP: restart the Server" }
 				)
 
 				-- TypeScript LSP
@@ -966,63 +935,15 @@ if vim.g.neovide then
 	vim.opt.guifont = { "FiraCode Nerd Font Mono", ":h18" }
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_input_use_logo = true
-	vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-	vim.api.nvim_set_keymap("n", "<D-v>", '"+P', { noremap = true, silent = true })
-	vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-	vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-	vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+	-- Deliberately overrides magenta's global <D-v>; its clipboard paste is <Leader>mp
+	vim.keymap.set("n", "<D-v>", '"+P', { silent = true, desc = "Paste from system clipboard" })
+	vim.keymap.set({ "i", "c", "v", "t" }, "<D-v>", "<C-R>+", { silent = true, desc = "Paste from system clipboard" })
 end
 
--- TODO Extract this into a file
--- Functions to work with XiaoSteve
-local function git_line(dir, args)
-	local out = vim.fn.systemlist(vim.list_extend({ "git", "-C", dir }, args))
-	if vim.v.shell_error ~= 0 then
-		return nil
-	end
-	return out[1]
-end
-
-local function code_reference()
-	local start_line, end_line = vim.fn.line("v"), vim.fn.line(".")
-	if start_line > end_line then
-		start_line, end_line = end_line, start_line
-	end
-	local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-
-	local file = vim.api.nvim_buf_get_name(0)
-	local dir = vim.fn.fnamemodify(file, ":h")
-	local toplevel = git_line(dir, { "rev-parse", "--show-toplevel" })
-	if toplevel == nil then
-		return table.concat(lines, "\n")
-	end
-
-	local remote = git_line(dir, { "remote", "get-url", "origin" })
-	local repo = remote and remote:gsub("%.git$", ""):gsub(".*[/:]", "") or vim.fn.fnamemodify(toplevel, ":t")
-	local branch = git_line(dir, { "rev-parse", "--abbrev-ref", "HEAD" }) or "?"
-	local commit = git_line(dir, { "rev-parse", "--short", "HEAD" }) or "?"
-	local path = file:sub(#toplevel + 2)
-
-	local working_state = ""
-	if vim.bo.modified then
-		working_state = " [UNSAVED buffer]"
-	elseif git_line(dir, { "status", "--porcelain", "--", file }) then
-		working_state = " [uncommitted]"
-	end
-
-	return table.concat({
-		repo .. " @ " .. branch .. " " .. commit .. working_state,
-		path .. ":" .. start_line .. "-" .. end_line,
-		"",
-		"```" .. vim.bo.filetype,
-		table.concat(lines, "\n"),
-		"```",
-	}, "\n")
-end
-
-vim.keymap.set("x", "<Leader>y", function()
-	local reference = code_reference()
-	vim.fn.setreg("+", reference)
-	vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "n", false)
-	vim.notify("Copied code reference (" .. #vim.split(reference, "\n") .. " lines)")
-end, { desc = "Copy selection with repo/branch/commit/path for asking XiaoSteve" })
+-- Ask XiaoSteve about code he cannot see
+vim.keymap.set(
+	{ "n", "x" },
+	"<Leader>yr",
+	require("code_reference").copy,
+	{ desc = "Yank: code reference (repo/branch/commit/path) for XiaoSteve" }
+)
