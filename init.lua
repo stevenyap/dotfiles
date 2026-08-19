@@ -474,7 +474,7 @@ require("lazy").setup({
 					if vim.g.review_base_rev then
 						vim.cmd("Neotree source=git_status git_base=" .. vim.g.review_base_rev)
 					else
-						vim.cmd("Neotree source=git_status toggle")
+						vim.cmd("Neotree source=git_status git_base=HEAD toggle")
 					end
 				end)
 			end,
