@@ -220,9 +220,60 @@ require("lazy").setup({
 			-- Display git diffs in Neovim
 			-- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md
 			-- NOTE we can also use Neo-Tree to view git status (<Leader>z)
+			-- :ReviewBase origin/development -> hunks are the branch's changes
+			-- :ReviewBase                    -> hunks are my own uncommitted edits
 			"echasnovski/mini.diff",
 			config = function()
-				require("mini.diff").setup({
+				local diff = require("mini.diff")
+
+				local function set_ref_text_from_rev(buf, rev)
+					local file = vim.api.nvim_buf_get_name(buf)
+					if file == "" then
+						return diff.fail_attach(buf)
+					end
+					local dir = vim.fn.fnamemodify(file, ":h")
+					vim.fn.systemlist({ "git", "-C", dir, "rev-parse", "--verify", "--quiet", rev .. "^{commit}" })
+					if vim.v.shell_error ~= 0 then
+						return diff.fail_attach(buf)
+					end
+					local text_at_rev =
+						vim.fn.systemlist({ "git", "-C", dir, "show", rev .. ":./" .. vim.fn.fnamemodify(file, ":t") })
+					local file_is_new_on_branch = vim.v.shell_error ~= 0
+					diff.set_ref_text(buf, file_is_new_on_branch and {} or text_at_rev)
+				end
+
+				local review_base_source = {
+					name = "review-base",
+					attach = function(buf)
+						-- Failing here hands the buffer down to the git source
+						if vim.g.review_base_rev == nil then
+							return false
+						end
+						vim.schedule(function()
+							set_ref_text_from_rev(buf, vim.g.review_base_rev)
+						end)
+					end,
+				}
+
+				local function restart_diff_in_all_buffers()
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == "" then
+							pcall(diff.disable, buf)
+							pcall(diff.enable, buf)
+						end
+					end
+				end
+
+				vim.api.nvim_create_user_command("ReviewBase", function(opts)
+					vim.g.review_base_rev = opts.args ~= "" and opts.args or nil
+					restart_diff_in_all_buffers()
+					vim.notify("mini.diff ref: " .. (vim.g.review_base_rev or "git index"))
+				end, { nargs = "?", desc = "Diff every buffer against a base revision" })
+
+				vim.keymap.set("n", "<Leader>zd", ":ReviewBase origin/")
+
+				diff.setup({
+					source = { review_base_source, diff.gen_source.git() },
 					view = {
 						style = "sign",
 						signs = { add = "+", change = "C", delete = "-" },
@@ -279,6 +330,13 @@ require("lazy").setup({
 				})
 				vim.keymap.set("n", "<leader>g", "<cmd>Gitui<CR>", { silent = true })
 			end,
+		},
+
+		-- https://github.com/esmuellert/codediff.nvim
+		-- SourceTree in neovim
+		{
+			"esmuellert/codediff.nvim",
+			cmd = "CodeDiff",
 		},
 
 		-- https://github.com/FabijanZulj/blame.nvim
@@ -412,7 +470,13 @@ require("lazy").setup({
 				})
 
 				vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>")
-				vim.keymap.set("n", "<Leader>z", ":Neotree source=git_status toggle<CR>")
+				vim.keymap.set("n", "<Leader>z", function()
+					if vim.g.review_base_rev then
+						vim.cmd("Neotree source=git_status git_base=" .. vim.g.review_base_rev)
+					else
+						vim.cmd("Neotree source=git_status toggle")
+					end
+				end)
 			end,
 		},
 		-- Calls LSP when NeoTree is renaming/moving files/folders
@@ -908,3 +972,57 @@ if vim.g.neovide then
 	vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 end
+
+-- TODO Extract this into a file
+-- Functions to work with XiaoSteve
+local function git_line(dir, args)
+	local out = vim.fn.systemlist(vim.list_extend({ "git", "-C", dir }, args))
+	if vim.v.shell_error ~= 0 then
+		return nil
+	end
+	return out[1]
+end
+
+local function code_reference()
+	local start_line, end_line = vim.fn.line("v"), vim.fn.line(".")
+	if start_line > end_line then
+		start_line, end_line = end_line, start_line
+	end
+	local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+	local file = vim.api.nvim_buf_get_name(0)
+	local dir = vim.fn.fnamemodify(file, ":h")
+	local toplevel = git_line(dir, { "rev-parse", "--show-toplevel" })
+	if toplevel == nil then
+		return table.concat(lines, "\n")
+	end
+
+	local remote = git_line(dir, { "remote", "get-url", "origin" })
+	local repo = remote and remote:gsub("%.git$", ""):gsub(".*[/:]", "") or vim.fn.fnamemodify(toplevel, ":t")
+	local branch = git_line(dir, { "rev-parse", "--abbrev-ref", "HEAD" }) or "?"
+	local commit = git_line(dir, { "rev-parse", "--short", "HEAD" }) or "?"
+	local path = file:sub(#toplevel + 2)
+
+	local working_state = ""
+	if vim.bo.modified then
+		working_state = " [UNSAVED buffer]"
+	elseif git_line(dir, { "status", "--porcelain", "--", file }) then
+		working_state = " [uncommitted]"
+	end
+
+	return table.concat({
+		repo .. " @ " .. branch .. " " .. commit .. working_state,
+		path .. ":" .. start_line .. "-" .. end_line,
+		"",
+		"```" .. vim.bo.filetype,
+		table.concat(lines, "\n"),
+		"```",
+	}, "\n")
+end
+
+vim.keymap.set("x", "<Leader>y", function()
+	local reference = code_reference()
+	vim.fn.setreg("+", reference)
+	vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "n", false)
+	vim.notify("Copied code reference (" .. #vim.split(reference, "\n") .. " lines)")
+end, { desc = "Copy selection with repo/branch/commit/path for asking XiaoSteve" })
