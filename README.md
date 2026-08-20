@@ -66,8 +66,8 @@ in slots Vim leaves empty.
 | `<Leader>tw` | Toggle line wrapping |
 | `<Leader>tn` | Toggle relative line numbers |
 | `<Leader>tm` | Toggle rendered markdown in the current buffer |
-| `<Leader>te` | Toggle inline (virtual-line) diagnostics |
-| `<Leader>th` | Toggle the diff overlay, showing the reference text inline |
+| `<Leader>tl` | Toggle inline (virtual-line) diagnostics |
+| `<Leader>tg` | Toggle the diff overlay, showing the reference text inline |
 
 ### `<Leader>y` — yank
 

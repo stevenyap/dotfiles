@@ -270,7 +270,7 @@ require("lazy").setup({
 				-- the old hand-tuned SourceTree palette existed because solarized's
 				-- cream background washed out the stock diff pastels.
 
-				vim.keymap.set("n", "<Leader>th", function()
+				vim.keymap.set("n", "<Leader>tg", function()
 					diff.toggle_overlay(0)
 				end, { desc = "Toggle: diff overlay (hunks)" })
 			end,
@@ -591,7 +591,7 @@ require("lazy").setup({
 					virtual_text = false,
 				})
 
-				vim.keymap.set("n", "<Leader>te", require("lsp_lines").toggle, { desc = "Toggle: inline diagnostics" })
+				vim.keymap.set("n", "<Leader>tl", require("lsp_lines").toggle, { desc = "Toggle: inline diagnostics" })
 			end,
 		},
 
