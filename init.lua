@@ -266,21 +266,9 @@ require("lazy").setup({
 					},
 				})
 
-				-- SourceTree diff palette: one flat tint per line, red for the
-				-- reference text and green for the buffer text. No word-level tint --
-				-- SourceTree does not draw one, and it fights the line colour.
-				local function hl(group, opts)
-					vim.api.nvim_set_hl(0, group, opts)
-				end
-				hl("MiniDiffSignAdd", { fg = "#1a7f37" })
-				hl("MiniDiffSignChange", { fg = "#9a6700" })
-				hl("MiniDiffSignDelete", { fg = "#cf222e" })
-				hl("MiniDiffOverAdd", { fg = "#1a7f37", bg = "#cdeed5" })
-				hl("MiniDiffOverContextBuf", { bg = "#cdeed5" })
-				hl("MiniDiffOverChangeBuf", { fg = "#1a7f37", bg = "#cdeed5" })
-				hl("MiniDiffOverDelete", { fg = "#cf222e", bg = "#fbd8d3" })
-				hl("MiniDiffOverContext", { bg = "#fbd8d3" })
-				hl("MiniDiffOverChange", { fg = "#cf222e", bg = "#fbd8d3" })
+				-- MiniDiff* colours come from modus-themes, which defines them;
+				-- the old hand-tuned SourceTree palette existed because solarized's
+				-- cream background washed out the stock diff pastels.
 
 				vim.keymap.set("n", "<Leader>th", function()
 					diff.toggle_overlay(0)
@@ -333,32 +321,16 @@ require("lazy").setup({
 		},
 
 		-- colorscheme
-		-- https://github.com/maxmx03/solarized.nvim
+		-- https://github.com/miikanissi/modus-themes.nvim
 		{
-			"maxmx03/solarized.nvim",
+			"miikanissi/modus-themes.nvim",
 			lazy = false,
 			priority = 1000,
 			config = function()
-				require("solarized").setup({
-					palette = "solarized",
-					variant = "autumn",
-					on_highlights = function(colors)
-						-- Solarized colors: https://ethanschoonover.com/solarized/
-						return {
-							Visual = { bg = colors.yellow, fg = colors.base03 },
-							Search = { bg = colors.yellow, fg = colors.base03 },
-							CurSearch = { bg = colors.orange, fg = colors.base03 },
-
-							-- NeoTree colorscheme: https://github.com/loctvl842/monokai-pro.nvim/blob/master/lua/monokai-pro/theme/plugins/neo-tree.lua
-							NeoTreeRootName = { fg = colors.blue },
-							NeoTreeDirectoryIcon = { fg = colors.blue },
-							NeoTreeDirectoryName = { fg = colors.blue },
-						}
-					end,
-				})
+				require("modus-themes").setup({})
 				vim.o.termguicolors = true
-				vim.o.background = "light" -- or 'dark'
-				vim.cmd.colorscheme("solarized")
+				vim.o.background = "light" -- modus_operandi; 'dark' switches to modus_vivendi
+				vim.cmd.colorscheme("modus_operandi")
 			end,
 		},
 
@@ -467,14 +439,14 @@ require("lazy").setup({
 						chars = { "·", "¦" }, -- more code can be found in https://unicodeplus.com/
 
 						style = {
-							"#eee8d5", -- base2, faint on a light background
+							"#f2f2f2", -- modus bg_dim, faint on the white background
 						},
 					},
 					chunk = {
 						enable = true,
 						use_treesitter = true,
 						style = {
-							{ fg = "#b58900" },
+							{ fg = "#884900" }, -- modus yellow_warmer
 						},
 					},
 					blank = {
@@ -595,14 +567,14 @@ require("lazy").setup({
 			dependencies = {
 				"SmiteshP/nvim-navic",
 				"nvim-tree/nvim-web-devicons",
-				"maxmx03/solarized.nvim", -- We using the colors function
+				"miikanissi/modus-themes.nvim", -- We using the colors function
 			},
 			opts = {},
 			config = function()
-				local colors = require("solarized.utils").get_colors()
+				local colors = require("modus-themes.colors").setup()
 				require("barbecue").setup({
 					theme = {
-						dirname = { fg = colors.base01 },
+						dirname = { fg = colors.fg_dim },
 					},
 				})
 			end,

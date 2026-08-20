@@ -5,7 +5,7 @@ local mux = wezterm.mux
 
 -- Start of config
 
-config.color_scheme = "Solarized (dark) (terminal.sexy)"
+config.color_scheme = "Modus-Operandi"
 config.font = wezterm.font("FiraCode Nerd Font Mono")
 config.font_size = 18
 config.enable_tab_bar = false
