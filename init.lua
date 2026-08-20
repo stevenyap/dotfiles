@@ -729,6 +729,7 @@ require("lazy").setup({
 						javascriptreact = { "prettier", "prettierd", stop_after_first = true },
 						typescript = { "prettier", "prettierd", stop_after_first = true },
 						typescriptreact = { "prettier", "prettierd", stop_after_first = true },
+						markdown = { "prettier", "prettierd", stop_after_first = true },
 						rust = { "rustfmt" },
 						purescript = { "purs-tidy" },
 						terraform = { "terraform_fmt" },
