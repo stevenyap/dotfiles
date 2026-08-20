@@ -38,8 +38,18 @@
 [delta]
   side-by-side = false
   navigate = true  # use n and N to move between diff sections
-  dark = true
+  light = true
   line-numbers = true
   syntax-theme = none
+  # modus operandi diff palette, same values the neovim overlay uses
+  minus-style = normal "#ffd8d5"
+  minus-emph-style = normal "#f3b5af"
+  plus-style = normal "#c1f2d1"
+  plus-emph-style = normal "#aee5be"
+  line-numbers-minus-style = "#aa2222"
+  line-numbers-plus-style = "#006700"
+  line-numbers-zero-style = "#595959"
+  hunk-header-decoration-style = "#595959" box
+  file-decoration-style = "#0031a9" ul
 [merge]
   conflictstyle = zdiff3
