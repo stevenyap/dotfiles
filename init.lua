@@ -266,9 +266,7 @@ require("lazy").setup({
 					},
 				})
 
-				-- MiniDiff* colours come from modus-themes, which defines them;
-				-- the old hand-tuned SourceTree palette existed because solarized's
-				-- cream background washed out the stock diff pastels.
+				-- Overlay colours: sourcetree_diff_overlay in the modus-themes spec
 
 				vim.keymap.set("n", "<Leader>tg", function()
 					diff.toggle_overlay(0)
@@ -327,7 +325,19 @@ require("lazy").setup({
 			lazy = false,
 			priority = 1000,
 			config = function()
-				require("modus-themes").setup({})
+				-- mini.diff's own defaults link a change to DiffText/DiffChange,
+				-- which modus paints amber; a change reads as a red old line plus
+				-- a green new line instead, the way SourceTree shows it.
+				local sourcetree_diff_overlay = function(highlights, colors)
+					highlights.MiniDiffOverDelete = { fg = colors.fg_removed, bg = colors.bg_removed }
+					highlights.MiniDiffOverContext = { fg = colors.fg_removed, bg = colors.bg_removed }
+					highlights.MiniDiffOverChange = { fg = colors.fg_removed_intense, bg = colors.bg_removed_refine }
+					highlights.MiniDiffOverAdd = { bg = colors.bg_added }
+					highlights.MiniDiffOverContextBuf = { bg = colors.bg_added }
+					highlights.MiniDiffOverChangeBuf = { bg = colors.bg_added_refine }
+				end
+
+				require("modus-themes").setup({ on_highlights = sourcetree_diff_overlay })
 				vim.o.termguicolors = true
 				vim.o.background = "light" -- modus_operandi; 'dark' switches to modus_vivendi
 				vim.cmd.colorscheme("modus_operandi")
