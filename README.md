@@ -29,10 +29,13 @@ For python-provider, we need to:
 ## Neovim keymaps
 
 Leader is `<Space>`. The rule this layout follows: **nothing shadows a native
-Vim command** — anything Vim does not ship lives under `<Leader>`, grouped by
-its second key. The exception is grammar (motions, text objects, operators),
-which cannot work behind a leader, so it sits in Vim's own namespaces but only
-in slots Vim leaves empty.
+Vim command that does something `j` and `k` cannot** — anything Vim does not
+ship lives under `<Leader>`, grouped by its second key. The exception is
+grammar (motions, text objects, operators), which cannot work behind a leader,
+so it sits in Vim's own namespaces but only in slots Vim leaves empty. The one
+deliberate shadow is `<C-j>`/`<C-k>`, bought back from window down/up, which
+return to Vim's own `<C-w>j`/`<C-w>k` and are still reachable by holding
+`<C-j>`/`<C-k>` past the end of a list.
 
 ### `<Leader>l` — LSP and logs
 
@@ -55,7 +58,7 @@ in slots Vim leaves empty.
 | `<Leader>gn` | Neo-tree listing only the changed files (against the review base if one is set, else HEAD) |
 | `<Leader>gb` | Toggle the blame pane for the current file |
 | `<Leader>gc` | Fuzzy-search the commit log and open a commit |
-| `<Leader>gr` | Set the review base, e.g. `origin/development` — every buffer then diffs against that branch instead of the index. No argument resets it to the index |
+| `<Leader>gr` | Set the review base, e.g. `origin/development` — every buffer then diffs against that branch instead of the index, the diff overlay turns on, and `<C-j>`/`<C-k>` start jumping hunks. No argument resets it to the index, turns the overlay off, and hands `<C-j>`/`<C-k>` back to diagnostics |
 | `<Leader>ga` | Apply (stage) the hunks under a motion or Visual selection |
 | `<Leader>gu` | Undo (reset) the hunks under a motion or Visual selection |
 
@@ -67,7 +70,7 @@ in slots Vim leaves empty.
 | `<Leader>tn` | Toggle relative line numbers |
 | `<Leader>tm` | Toggle rendered markdown in the current buffer |
 | `<Leader>tl` | Toggle inline (virtual-line) diagnostics |
-| `<Leader>tg` | Toggle the diff overlay, showing the reference text inline |
+| `<Leader>tg` | Toggle the diff overlay, showing the reference text inline. Setting a review base turns it on for you, so this is for the buffers you want to read clean during a review |
 
 ### `<Leader>y` — yank
 
@@ -111,11 +114,16 @@ in slots Vim leaves empty.
 | `ih` | The hunk under the cursor as a text object: `dih`, `yih`, `vih` |
 | `]d` / `[d` | Next / previous diagnostic (Neovim's own, so it takes a count) |
 
-### Ctrl — windows and pickers
+The bracket forms above are the ones that take counts and compose with
+operators (`d]h`). `<C-j>`/`<C-k>` below are the one-chord version for walking
+a list in both directions, which is the thing you actually do all day.
+
+### Ctrl — jumps and pickers
 
 | Key | Does |
 |-----|------|
-| `<C-h>` `<C-j>` `<C-k>` `<C-l>` | Move to the window left / down / up / right |
+| `<C-j>` / `<C-k>` | Walk the list, then leave the window. In order: the next / previous **hunk** while a review base is set, or the next / previous **diagnostic** when one is not; at the end of the list, the window below / above; and if there is no window that way, wrap to the first / last item. Holding one key therefore walks a file's problems, crosses into the next window, and walks that one. The diagnostic lands with its message in a float, since virtual text and virtual lines are both off by default |
+| `<C-h>` / `<C-l>` | Move to the window left / right. Down and up are Vim's own `<C-w>j` / `<C-w>k`, which always work — `<C-j>`/`<C-k>` only reach for them once the list runs out |
 | `<C-p>` | Fuzzy-find files |
 | `<C-b>` | Fuzzy-find open buffers |
 | `<C-f>` | Live grep the project |

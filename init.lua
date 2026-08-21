@@ -57,11 +57,17 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
--- Move around Windows
+-- Down and up: <c-j>/<c-k> fall through to them at the end of a list, <c-w>j/<c-w>k always
 vim.keymap.set("n", "<c-h>", "<c-w>h", { desc = "Window left" })
 vim.keymap.set("n", "<c-l>", "<c-w>l", { desc = "Window right" })
-vim.keymap.set("n", "<c-j>", "<c-w>j", { desc = "Window down" })
-vim.keymap.set("n", "<c-k>", "<c-w>k", { desc = "Window up" })
+
+local jump = require("jump")
+vim.keymap.set("n", "<c-j>", jump.hunk_or_diagnostic("next"), {
+	desc = "Jump: next hunk/diagnostic, then the window below, then wrap to the first",
+})
+vim.keymap.set("n", "<c-k>", jump.hunk_or_diagnostic("prev"), {
+	desc = "Jump: previous hunk/diagnostic, then the window above, then wrap to the last",
+})
 
 -- Shift + Enter = Esc
 vim.keymap.set({ "i", "n", "v", "c", "t" }, "<S-CR>", "<Esc>", { silent = true, desc = "Escape" })
@@ -87,13 +93,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 -- Mappings
--- Rule: nothing shadows a native Vim command. Anything Vim does not ship lives
--- under <Leader>, grouped by its second key:
+-- Rule: nothing shadows a native Vim command that does something j and k
+-- cannot. Anything Vim does not ship lives under <Leader>, grouped by its
+-- second key:
 --   l? = LSP + logs   g? = git (incl. hunks)   t? = toggle   y? = yank   m? = AI
 -- The exception is GRAMMAR, which cannot work behind a leader: hunk motions
 -- ([h ]h [H ]H) and the hunk text object (ih) sit in Vim's own motion and
 -- text-object namespaces, in slots Vim leaves empty.
--- Neovim's own gr*/]d/[d and every Vim g?/z? command are left untouched.
+-- Neovim's own gr*/]d/[d and every Vim g?/z? command are left untouched. The
+-- one shadow taken on purpose is <c-j>/<c-k>, bought back from window down/up.
 -- <Leader>? lists everything.
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
