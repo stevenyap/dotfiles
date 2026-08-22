@@ -246,7 +246,7 @@ require("lazy").setup({
 				local review_base = require("review_base")
 
 				review_base.setup()
-				vim.keymap.set("n", "<Leader>gr", ":ReviewBase origin/", { desc = "Git: set review base" })
+				vim.keymap.set("n", "<Leader>gr", ":ReviewBase origin/development", { desc = "Git: set review base" })
 
 				diff.setup({
 					source = { review_base.source, diff.gen_source.git() },
@@ -541,8 +541,6 @@ require("lazy").setup({
 			"nvimdev/lspsaga.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
-				local noremapsilent = { noremap = true, silent = true }
-
 				require("lspsaga").setup({
 					symbol_in_winbar = {
 						enable = false, -- We using utilyre/barbecue.nvim

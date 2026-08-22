@@ -1,6 +1,5 @@
 {
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Read(~/Workspace/**)",
       "Read(~/Desktop/**)",
@@ -50,7 +49,8 @@
       "Bash(brew info:*)",
       "Bash(readlink:*)",
       "Bash(python3 -m json.tool:*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "opus",
   "enableWorkflows": true,
@@ -58,7 +58,7 @@
   "skipWorkflowUsageWarning": true,
   "theme": "dark",
   "switchModelsOnFlag": false,
+  "remoteControlAtStartup": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "remoteControlAtStartup": true
+  "agentPushNotifEnabled": true
 }
