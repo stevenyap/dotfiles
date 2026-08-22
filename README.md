@@ -58,7 +58,7 @@ return to Vim's own `<C-w>j`/`<C-w>k` and are still reachable by holding
 | `<Leader>gn` | Neo-tree listing only the changed files (against the review base if one is set, else HEAD) |
 | `<Leader>gb` | Toggle the blame pane for the current file |
 | `<Leader>gc` | Fuzzy-search the commit log and open a commit |
-| `<Leader>gr` | Set the review base, e.g. `origin/development` — every buffer then diffs against that branch instead of the index, the diff overlay turns on, and `<C-j>`/`<C-k>` start jumping hunks. No argument resets it to the index, turns the overlay off, and hands `<C-j>`/`<C-k>` back to diagnostics |
+| `<Leader>gr` | Set the review base, e.g. `origin/development` — every buffer then diffs against that branch instead of the index and the diff overlay turns on, so `<C-j>`/`<C-k>` start jumping hunks. No argument resets it to the index and turns the overlay off, handing `<C-j>`/`<C-k>` back to diagnostics |
 | `<Leader>ga` | Apply (stage) the hunks under a motion or Visual selection |
 | `<Leader>gu` | Undo (reset) the hunks under a motion or Visual selection |
 
@@ -70,7 +70,7 @@ return to Vim's own `<C-w>j`/`<C-w>k` and are still reachable by holding
 | `<Leader>tn` | Toggle relative line numbers |
 | `<Leader>tm` | Toggle rendered markdown in the current buffer |
 | `<Leader>tl` | Toggle inline (virtual-line) diagnostics |
-| `<Leader>tg` | Toggle the diff overlay, showing the reference text inline. Setting a review base turns it on for you, so this is for the buffers you want to read clean during a review |
+| `<Leader>tg` | Toggle the diff overlay, showing the reference text inline, and with it whether `<C-j>`/`<C-k>` jump hunks or diagnostics. Setting a review base turns it on for you, so this is for the buffers you want to read clean during a review |
 
 ### `<Leader>y` — yank
 
@@ -122,7 +122,7 @@ a list in both directions, which is the thing you actually do all day.
 
 | Key | Does |
 |-----|------|
-| `<C-j>` / `<C-k>` | Walk the list, then leave the window. In order: the next / previous **hunk** while a review base is set, or the next / previous **diagnostic** when one is not; at the end of the list, the window below / above; and if there is no window that way, wrap to the first / last item. Holding one key therefore walks a file's problems, crosses into the next window, and walks that one. The diagnostic lands with its message in a float, since virtual text and virtual lines are both off by default |
+| `<C-j>` / `<C-k>` | Walk the list, then leave the window. In order: the next / previous **hunk** while the diff overlay is on, or the next / previous **diagnostic** when it is off; at the end of the list, the window below / above; and if there is no window that way, wrap to the first / last item. Holding one key therefore walks a file's problems, crosses into the next window, and walks that one. The diagnostic lands with its message in a float, since virtual text and virtual lines are both off by default |
 | `<C-h>` / `<C-l>` | Move to the window left / right. Down and up are Vim's own `<C-w>j` / `<C-w>k`, which always work — `<C-j>`/`<C-k>` only reach for them once the list runs out |
 | `<C-p>` | Fuzzy-find files |
 | `<C-b>` | Fuzzy-find open buffers |

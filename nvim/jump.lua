@@ -1,5 +1,5 @@
--- Walk the hunks under review or the buffer's diagnostics, then step to the
--- neighbouring window, then wrap to the far end of the list.
+-- Walk the hunks the diff overlay is showing or the buffer's diagnostics, then
+-- step to the neighbouring window, then wrap to the far end of the list.
 local M = {}
 
 local function show_diagnostic_float(diagnostic, bufnr)
@@ -21,11 +21,9 @@ local function without_notifications(action)
 	end
 end
 
-local function buffer_is_under_review()
-	if not require("review_base").is_active() then
-		return false
-	end
-	return require("mini.diff").get_buf_data(0) ~= nil
+local function diff_overlay_is_on()
+	local buf_data = require("mini.diff").get_buf_data(0)
+	return buf_data ~= nil and buf_data.overlay
 end
 
 local function jumped_to_hunk(direction, wrap)
@@ -58,7 +56,7 @@ function M.hunk_or_diagnostic(direction)
 	local neighbouring_window = direction == "next" and "j" or "k"
 
 	local function jumped_to_item(wrap)
-		if buffer_is_under_review() then
+		if diff_overlay_is_on() then
 			return jumped_to_hunk(direction, wrap)
 		end
 		return jumped_to_diagnostic(step, wrap)
