@@ -14,18 +14,17 @@ Personal dotfiles for macOS — Neovim, tmux, zsh, WezTerm, and git tooling. Fil
 
 ## Key files
 
-| File                                   | Purpose                                                                                                                |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `init.lua`                             | Neovim config — lazy.nvim bootstrap + all plugin specs and keymaps                                                     |
-| `nvim/*.lua`                           | Lua extracted out of `init.lua`, reached via `package.path` (NOT the runtimepath — lazy.nvim resets that in `setup()`) |
-| `.zshrc`                               | zsh config — antigen plugins, PATH setup, aliases                                                                      |
-| `.tmux.conf`                           | tmux config — prefix is `C-a`                                                                                          |
-| `.wezterm.lua`                         | WezTerm terminal config                                                                                                |
-| `.spaceshiprc.zsh`                     | Spaceship prompt config                                                                                                |
-| `.gitui-keys.ron` / `.gitui-theme.ron` | gitui keybindings and theme                                                                                            |
-| `bin/`                                 | Custom scripts on PATH                                                                                                 |
-| `Runnerfile.sh`                        | Task runner via `runner` (starts tmuxinator sessions)                                                                  |
-| `.ai/context.md`                       | AI assistant context loaded automatically by magenta.nvim                                                              |
+| File               | Purpose                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `init.lua`         | Neovim config — lazy.nvim bootstrap + all plugin specs and keymaps                                                     |
+| `nvim/*.lua`       | Lua extracted out of `init.lua`, reached via `package.path` (NOT the runtimepath — lazy.nvim resets that in `setup()`) |
+| `.zshrc`           | zsh config — antigen plugins, PATH setup, aliases                                                                      |
+| `.tmux.conf`       | tmux config — prefix is `C-a`                                                                                          |
+| `.wezterm.lua`     | WezTerm terminal config                                                                                                |
+| `.spaceshiprc.zsh` | Spaceship prompt config                                                                                                |
+| `bin/`             | Custom scripts on PATH                                                                                                 |
+| `Runnerfile.sh`    | Task runner via `runner` (starts tmuxinator sessions)                                                                  |
+| `.ai/context.md`   | AI assistant context loaded automatically by magenta.nvim                                                              |
 
 ## Neovim architecture (`init.lua`)
 

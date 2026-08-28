@@ -1,25 +1,27 @@
-dotfiles
-========
+# dotfiles
 
 My dotfiles for neovim, tmux and everything else.
 To be used at your own risk!
 
-Locally, I store all my dotfiles in `~/Workspace/dotfiles` and then symlink the relevant files. 
+Locally, I store all my dotfiles in `~/Workspace/dotfiles` and then symlink the relevant files.
 My motivation for doing this is to separate out my own dotfiles from my home directory.
 
 No installation steps are provided in this git.
 One should know how to use the dotfiles else don't use it.
 
 ## Notable apps:
+
 - https://rectangleapp.com/pro
-- https://alt-tab-macos.netlify.app/ 
+- https://alt-tab-macos.netlify.app/
 - https://www.alfredapp.com/
-- `brew install gitui && brew install git-delta`
+- `brew install git-delta`
 - `npm install -g @builder.io/ai-shell`
 - `npm install -g tree-sitter-cli`
 
 ## Neovim:
+
 For python-provider, we need to:
+
 - `brew install python3`
 - `python3 -m venv ./pyenv`
 - `source ./pyenv/bin/activate`
@@ -39,80 +41,80 @@ return to Vim's own `<C-w>j`/`<C-w>k` and are still reachable by holding
 
 ### `<Leader>l` — LSP and logs
 
-| Key | Does |
-|-----|------|
-| `<Leader>ld` | Jump to the definition of the symbol under the cursor |
-| `<Leader>lh` | Show hover documentation for the symbol under the cursor |
+| Key          | Does                                                               |
+| ------------ | ------------------------------------------------------------------ |
+| `<Leader>ld` | Jump to the definition of the symbol under the cursor              |
+| `<Leader>lh` | Show hover documentation for the symbol under the cursor           |
 | `<Leader>lp` | Peek the definition in a floating window, without leaving the file |
-| `<Leader>lr` | List every reference to the symbol under the cursor |
-| `<Leader>ln` | Rename the symbol under the cursor across the project |
-| `<Leader>la` | Offer code actions for the cursor (also works on a Visual range) |
-| `<Leader>le` | Show the full diagnostics for the current line in a float |
-| `<Leader>lS` | Restart the language servers, for when one hangs |
-| `<Leader>lm` | Open `:messages` — the editor and plugin log |
+| `<Leader>lr` | List every reference to the symbol under the cursor                |
+| `<Leader>ln` | Rename the symbol under the cursor across the project              |
+| `<Leader>la` | Offer code actions for the cursor (also works on a Visual range)   |
+| `<Leader>le` | Show the full diagnostics for the current line in a float          |
+| `<Leader>lS` | Restart the language servers, for when one hangs                   |
+| `<Leader>lm` | Open `:messages` — the editor and plugin log                       |
 
 ### `<Leader>g` — git, hunks included
 
-| Key | Does |
-|-----|------|
-| `<Leader>gn` | Neo-tree listing only the changed files (against the review base if one is set, else HEAD) |
-| `<Leader>gb` | Toggle the blame pane for the current file |
-| `<Leader>gc` | Fuzzy-search the commit log and open a commit |
+| Key          | Does                                                                                                                                                                                                                                                                                               |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<Leader>gn` | Neo-tree listing only the changed files (against the review base if one is set, else HEAD)                                                                                                                                                                                                         |
+| `<Leader>gb` | Toggle the blame pane for the current file                                                                                                                                                                                                                                                         |
+| `<Leader>gc` | Fuzzy-search the commit log and open a commit                                                                                                                                                                                                                                                      |
 | `<Leader>gr` | Set the review base, e.g. `origin/development` — every buffer then diffs against that branch instead of the index and the diff overlay turns on, so `<C-j>`/`<C-k>` start jumping hunks. No argument resets it to the index and turns the overlay off, handing `<C-j>`/`<C-k>` back to diagnostics |
-| `<Leader>ga` | Apply (stage) the hunks under a motion or Visual selection |
-| `<Leader>gu` | Undo (reset) the hunks under a motion or Visual selection |
+| `<Leader>ga` | Apply (stage) the hunks under a motion or Visual selection                                                                                                                                                                                                                                         |
+| `<Leader>gu` | Undo (reset) the hunks under a motion or Visual selection                                                                                                                                                                                                                                          |
 
 ### `<Leader>t` — toggles
 
-| Key | Does |
-|-----|------|
-| `<Leader>tw` | Toggle line wrapping |
-| `<Leader>tn` | Toggle relative line numbers |
-| `<Leader>tm` | Toggle rendered markdown in the current buffer |
-| `<Leader>tl` | Toggle inline (virtual-line) diagnostics |
+| Key          | Does                                                                                                                                                                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<Leader>tw` | Toggle line wrapping                                                                                                                                                                                                                    |
+| `<Leader>tn` | Toggle relative line numbers                                                                                                                                                                                                            |
+| `<Leader>tm` | Toggle rendered markdown in the current buffer                                                                                                                                                                                          |
+| `<Leader>tl` | Toggle inline (virtual-line) diagnostics                                                                                                                                                                                                |
 | `<Leader>tg` | Toggle the diff overlay, showing the reference text inline, and with it whether `<C-j>`/`<C-k>` jump hunks or diagnostics. Setting a review base turns it on for you, so this is for the buffers you want to read clean during a review |
 
 ### `<Leader>y` — yank
 
-| Key | Does |
-|-----|------|
-| `<Leader>ya` | Yank the whole file and return the cursor to where it was |
+| Key          | Does                                                                                                                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<Leader>ya` | Yank the whole file and return the cursor to where it was                                                                                                                        |
 | `<Leader>yr` | Yank the current lines with a `repo @ branch commit path:lines` header, marked `[uncommitted]` or `[UNSAVED buffer]` when they differ from HEAD. Works in Normal and Visual mode |
 
 ### `<Leader>m` — magenta (AI), plugin defaults
 
-| Key | Does |
-|-----|------|
-| `<Leader>mt` | Toggle the magenta sidebar |
-| `<Leader>mn` | Start a new thread |
-| `<Leader>mc` | Clear magenta state |
-| `<Leader>ma` | Abort the running operation |
+| Key          | Does                                                                          |
+| ------------ | ----------------------------------------------------------------------------- |
+| `<Leader>mt` | Toggle the magenta sidebar                                                    |
+| `<Leader>mn` | Start a new thread                                                            |
+| `<Leader>mc` | Clear magenta state                                                           |
+| `<Leader>ma` | Abort the running operation                                                   |
 | `<Leader>mp` | Paste the clipboard into the input buffer; in Visual mode, send the selection |
-| `<Leader>mb` | Add the current buffer to context |
-| `<Leader>mf` | Pick files to add to context |
-| `<Leader>mP` | Pick the model profile |
-| `<Leader>mw` | Start a worktree orchestrator thread |
-| `<Leader>ms` | Toggle sandbox bypass for the thread under the cursor |
+| `<Leader>mb` | Add the current buffer to context                                             |
+| `<Leader>mf` | Pick files to add to context                                                  |
+| `<Leader>mP` | Pick the model profile                                                        |
+| `<Leader>mw` | Start a worktree orchestrator thread                                          |
+| `<Leader>ms` | Toggle sandbox bypass for the thread under the cursor                         |
 
 ### `<Leader>` singles
 
-| Key | Does |
-|-----|------|
-| `<Leader>s` | Write every modified buffer (`:wa`) |
-| `<Leader>/` | Clear the search highlight |
-| `<Leader>k` | Split the line at the cursor |
-| `<Leader>K` | Split the line at column 0, pushing it down |
-| `<Leader>n` | Toggle the file tree |
+| Key         | Does                                               |
+| ----------- | -------------------------------------------------- |
+| `<Leader>s` | Write every modified buffer (`:wa`)                |
+| `<Leader>/` | Clear the search highlight                         |
+| `<Leader>k` | Split the line at the cursor                       |
+| `<Leader>K` | Split the line at column 0, pushing it down        |
+| `<Leader>n` | Toggle the file tree                               |
 | `<Leader>?` | Fuzzy-search every keymap, with these descriptions |
 
 ### Grammar — takes counts, composes with operators
 
-| Key | Does |
-|-----|------|
-| `]h` / `[h` | Next / previous changed hunk. Takes a count: `3]h` |
-| `]H` / `[H` | Last / first hunk in the file |
-| `ih` | The hunk under the cursor as a text object: `dih`, `yih`, `vih` |
-| `]d` / `[d` | Next / previous diagnostic (Neovim's own, so it takes a count) |
+| Key         | Does                                                            |
+| ----------- | --------------------------------------------------------------- |
+| `]h` / `[h` | Next / previous changed hunk. Takes a count: `3]h`              |
+| `]H` / `[H` | Last / first hunk in the file                                   |
+| `ih`        | The hunk under the cursor as a text object: `dih`, `yih`, `vih` |
+| `]d` / `[d` | Next / previous diagnostic (Neovim's own, so it takes a count)  |
 
 The bracket forms above are the ones that take counts and compose with
 operators (`d]h`). `<C-j>`/`<C-k>` below are the one-chord version for walking
@@ -120,28 +122,28 @@ a list in both directions, which is the thing you actually do all day.
 
 ### Ctrl — jumps and pickers
 
-| Key | Does |
-|-----|------|
+| Key               | Does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<C-j>` / `<C-k>` | Walk the list, then leave the window. In order: the next / previous **hunk** while the diff overlay is on, or the next / previous **diagnostic** when it is off; at the end of the list, the window below / above; and if there is no window that way, wrap to the first / last item. Holding one key therefore walks a file's problems, crosses into the next window, and walks that one. The diagnostic lands with its message in a float, since virtual text and virtual lines are both off by default |
-| `<C-h>` / `<C-l>` | Move to the window left / right. Down and up are Vim's own `<C-w>j` / `<C-w>k`, which always work — `<C-j>`/`<C-k>` only reach for them once the list runs out |
-| `<C-p>` | Fuzzy-find files |
-| `<C-b>` | Fuzzy-find open buffers |
-| `<C-f>` | Live grep the project |
-| `<C-s>` | Fuzzy-find the files changed against git |
+| `<C-h>` / `<C-l>` | Move to the window left / right. Down and up are Vim's own `<C-w>j` / `<C-w>k`, which always work — `<C-j>`/`<C-k>` only reach for them once the list runs out                                                                                                                                                                                                                                                                                                                                            |
+| `<C-p>`           | Fuzzy-find files                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `<C-b>`           | Fuzzy-find open buffers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `<C-f>`           | Live grep the project                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `<C-s>`           | Fuzzy-find the files changed against git                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 ### Insert mode
 
-| Key | Does |
-|-----|------|
-| `<C-l>` | Accept the whole AI suggestion |
-| `<C-g>l` | Accept one word of the AI suggestion |
-| `<C-g>j` / `<C-g>k` | Cycle to the next / previous AI suggestion |
-| `<C-h>` | Expand the snippet under the cursor |
-| `<C-f>` | Fuzzy-complete a file path |
-| `<C-j>` / `<C-k>` | Next / previous completion item, or jump between snippet fields |
-| `<C-Space>` | Open completion |
-| `<C-e>` | Dismiss completion |
-| `<S-CR>` | Escape (also in Normal, Visual, Cmdline and Terminal) |
+| Key                 | Does                                                            |
+| ------------------- | --------------------------------------------------------------- |
+| `<C-l>`             | Accept the whole AI suggestion                                  |
+| `<C-g>l`            | Accept one word of the AI suggestion                            |
+| `<C-g>j` / `<C-g>k` | Cycle to the next / previous AI suggestion                      |
+| `<C-h>`             | Expand the snippet under the cursor                             |
+| `<C-f>`             | Fuzzy-complete a file path                                      |
+| `<C-j>` / `<C-k>`   | Next / previous completion item, or jump between snippet fields |
+| `<C-Space>`         | Open completion                                                 |
+| `<C-e>`             | Dismiss completion                                              |
+| `<S-CR>`            | Escape (also in Normal, Visual, Cmdline and Terminal)           |
 
 ### Left to Vim
 
@@ -152,12 +154,14 @@ scroll and spell namespace all do exactly what stock Vim does. Neovim's own
 ## Tricky bits
 
 Always start with:
+
 - `xcode-select --install`
 - Install Xcode App
 - `brew install ruby` -> needed for cocoapods and tmuxinator
 - Create `~/.zsh_secrets` with 1Password `dotfiles` personal secrets
 
 Soft links settings:
+
 - Local bash soft linking:
   - `ln -s ~/Workspace/dotfiles/init.lua ~/.config/nvim/init.lua`
   - `ln -s ~/Workspace/dotfiles/.wezterm.lua ~/.wezterm.lua`
@@ -166,8 +170,6 @@ Soft links settings:
   - `ln -s ~/Workspace/dotfiles/.tmux.conf ~/.tmux.conf`
   - `ln -s ~/Workspace/dotfiles/.gitconfig ~/.gitconfig`
   - `ln -s ~/Workspace/dotfiles/.gitignore_global ~/.gitignore_global`
-  - `ln -s ~/Workspace/dotfiles/.gitui-keys.ron $HOME/.config/gitui/key_bindings.ron`
-  - `ln -s ~/Workspace/dotfiles/.gitui-theme.ron $HOME/.config/gitui/theme.ron`
   - `ln -s ~/Workspace/dotfiles/.claude/settings.json $HOME/.claude/settings.json`
 - Access other folders in dotfile tmux:
   - `ln -s ~/Desktop ~/Workspace/dotfiles/Desktop`
