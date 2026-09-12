@@ -85,6 +85,10 @@ export NVM_DIR="$HOME/.nvm"
 # Use local npm binaries over global npm binaries
 export PATH=./node_modules/.bin:${PATH}
 
+# pnpm
+export PNPM_HOME="/Users/stevenyap/Library/pnpm"
+export PATH="$PNPM_HOME/bin:$PATH"
+
 # React Native android emulator
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator

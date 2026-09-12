@@ -52,7 +52,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "enableWorkflows": true,
   "effortLevel": "xhigh",
   "skipWorkflowUsageWarning": true,
