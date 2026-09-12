@@ -420,6 +420,8 @@ require("lazy").setup({
 					},
 				})
 
+				require("neotree_base_diff").setup()
+
 				vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>", { desc = "File tree" })
 				vim.keymap.set("n", "<Leader>gn", function()
 					if vim.g.review_base_rev then
