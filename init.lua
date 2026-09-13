@@ -424,11 +424,8 @@ require("lazy").setup({
 
 				vim.keymap.set("n", "<Leader>n", ":Neotree source=filesystem toggle<CR>", { desc = "File tree" })
 				vim.keymap.set("n", "<Leader>gn", function()
-					if vim.g.review_base_rev then
-						vim.cmd("Neotree source=git_status git_base=" .. vim.g.review_base_rev)
-					else
-						vim.cmd("Neotree source=git_status git_base=HEAD toggle")
-					end
+					local git_base = vim.g.review_base_rev or "HEAD"
+					vim.cmd("Neotree source=git_status git_base=" .. git_base .. " toggle")
 				end, { desc = "Git: changed-file tree" })
 			end,
 		},
