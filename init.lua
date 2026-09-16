@@ -804,14 +804,21 @@ require("lazy").setup({
 
 				-- Eslint LSP
 				-- npm i -g vscode-langservers-extracted
+				local eslint_root_dir_if_eslint_project = vim.lsp.config.eslint.root_dir
 				vim.lsp.config("eslint", {
-					root_dir = function(_, on_dir)
-						-- A hack to workaround the root_dir issue where the plugin cannot detect the root directory correctly
-						-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua#L89
-						on_dir(vim.fn.getcwd())
+					root_dir = function(bufnr, on_dir)
+						eslint_root_dir_if_eslint_project(bufnr, function()
+							-- A hack to workaround the root_dir issue where the plugin cannot detect the root directory correctly
+							-- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/eslint.lua#L89
+							on_dir(vim.fn.getcwd())
+						end)
 					end,
 				})
 				vim.lsp.enable("eslint")
+
+				-- Oxlint LSP
+				-- npm i -g oxlint; a project's own node_modules/.bin/oxlint wins over the global one
+				vim.lsp.enable("oxlint")
 
 				-- Purescript LSP
 				-- npm i -g purescript-language-server purs-tidy

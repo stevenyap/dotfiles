@@ -48,7 +48,7 @@ Key plugin dependencies that must be installed via Homebrew:
 - `stylua` — Lua formatter; `init.lua` and `nvim/*.lua` are kept stylua-clean
 - `tree-sitter-cli` — Treesitter
 
-LSP servers are installed via npm (`vscode-langservers-extracted`, `purescript-language-server`, `purs-tidy`). TypeScript uses `pmizio/typescript-tools.nvim`.
+LSP servers are installed via npm (`vscode-langservers-extracted`, `oxlint`, `purescript-language-server`, `purs-tidy`). TypeScript uses `pmizio/typescript-tools.nvim`. Eslint and oxlint each attach only in a project that holds that linter's own config file, so a project runs either, both or neither.
 
 ## Secrets
 
