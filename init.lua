@@ -73,7 +73,7 @@ vim.keymap.set("n", "<c-k>", jump.hunk_or_diagnostic("prev"), {
 vim.keymap.set({ "i", "n", "v", "c", "t" }, "<S-CR>", "<Esc>", { silent = true, desc = "Escape" })
 
 -- Switch between relative and absolute line numbers
-vim.opt.relativenumber = true -- Show relative numbers by default
+vim.opt.relativenumber = false -- Hide relative numbers by default
 vim.opt.signcolumn = "yes" -- Always display the sign column, prevents text shifting when signs are displayed
 vim.opt.number = true -- Enables line numbers on the left side of the window
 vim.opt.cursorline = true -- Highlights the line under the cursor
@@ -316,6 +316,16 @@ require("lazy").setup({
 			config = function()
 				require("render-markdown").setup({
 					latex = { enabled = false },
+					-- Keep the cursor line rendered: the plugin's added text and
+					-- Neovim's concealed markers each have their own switch
+					anti_conceal = { enabled = false },
+					win_options = { concealcursor = { rendered = "nc" } },
+					code = {
+						-- The grey reaches diff blocks too, drawn under Treesitter so
+						-- their red and green stay on top
+						disable_background = false,
+						priority = vim.hl.priorities.treesitter - 1,
+					},
 				})
 				vim.keymap.set(
 					"n",
@@ -345,7 +355,17 @@ require("lazy").setup({
 					highlights.MiniDiffOverChangeBuf = { bg = colors.bg_added_refine }
 				end
 
-				require("modus-themes").setup({ on_highlights = sourcetree_diff_overlay })
+				require("modus-themes").setup({
+					on_highlights = function(highlights, colors)
+						sourcetree_diff_overlay(highlights, colors)
+						-- Modus gives this group a teal fg and no bg, which flattens the
+						-- syntax colours of a code block; bg only keeps them
+						highlights.RenderMarkdownCode = { bg = colors.bg_dim }
+						-- Inline code shares the block's priority, so now that it draws
+						-- under Treesitter its teal has to come from here
+						highlights["@markup.raw.markdown_inline"] = { link = "markdownCode" }
+					end,
+				})
 				vim.o.termguicolors = true
 				vim.o.background = "light" -- modus_operandi; 'dark' switches to modus_vivendi
 				vim.cmd.colorscheme("modus_operandi")
@@ -364,6 +384,7 @@ require("lazy").setup({
 			config = function()
 				require("nvim-treesitter").install({
 					"bash",
+					"diff",
 					"html",
 					"lua",
 					"markdown",
@@ -818,6 +839,19 @@ require("lazy").setup({
 
 				-- Oxlint LSP
 				-- npm i -g oxlint; a project's own node_modules/.bin/oxlint wins over the global one
+				local oxlint_root_dir = vim.lsp.config.oxlint.root_dir
+				vim.lsp.config("oxlint", {
+					settings = { typeAware = false },
+					root_dir = function(bufnr, on_dir)
+						oxlint_root_dir(bufnr, function(root_dir)
+							-- Upstream calls on_dir(nil) in a project without an oxlint
+							-- config, and that still starts the server
+							if root_dir then
+								on_dir(root_dir)
+							end
+						end)
+					end,
+				})
 				vim.lsp.enable("oxlint")
 
 				-- Purescript LSP
